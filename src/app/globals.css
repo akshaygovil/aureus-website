@@ -41,21 +41,127 @@
   animation: glow-flicker 5s ease-in-out infinite;
 }
 
-  @keyframes pulse-blue {
-    0%, 100% {
-      opacity: 0.45;
-      transform: scale(1);
-      filter: drop-shadow(0 0 20px rgba(90,131,215,0.4));
-    }
-    50% {
-      opacity: 0.9;
-      transform: scale(1.2);
-      filter: drop-shadow(0 0 60px rgba(90,131,215,0.7));
-    }
+@keyframes pulse-blue {
+  0%, 100% {
+    opacity: 0.45;
+    transform: scale(1);
+    filter: drop-shadow(0 0 20px rgba(90,131,215,0.4));
   }
-  .animate-pulse-blue {
-    animation: pulse-blue 3s ease-in-out infinite;
+  50% {
+    opacity: 0.9;
+    transform: scale(1.2);
+    filter: drop-shadow(0 0 60px rgba(90,131,215,0.7));
   }
+}
+.animate-pulse-blue {
+  animation: pulse-blue 3s ease-in-out infinite;
+}
+
+@keyframes core-pulse {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+    filter: drop-shadow(0 0 40px rgba(80,170,255,0.6));
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.3);
+    filter: drop-shadow(0 0 180px rgba(80,170,255,1));
+  }
+}
+.animate-core-pulse { animation: core-pulse 3s ease-in-out infinite; }
+
+@keyframes wave {
+  0% { opacity: 0.4; transform: scale(0.8); }
+  50% { opacity: 0.7; transform: scale(1.8); }
+  100% { opacity: 0; transform: scale(2.6); }
+}
+.animate-wave { animation: wave 4.5s ease-in-out infinite; }
+
+.group:hover img {
+  filter: blur(3px) brightness(0.9);
+  transition: all 0.5s ease;
+}
+
+@keyframes muscleGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 8px rgba(201,162,39,0.4));
+    opacity: 0.9;
+  }
+  50% {
+    filter: drop-shadow(0 0 18px rgba(201,162,39,0.9));
+    opacity: 1;
+  }
+}
+
+
+@keyframes humanbodysvgglow {
+  0%, 100% {
+    filter: drop-shadow(0 0 0px rgba(67,160,71,0.0));
+  }
+  50% {
+    filter: drop-shadow(0 0 12px rgba(67,160,71,0.6));
+  }
+}
+
+.hover-humanbodysvgglow:hover {
+  animation: humanbodysvgglow 1.2s ease-in-out infinite;
+  z-index: 100;
+  opacity: 0.95;
+  transition: all 0.2s ease;
+}
+
+.hover-humanbodysvgglow {
+  transition: filter 0.25s ease, fill 0.25s ease;
+}
+
+.hover-humanbodysvgglow:hover {
+  filter: brightness(1.08) drop-shadow(0 0 1px rgba(67, 160, 71, 0.2));
+  fill: #e0f2e9; /* light mint-green tint */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 @layer components {
