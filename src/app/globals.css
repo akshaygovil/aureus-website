@@ -1,16 +1,9 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: 'red';
   --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+};
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -18,6 +11,91 @@
     --foreground: #ededed;
   }
 }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px) }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fadeIn {
+  animation: fadeIn 1s ease-out both;
+}
+
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+.animate-pulse-slow {
+  animation: pulse-slow 6s ease-in-out infinite;
+}
+
+@keyframes glow-flicker {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.02); }
+}
+.animate-glow-flicker {
+  animation: glow-flicker 5s ease-in-out infinite;
+}
+
+  @keyframes pulse-blue {
+    0%, 100% {
+      opacity: 0.45;
+      transform: scale(1);
+      filter: drop-shadow(0 0 20px rgba(90,131,215,0.4));
+    }
+    50% {
+      opacity: 0.9;
+      transform: scale(1.2);
+      filter: drop-shadow(0 0 60px rgba(90,131,215,0.7));
+    }
+  }
+  .animate-pulse-blue {
+    animation: pulse-blue 3s ease-in-out infinite;
+  }
+
+
+@layer components {
+  /* --- Primary (Gold Gradient) --- */
+  .btn-primary {
+    @apply relative inline-flex items-center justify-center px-8 py-3 
+           font-semibold rounded-xl text-black
+           bg-gradient-to-r from-[#D4AF37] via-[#C9A227] to-[#B5951F]
+           shadow-[0_4px_20px_rgba(201,162,39,0.25)]
+           transition-all duration-300 ease-out
+           hover:scale-[1.04]
+           hover:shadow-[0_8px_30px_rgba(201,162,39,0.4)];
+  }
+
+  /* --- Secondary (Outlined + Glow) --- */
+  .btn-secondary {
+    @apply relative inline-flex items-center justify-center px-8 py-3 rounded-xl font-semibold
+           border border-[#C9A227] text-[#C9A227]
+           bg-transparent
+           transition-all duration-300 ease-out;
+
+    @apply hover:bg-[#C9A227] hover:text-black hover:shadow-[0_0_25px_rgba(201,162,39,0.4)]
+           hover:scale-[1.02];
+  }
+
+  /* --- Optional: Fancy Gradient Glow on Hover --- */
+  .btn-primary::before {
+    content: "";
+    @apply absolute inset-0 rounded-xl opacity-0 transition-opacity duration-500;
+    background: linear-gradient(90deg, #D4AF37, #E9C46A, #C9A227);
+    filter: blur(20px);
+    z-index: -1;
+  }
+
+  .btn-primary:hover::before {
+    opacity: 1;
+  }
+
+}
+
 
 body {
   background: var(--background);
