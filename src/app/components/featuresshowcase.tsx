@@ -373,7 +373,6 @@ export default function AureusFeatureShowcase() {
       >
         <div className="w-full max-w-md rounded-2xl bg-white shadow-[0_4px_50px_rgba(0,0,0,0.06)] border border-gray-100 p-6">
           <div className="rounded-xl border border-gray-200 bg-[#FAFAFA] shadow-inner p-5 mb-5 flex flex-col items-center">
-
             <div className="flex items-center justify-center gap-3">
               <button
                 onClick={() => setWeight(String(prevStep(weight)))}

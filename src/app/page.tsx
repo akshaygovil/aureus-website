@@ -11,6 +11,8 @@ import FeatureShowcaseSection from "./components/featuresshowcase";
 import { ReactCompareSlider, ReactCompareSliderImage } from "react-compare-slider";
 import HumanBody from "./components/HumanBody";
 import InteractiveMuscleMap from "./components/selectablehumanbody";
+import ComparisonTable from "./components/benefits";
+import MyVisionSection from "./components/vision";
 
 function Feature({ icon, title, desc }: { icon: string; title: string; desc: string }) {
   return (
@@ -37,17 +39,7 @@ export default function Page() {
       {/* --- HERO --- */}
       <HeroLanding />
       <ValueProposition/>
-
-
-
-
-
-
-
-
-
-
-
+      <MyVisionSection/>
 
 
 
@@ -732,6 +724,9 @@ export default function Page() {
     </div>
   </div>
 </section>
+
+
+      <ComparisonTable/>
       <DataDrivenPhysique/>
 
       <FAQSection/>
@@ -752,10 +747,16 @@ export default function Page() {
               About
             </a>
             <a
-              href="#"
+              href="/privacy_policy"
               className="text-[#4B4B4B] hover:text-[#C9A227] transition-colors"
             >
-              Privacy
+              Privacy Policy
+            </a>
+            <a
+              href="/terms_of_service"
+              className="text-[#4B4B4B] hover:text-[#C9A227] transition-colors"
+            >
+              Terms of Service
             </a>
             <a
               href="#"
