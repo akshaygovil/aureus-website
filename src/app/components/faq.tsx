@@ -1,126 +1,174 @@
 "use client";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { HiChevronDown } from "react-icons/hi";
 
 export default function FAQSection() {
   const faqs = [
     {
-      q: "What makes this different from other fitness apps?",
-      a: "Aureus strips away distractions — no endless scrolling or cluttered dashboards. Every feature is intentionally crafted to help you train smarter, recover better, and see measurable progress that lasts.",
+      q: "Will I visually see progress over time?",
+      a: "Yes. Explore the entire experience for 7 days before committing.",
     },
     {
-      q: "Do I need any special equipment?",
-      a: "Not at all. The app adapts to you. Whether you have a full gym or just a set of dumbbells, it tailors your workouts to the gear you actually own.",
+      q: "Can I track photos and weight changes?",
+      a: "Yes. Explore the entire experience for 7 days before committing.",
     },
     {
-      q: "Can I cancel anytime?",
-      a: "Yes. You’re in control. Cancel or pause your subscription anytime directly from your account settings — no hidden fees, no contracts.",
+      q: "How accurate are the strength and progression estimates?",
+      a: "Yes. Explore the entire experience for 7 days before committing.",
     },
     {
-      q: "Will I get new updates?",
-      a: "Absolutely. Subscribers automatically receive every feature update, design refinement, and training enhancement as soon as it’s released.",
+      q: "Will this app make workouts feel easier to stick with?",
+      a: "Yes. Explore the entire experience for 7 days before committing.",
     },
     {
-      q: "Is there a free trial?",
-      a: "Yes — you can explore everything for 7 days at no cost. Experience the platform before deciding to commit.",
+      q: " I'm inconsistent with training - will this still work?",
+      a: "Yes. Explore the entire experience for 7 days before committing.",
+    },
+    {
+      q: "Can I train however I want, or must I follow a fixed plan?",
+      a: "Yes. Explore the entire experience for 7 days before committing.",
+    },
+    {
+      q: "How often do I need to train for results?",
+      a: "Yes. Explore the entire experience for 7 days before committing.",
+    },
+    {
+      q: "Is my data safe and private?",
+      a: "Yes. Explore the entire experience for 7 days before committing.",
+    },
+    {
+      q: "Most companies just stick that they use “AI” to increase share holder value, when the AI functionality is really bad. Is your app like this? ",
+      a: `No. We don't use AI as a marketing buzzwork, the AI functionality has meticulously been picked to ensure that it is genuinely helpful and provides insights which a normal algorithm wouldn't be able to supply. Our AI isn't a generic chatbot, or a ChatGPT wrapper. It is given an extremely comprehensive summary of your workouts, both daily and weekly and provides human sounding, concise and helpful summaries.
+      
+      Instead of giving vague advice like “train harder”, it can tell you:
+      <ul>
+        <li>which lifts improved the most this month</li>
+        <li>whether your volume is trending upward or downward</li>
+        <li>what muscle groups you've unintentionally neglected</li>
+        <li>how close you are to previous peaks</li>
+      </ul> One thing we strongly believe in is that if AI is your main marketing advantage, then you don’t have a really good product, and so our app, without the use of AI beats <strong>99%</strong> of workouts apps out there. The AI is just the extra cherry on top.
+      `,
+    },
+    {
+      q: "How is this generic from a normal AI app?",
+      a: "No. Whether you have a full gym or just dumbbells, the system tailors training precisely to the equipment you own.",
+    },
+    {
+      q: "How is this different from a ChatGPT wrapper?",
+      a: "Yes. Modify, pause, or cancel your subscription at any time without fees, commitments, or support requests.",
+    },
+    {
+      q: "How performant is your app, is it as fast as native apps?",
+      a: "Subscribers gain immediate access to all upgrades—new tools, training intelligence improvements, refinements, and enhancements.",
+    },
+    {
+      q: "Will I lose my data ever?",
+      a: "Yes. Explore the entire experience for 7 days before committing.",
     },
   ];
 
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section
-      id="faq"
-      className="relative w-full py-28 border-t border-gray-100 text-center overflow-hidden bg-[#FAFAF7]"
-    >
-      {/* --- Subtle Breathing Glow (behind content) --- */}
-      <div aria-hidden className="absolute inset-0 z-0 flex justify-center pointer-events-none">
+    <section className="relative w-full py-32 bg-[#F6F8FA] overflow-hidden">
+      {/* Soft ambient glow (more subtle & expensive-looking) */}
       <motion.div
-        className="absolute w-[1200px] h-[1200px] rounded-full blur-[200px] opacity-50"
+        aria-hidden
+        initial={{ opacity: 0.15, scale: 1 }}
+        animate={{ opacity: [0.15, 0.32, 0.15], scale: [1, 1.04, 1] }}
+        transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute inset-0 blur-[160px]"
         style={{
-          top: "-400px",      // pushes the glow higher
-          left: "-300px",     // pushes it to the left
-          background:
-            "radial-gradient(50% 50% at 50% 50%, rgba(80,160,255,0.8) 0%, rgba(150,210,255,0.45) 35%, rgba(250,250,247,0) 70%)",
-        }}
-        animate={{
-          scale: [1, 1.12, 1],
-          opacity: [0.45, 0.6, 0.45],
-          rotate: [0, 3, -3, 0],
-        }}
-        transition={{
-          duration: 14,
-          repeat: Infinity,
-          ease: "easeInOut",
+          background: `
+            radial-gradient(
+              circle,
+              rgba(62, 91, 169, 0.12) 0%,
+              rgba(255,255,255,0) 65%
+            )
+          `,
         }}
       />
 
-      </div>
-
-      {/* --- Content --- */}
-      <div className="relative z-10 max-w-5xl mx-auto px-6">
-        <h2 className="text-4xl sm:text-5xl font-extrabold mb-4 leading-tight">
+      {/* Outer container is full width so the heading can span the viewport */}
+      <div className="relative z-10 w-full px-6">
+        {/* Header – full-width */}
+        <motion.h2
+          initial={{ opacity: 0, y: 14 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="w-full text-center text-[4rem] font-[900] tracking-tight text-[#0D1B3D]"
+        >
           Frequently Asked{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#7C6A2E] via-[#C9A227] to-[#F5DC82]">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] via-[#E9C85B] to-[#B78A2E]">
             Questions
           </span>
-        </h2>
-        <p className="text-[#555] max-w-md mx-auto mb-12">
-          Clarity before commitment. Here’s what you should know.
-        </p>
+        </motion.h2>
 
-        {/* --- FAQ Accordion (no height:auto; zero glitch) --- */}
-        <div className="space-y-4 text-left">
-          {faqs.map(({ q, a }, i) => {
-            const isOpen = openIndex === i;
-            const panelId = `faq-panel-${i}`;
-            const buttonId = `faq-button-${i}`;
+        {/* Inner content constrained to max width */}
+        <div className="max-w-4xl mx-auto">
+          <p className="text-center text-[#8A94A6] max-w-lg mx-auto mt-4 mb-16 text-[15.5px] leading-relaxed font-medium tracking-[0.015em]">
+            Transparent answers—so every choice feels informed and intentional.
+          </p>
 
-            return (
-              <div
-                key={i}
-                className={`border rounded-2xl overflow-hidden transition-colors duration-300 ${
-                  isOpen
-                    ? "border-[#C9A227]/40 shadow-sm bg-white"
-                    : "border-gray-200 hover:border-[#C9A227]/30 bg-white/95"
-                }`}
-              >
-                <button
-                  id={buttonId}
-                  aria-controls={panelId}
-                  aria-expanded={isOpen}
-                  onClick={() => setOpenIndex(isOpen ? null : i)}
-                  className="w-full flex justify-between items-center text-lg font-medium text-[#1E1E1E] px-6 py-5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C9A227]/40 rounded-2xl"
-                >
-                  <span>{q}</span>
-                  <motion.span
-                    // only a transform → GPU, super smooth
-                    animate={{ rotate: isOpen ? 180 : 0 }}
-                    transition={{ duration: 0.22, ease: "easeOut" }}
-                    className="text-[#C9A227] select-none"
-                  >
-                    ▼
-                  </motion.span>
-                </button>
+          {/* FAQ List */}
+          <div className="space-y-4">
+            {faqs.map(({ q, a }, i) => {
+              const isOpen = openIndex === i;
 
-                {/* Smooth accordion with CSS grid rows (0fr → 1fr) */}
-                <div
-                  id={panelId}
-                  role="region"
-                  aria-labelledby={buttonId}
-                  className={`grid transition-all duration-300 ease-in-out ${
-                    isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+              return (
+                <motion.div
+                  key={i}
+                  animate={{
+                    boxShadow: isOpen
+                      ? "0px 10px 34px rgba(13,27,61,0.08)"
+                      : "0px 4px 16px rgba(13,27,61,0.03)",
+                    y: isOpen ? -1 : 0,
+                  }}
+                  transition={{ duration: 0.35, ease: "easeOut" }}
+                  className={`rounded-2xl border overflow-hidden transition-all backdrop-blur-sm ${
+                    isOpen
+                      ? "border-[#D4AF37]/70 bg-white"
+                      : "border-[#E9EDF3] bg-white/80 hover:bg-white/90"
                   }`}
                 >
-                  <div className="overflow-hidden">
-                    <div className="px-6 pb-6 text-gray-600 text-sm leading-relaxed border-t border-gray-100">
-                      {a}
+                  <button
+                    onClick={() => setOpenIndex(isOpen ? null : i)}
+                    className="w-full flex justify-between items-center px-7 py-6 text-left"
+                  >
+                    <span className="text-[17px] font-semibold text-[#0D1B3D] tracking-[0.01em]">
+                      {q}
+                    </span>
+
+                    <motion.div
+                      animate={{ rotate: isOpen ? 180 : 0 }}
+                      transition={{ duration: 0.28, ease: "easeOut" }}
+                      className="text-[#D4AF37]"
+                    >
+                      <HiChevronDown size={22} />
+                    </motion.div>
+                  </button>
+
+                  {/* Answer */}
+                  <motion.div animate={{ height: isOpen ? "auto" : 0 }}>
+                    <div className="px-7 py-6 border-t border-[#E9EDF3] overflow-hidden">
+                      <div
+                        className="
+                          text-[14.5px] text-[#8A94A6] leading-[1.75] tracking-[0.01em] whitespace-pre-line
+                          [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:my-[4px]
+                          [&_li]:leading-[1]
+                          [&_li::marker]:text-[#0D1B3D]
+                          [&_strong]:font-semibold [&_strong]:text-[#0D1B3D]
+                        "
+                        dangerouslySetInnerHTML={{ __html: a }}
+                      />
                     </div>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+                  </motion.div>
+                </motion.div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>
