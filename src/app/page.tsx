@@ -45,12 +45,28 @@ export default function Page() {
 
       <FeatureShowcaseSection/>
       <FeatureShowcase
-        title="Log your fitness journey"
-        description="Stay consistent by logging your progress from your mobile or watch. Follow exercise instructions to perfect your form, and take notes to remind yourself of key details."
-        buttonText="Start Now"
+        title="250 + exercise library"
+        description="Containing over 250 + exericses with detailed "
         buttonLink="#"
-        //images={["/appscreenshots/1.png"]}
+        image={"/4.png"}
         flip={false}
+        tilt={"right"}
+      />
+      <FeatureShowcase
+        title="250 + exercise library"
+        description="Containing over 250 + exericses with detailed "
+        buttonLink="#"
+        image={"/idk.png"}
+        flip={true}
+        tilt={"right"}
+      />
+      <FeatureShowcase
+        title="250 + exercise library"
+        description="Containing over 250 + exericses with detailed "
+        buttonLink="#"
+        image={"/3.png"}
+        flip={false}
+        tilt={"flat"}
       />
 
     <section className="relative w-full py-36 bg-gradient-to-b from-[#050505] via-[#0A0A0A] to-[#101010] text-white overflow-hidden">
