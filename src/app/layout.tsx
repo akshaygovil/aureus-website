@@ -15,6 +15,12 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Aureus",
   description: "An AI fitness app",
+  icons: {
+    icon: [
+      { url: "/favicon.ico" }
+    ],
+    apple: "/apple-touch-icon.png",
+  },
 };
 
 export default function RootLayout({

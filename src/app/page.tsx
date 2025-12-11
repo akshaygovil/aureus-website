@@ -343,7 +343,7 @@ export default function Page() {
       {/* ===== Background Hero Image ===== */}
       <div className="absolute inset-0">
         <Image
-          src="/images/ai-athlete-bg.jpg" // <- your futuristic athlete/AI fusion image
+          src="/public/globe.svg" // <- your futuristic athlete/AI fusion image
           alt="AI Athlete Background"
           fill
           priority
