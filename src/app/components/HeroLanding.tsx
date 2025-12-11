@@ -17,7 +17,7 @@ export default function HeroLanding() {
           <li><a className="hover:text-white transition" href="#">Contact</a></li>
         </ul>
         <a
-          href="#"
+          href="/signup"
           className="hidden sm:inline-flex rounded-full bg-white/5 backdrop-blur border border-white/15 px-5 py-2 text-sm hover:bg-white/10 transition"
         >
           JOIN NOW
