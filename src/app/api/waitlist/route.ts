@@ -36,7 +36,7 @@ export async function POST(req: Request) {
       );
     }
 
-  const html = `
+  const userhtml = `
     <div style="
       width: 100%;
       background: #0B162F;
@@ -114,12 +114,36 @@ export async function POST(req: Request) {
         from: "Aureus Waitlist <noreply@aureus.fit>", // safe default
         to: email,
         subject: "You're on the Aureus waitlist 🎉",
-        html,
+        html: userhtml,
       });
     } catch (emailErr) {
       console.error("Resend email error:", emailErr);
       // We don't fail the request if email sending breaks
     }
+
+    const signupTime = new Date().toLocaleString("en-US", {
+      dateStyle: "medium",
+      timeStyle: "short",
+    });
+
+    try {
+      await resend.emails.send({
+        from: "Aureus Notifications <noreply@aureus.fit>",
+        to: 'akshaygovil913@gmail.com',
+        subject: "🚀 New Waitlist Signup for your app",
+        html: `
+          <div style="font-family:Inter,sans-serif;">
+            <h2>New Aureus Waitlist Signup</h2>
+            <p><strong>Name:</strong> ${firstName}</p>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Platform:</strong> ${platform}</p>
+            <p><strong>Time:</strong> ${signupTime}</p>
+          </div>
+        `,
+      });
+    } catch (err) {
+      console.error("Admin email failed:", err);
+    }    
 
     return NextResponse.json({ success: true }, { status: 200 });
   } catch (err) {
