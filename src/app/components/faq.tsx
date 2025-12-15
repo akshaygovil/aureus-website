@@ -126,7 +126,7 @@ export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section className="relative w-full py-32 bg-[#F6F8FA] overflow-hidden">
+    <section className="relative w-full py-20 md:py-32 bg-[#F6F8FA] overflow-hidden">
       {/* Soft ambient glow (more subtle & expensive-looking) */}
       <motion.div
         aria-hidden
@@ -153,7 +153,10 @@ export default function FAQSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: "easeOut" }}
-          className="w-full text-center text-[4rem] font-[900] tracking-tight text-[#0D1B3D]"
+          className="
+            w-full text-center font-[900] tracking-tight text-[#0D1B3D]
+            text-[2.2rem] sm:text-[2.8rem] md:text-[3.4rem] lg:text-[4rem]
+          "
         >
           Frequently Asked{" "}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] via-[#E9C85B] to-[#B78A2E]">
@@ -163,7 +166,7 @@ export default function FAQSection() {
 
         {/* Inner content constrained to max width */}
         <div className="max-w-4xl mx-auto">
-          <p className="text-center text-[#8A94A6] mt-4 mb-16 text-[15.5px] leading-relaxed font-medium tracking-[0.015em]">
+          <p className="text-center text-[#8A94A6] mt-4 mb-10 md:mb-16 text-[15.5px] leading-relaxed font-medium tracking-[0.015em]">
             Transparent answers—so every choice feels informed and intentional.
           </p>
 
@@ -192,7 +195,7 @@ export default function FAQSection() {
                     onClick={() => setOpenIndex(isOpen ? null : i)}
                     className="w-full flex justify-between items-center px-7 py-6 text-left"
                   >
-                    <span className="text-[17px] font-semibold text-[#0D1B3D] tracking-[0.01em]">
+                    <span className="font-semibold text-[#0D1B3D] tracking-[0.01em] text-[15.5px] sm:text-[16.5px] md:text-[17px]">
                       {q}
                     </span>
 
@@ -210,9 +213,10 @@ export default function FAQSection() {
                     <div className="px-7 py-6 border-t border-[#E9EDF3] overflow-hidden">
                       <div
                         className="
-                          text-[14.5px] text-[#8A94A6] leading-[1.75] tracking-[0.01em] whitespace-pre-line
-                          [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:my-[4px]
-                          [&_li]:leading-[1]
+                          text-[14.5px] sm:text-[15px] text-[#8A94A6]
+                          leading-[1.7] tracking-[0.01em] whitespace-pre-line
+                          [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:my-2
+                          [&_li]:leading-[1.4] [&_li]:my-1
                           [&_li::marker]:text-[#0D1B3D]
                           [&_strong]:font-semibold [&_strong]:text-[#0D1B3D]
                         "
