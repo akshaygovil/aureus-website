@@ -2,17 +2,14 @@
 import FAQSection from "./components/faq";
 import HeroLanding from "./components/HeroLanding";
 import { motion } from "framer-motion";
-import ValueProposition from "./valueproposition/page";
 import DataDrivenPhysique from "./productshowcase.tsx/page";
 import FeatureShowcase from "./information/page";
 import Image from "next/image";
-import PlateCalculator from "./components/platecalculator";
 import FeatureShowcaseSection from "./components/featuresshowcase";
 import { ReactCompareSlider, ReactCompareSliderImage } from "react-compare-slider";
 import HumanBody from "./components/HumanBody";
 import InteractiveMuscleMap from "./components/selectablehumanbody";
 import ComparisonTable from "./components/benefits";
-import MyVisionSection from "./components/vision";
 
 function Feature({ icon, title, desc }: { icon: string; title: string; desc: string }) {
   return (
@@ -31,15 +28,10 @@ function Feature({ icon, title, desc }: { icon: string; title: string; desc: str
 }
 
 export default function Page() {
-
-
-
   return (
     <main className="min-h-screen bg-white text-[#1E1E1E] flex flex-col items-center">
       {/* --- HERO --- */}
       <HeroLanding />
-      <ValueProposition/>
-      <MyVisionSection/>
 
 
 
@@ -538,90 +530,6 @@ export default function Page() {
           ))}
         </div>
       </section>
-
-      {/* --- SHOWCASE --- */}
-      <section className="w-full max-w-6xl py-24 border-t border-gray-100 text-center">
-        <h2 className="text-3xl font-semibold mb-6">Beautifully Functional</h2>
-        <p className="text-[#555] max-w-xl mx-auto mb-14">
-          A minimal design that enhances focus, not noise. Every pixel serves purpose.
-        </p>
-
-        <div className="grid md:grid-cols-2 gap-8">
-          {Array.from({ length: 4 }).map((_, i) => (
-            <div
-              key={i}
-              className="h-64 bg-gradient-to-br from-[#FDFBF3] to-[#F5F5F0] rounded-xl border border-gray-100 shadow-inner hover:shadow-md transition"
-            />
-          ))}
-        </div>
-      </section>
-
-      {/* --- PRICING --- */}
-      <section className="w-full max-w-5xl py-24 border-t border-gray-100 text-center">
-        <h2 className="text-3xl font-semibold mb-4">Simple Pricing</h2>
-        <p className="text-[#555] max-w-md mx-auto mb-12">
-          No hidden fees, no gimmicks — just results that compound.
-        </p>
-
-        <div className="grid md:grid-cols-2 gap-8">
-          <div className="border border-gray-200 rounded-2xl p-10 bg-white hover:shadow-md transition">
-            <h3 className="text-xl font-semibold">Starter</h3>
-            <p className="text-gray-500 mt-1">For those beginning their journey</p>
-            <p className="mt-6 text-4xl font-bold">$9<span className="text-lg text-gray-500">/mo</span></p>
-            <ul className="mt-6 space-y-2 text-gray-600 text-sm">
-              <li>• Core training plans</li>
-              <li>• Basic progress tracking</li>
-              <li>• Access to updates</li>
-            </ul>
-            <a
-              href="#"
-              className="block mt-8 w-full rounded-full bg-[#C9A227] text-white py-2 font-semibold hover:bg-[#B5951F] transition"
-            >
-              Choose Starter
-            </a>
-          </div>
-
-          <div className="border border-[#C9A227]/30 rounded-2xl p-10 bg-gradient-to-br from-white to-[#FFFDF4] hover:shadow-lg transition">
-            <h3 className="text-xl font-semibold flex items-center justify-center gap-2">
-              Pro <span className="text-xs bg-[#C9A227]/10 text-[#C9A227] px-2 py-0.5 rounded-full">Popular</span>
-            </h3>
-            <p className="text-gray-500 mt-1">Advanced tools for dedicated lifters</p>
-            <p className="mt-6 text-4xl font-bold">$29<span className="text-lg text-gray-500">/mo</span></p>
-            <ul className="mt-6 space-y-2 text-gray-600 text-sm">
-              <li>• AI-assisted load tracking</li>
-              <li>• Detailed analytics</li>
-              <li>• Priority support</li>
-            </ul>
-            <a
-              href="#"
-              className="block mt-8 w-full rounded-full bg-[#C9A227] text-white py-2 font-semibold hover:bg-[#B5951F] transition"
-            >
-              Choose Pro
-            </a>
-          </div>
-        </div>
-      </section>
-      <a className="btn-primary">
-        hello
-      </a>
-
-      {/* --- CTA --- */}
-      <section className="w-full max-w-5xl py-24 border-t border-gray-100 text-center">
-        <div className="bg-gradient-to-r from-[#FDF8E4] to-[#FFFDF4] rounded-2xl p-12 border border-[#C9A227]/20">
-          <h2 className="text-3xl font-semibold mb-4">Start Your Journey Today</h2>
-          <p className="text-gray-600 max-w-md mx-auto mb-8">
-            Build the body and mind you’ve always wanted — without clutter or chaos.
-          </p>
-          <a
-            href="#"
-            className="px-8 py-3 rounded-full bg-[#C9A227] text-white font-semibold hover:bg-[#B5951F] transition"
-          >
-            Get Started
-          </a>
-        </div>
-      </section>
-
-
 
 {/* --- WHY CHOOSE AUREUS --- */}
 <section className="relative w-screen left-1/2 -translate-x-1/2 overflow-hidden py-32 bg-gradient-to-br from-[#FDFBF5] via-[#FAF8EF] to-[#F5F5F0] text-[#1E1E1E]">

@@ -37,13 +37,13 @@ export default function FAQSection() {
       q: "How accurate are the strength and progression estimates?",
       a: `No 1RM calculator can accurately predict strength estimates, and any app saying otherwise is lying.
           
-          But our app gets pretty close. Different formulas shine in different conditions and rep ranges, for example the Brzycki works best in the 1-5 rep range, wheras the O'Conner shines in the 6-12 rep range.
+          But our app gets pretty close. Different formulas shine in different conditions and rep ranges, for example the Brzycki works best in the 1-5 rep range, whereas the O'Conner shines in the 6-12 rep range.
 
           Unfortunately, other fitness apps use only 1 formula, which is not a good solution for a strength app.
           
           Our app employs a hybrid of all formulas, determining the most suitable one to use in the given rep range to ensure the highest level of accuracy in predicting your 1RM's.
 
-          So, our strengh curves, graphs, and progression estimates are pretty accurate. 
+          So, our strength curves, graphs, and progression estimates are pretty accurate. 
           `,
     },
     {
@@ -52,16 +52,17 @@ export default function FAQSection() {
 
           Our app helps visualise weeks, months, years and decades (if you use it that long) of your progress in an easy, intuitive manner than anyone can understand.
 
-          With daily reminders, AI feedback, workout streaks, and upward strength curves, our app makes seeing your progress very easy, and this motivates you to stick to with the gym for life.
+          With daily reminders, AI feedback, workout streaks, and upward strength curves, our app makes seeing your progress very easy, and this motivates you to stick with the gym for life.
         `,  
     },
     {
-      q: " I'm inconsistent with training - will this still work?",
-      a: "Yes. Explore the entire experience for 7 days before committing.",
+      q: "I'm inconsistent with training - will this still work?",
+      a: `Of course, this app works much better than others for those who are inconsistant. It has constant actionable steps, including an built in AI coach that will provide actionable feedback to get you back into it. 
+      Not just generic feedback, but stuff like <i>'perform your push workout tomorrow, with an extra focus on upper chest'</i>, or <i>'today's a rest day, no need to train today'</i>`,
     },
     {
       q: "Can I train however I want, or must I follow a fixed plan?",
-      a: "Yes. Explore the entire experience for 7 days before committing.",
+      a: "You can train however you want, and you can build your own workouts too",
     },
     {
       q: "How often do I need to train for results?",
@@ -69,10 +70,10 @@ export default function FAQSection() {
     },
     {
       q: "Is my data safe and private?",
-      a: "Yes. Explore the entire experience for 7 days before committing.",
+      a: "Yes. Your data is stored fully offline, so the owners of the app, even if they wanted, to won't be able to access it. The app is fully safe and private",
     },
     {
-      q: "Most companies just stick that they use “AI” to increase share holder value, when the AI functionality is really bad. Is your app like this? ",
+      q: "Most companies just stick that they use “AI” to increase shareholder value, when the AI functionality is really bad. Is your app like this? ",
       a: `No. We don't use AI as a marketing buzzwork, the AI functionality has meticulously been picked to ensure that it is genuinely helpful and provides insights which a normal algorithm wouldn't be able to supply. Our AI isn't a generic chatbot, or a ChatGPT wrapper. It is given an extremely comprehensive summary of your workouts, both daily and weekly and provides human sounding, concise and helpful summaries.
       
       Instead of giving vague advice like “train harder”, it can tell you:
@@ -119,7 +120,7 @@ export default function FAQSection() {
       q: "Will I lose my data ever?",
       a: `No, your data will be stored onto the app securely offline. We store the data offline in case the cloud servers malfunction or something happens, you will always have control of your data. 
           As long as you don't factory reset your phone, your data will remain securely stored on your phone 
-          At the moment, we don't store your data on the cloud as that's too costly, but its a strong possibility for the future. `,
+          At the moment, we don't store your data on the cloud as that's too costly, but it's a strong possibility for the future. `,
     },
   ];
 
