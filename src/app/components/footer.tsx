@@ -13,8 +13,7 @@ export default function Footer() {
         <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(255,255,255,0.95),rgba(255,255,255,0.65)_40%,rgba(255,255,255,1))]" />
       </div>
 
-      {/* Top gold hairline */}
-      <div className="h-px w-full bg-gradient-to-r from-transparent via-[#E9C85B]/85 to-transparent" />
+      <footer className="relative w-full overflow-hidden border-t border-black/[0.03] bg-white text-[#0D1B3D]"/>
 
       {/* FULL-WIDTH container */}
       <div className="w-full px-4 sm:px-6 lg:px-10">
@@ -63,7 +62,7 @@ export default function Footer() {
                 icon={<FaEnvelope />}
               />
               <SocialIcon
-                href="https://instagram.com/yourhandle"
+                href="https://instagram.com/aureus.gym"
                 label="Instagram"
                 icon={<FaInstagram />}
               />

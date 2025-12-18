@@ -195,6 +195,9 @@
   .btn-primary:hover::before {
     opacity: 1;
   }
+html {
+  scroll-behavior: smooth;
+}
 
 }
 

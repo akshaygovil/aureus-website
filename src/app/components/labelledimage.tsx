@@ -286,7 +286,7 @@ export default function LabeledPhoneMockup({
                 src={screenshotSrc}
                 alt="App screenshot"
                 fill
-                className="object-cover"
+                className="object-cover select-none"
                 priority
               />
 

@@ -4,7 +4,7 @@ import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion, type MotionProps } from "framer-motion";
-import { ArrowRight, Sparkles, ShieldCheck, Zap, AlertTriangle } from "lucide-react";
+import { ArrowRight, Sparkles, AlertTriangle } from "lucide-react";
 
 type HeroCTA = { label: string; href: string };
 type Snippet = { src: string; alt?: string };
@@ -15,32 +15,24 @@ type WarningPanel = {
 };
 
 type Brand = {
-  /** App icon/logo (square works best). Example: "/brand/logo.png" */
   logoSrc?: string;
-  /** Alt text for the logo image */
   logoAlt?: string;
-  /** App name text */
   name?: string;
-  /** Where the logo/name should link (usually "/") */
   href?: string;
 };
 
 type HeroProps = {
-  eyebrow?: string;
   title?: string;
   subtitle?: string;
 
-  /** Header brand (logo + name) */
   brand?: Brand;
 
-  /** Header CTA (also used as main primary CTA by default) */
   primaryCta?: HeroCTA;
   secondaryCta?: HeroCTA;
 
-  /** Panel[0] + Panel[1] are images. Panel[2] is a warning-style callout (rendered by WarningCalloutPanel). */
+  /** Panel[0] + Panel[1] are images. Panel[2] is unused (warning card renders instead). */
   panels?: [Snippet, Snippet, Snippet];
 
-  /** Content for the warning-style callout (panel[2]) */
   warning?: WarningPanel;
 
   className?: string;
@@ -57,39 +49,36 @@ const EASE_IN_OUT: [number, number, number, number] = [0.42, 0, 0.58, 1];
 function AmbientBackground() {
   return (
     <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
-      {/* softer, larger grid (less busy) */}
       <div
-        className="absolute inset-0 opacity-[0.065]"
+        className="absolute inset-0 opacity-[0.055]"
         style={{
           backgroundImage: `
-            linear-gradient(to right, rgba(13,27,61,0.18) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(13,27,61,0.18) 1px, transparent 1px)
+            linear-gradient(to right, rgba(13,27,61,0.48) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(13,27,61,0.48) 1px, transparent 1px)
           `,
-          backgroundSize: "72px 72px",
+          backgroundSize: "80px 80px",
         }}
       />
 
-      {/* premium glows */}
       <div
-        className="absolute -top-48 left-1/2 h-[860px] w-[1220px] -translate-x-1/2 rounded-full blur-3xl"
+        className="absolute -top-52 left-1/2 h-[900px] w-[1280px] -translate-x-1/2 rounded-full blur-3xl"
         style={{
-          background: "radial-gradient(closest-side, rgba(62,91,169,0.30), rgba(255,255,255,0))",
+          background: "radial-gradient(closest-side, rgba(62,91,169,0.28), rgba(255,255,255,0))",
         }}
       />
       <div
         className="absolute -bottom-72 left-[6%] h-[720px] w-[720px] rounded-full blur-3xl"
         style={{
-          background: "radial-gradient(closest-side, rgba(201,162,39,0.24), rgba(255,255,255,0))",
+          background: "radial-gradient(closest-side, rgba(201,162,39,0.22), rgba(255,255,255,0))",
         }}
       />
       <div
-        className="absolute -bottom-80 right-[4%] h-[900px] w-[900px] rounded-full blur-3xl"
+        className="absolute -bottom-80 right-[4%] h-[920px] w-[920px] rounded-full blur-3xl"
         style={{
           background: "radial-gradient(closest-side, rgba(13,27,61,0.16), rgba(255,255,255,0))",
         }}
       />
 
-      {/* grain */}
       <div
         className="absolute inset-0 opacity-[0.05] mix-blend-multiply"
         style={{
@@ -99,15 +88,6 @@ function AmbientBackground() {
       />
 
       <div className="absolute inset-0 bg-gradient-to-b from-white/0 via-white/0 to-white/55" />
-    </div>
-  );
-}
-
-function Badge({ icon, label }: { icon: React.ReactNode; label: string }) {
-  return (
-    <div className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/70 px-3 py-1 text-[12px] font-medium text-[#0D1B3D] shadow-[0_1px_0_rgba(0,0,0,0.03)] backdrop-blur">
-      <span className="grid place-items-center">{icon}</span>
-      <span className="tracking-tight">{label}</span>
     </div>
   );
 }
@@ -125,7 +105,7 @@ function GlassImagePanel({
   src: string;
   alt: string;
   tilt: number;
-  aspect: number; // width / height
+  aspect: number;
   floatDelay?: number;
   className?: string;
   priority?: boolean;
@@ -135,8 +115,8 @@ function GlassImagePanel({
 
   const shadow =
     prominence === "primary"
-      ? "shadow-[0_60px_190px_rgba(13,27,61,0.34)]"
-      : "shadow-[0_44px_150px_rgba(13,27,61,0.24)]";
+      ? "shadow-[0_52px_170px_rgba(13,27,61,0.30)]"
+      : "shadow-[0_40px_140px_rgba(13,27,61,0.22)]";
 
   const border = prominence === "primary" ? "border-white/55" : "border-white/40";
 
@@ -145,40 +125,39 @@ function GlassImagePanel({
       initial={
         reduce
           ? undefined
-          : { opacity: 0, y: 18, rotate: tilt * 0.6, scale: prominence === "primary" ? 0.992 : 0.988 }
+          : { opacity: 0, y: 16, rotate: tilt * 0.6, scale: prominence === "primary" ? 0.992 : 0.988 }
       }
       animate={reduce ? undefined : { opacity: 1, y: 0, rotate: tilt, scale: 1 }}
-      transition={{ duration: 0.9, ease: EASE_OUT, delay: 0.12 + floatDelay }}
+      transition={{ duration: 0.85, ease: EASE_OUT, delay: 0.10 + floatDelay }}
       className={cn("relative", className)}
     >
-      {/* glow bed */}
       <div
         aria-hidden
-        className={cn("absolute rounded-[40px] blur-2xl", prominence === "primary" ? "-inset-12" : "-inset-10")}
+        className={cn("absolute rounded-[40px] blur-2xl", prominence === "primary" ? "-inset-10" : "-inset-9")}
         style={{
           background:
             prominence === "primary"
-              ? "radial-gradient(closest-side, rgba(201,162,39,0.36), rgba(62,91,169,0.24), rgba(255,255,255,0))"
-              : "radial-gradient(closest-side, rgba(201,162,39,0.22), rgba(62,91,169,0.18), rgba(255,255,255,0))",
+              ? "radial-gradient(closest-side, rgba(201,162,39,0.30), rgba(62,91,169,0.20), rgba(255,255,255,0))"
+              : "radial-gradient(closest-side, rgba(201,162,39,0.20), rgba(62,91,169,0.14), rgba(255,255,255,0))",
         }}
       />
 
       <motion.div
-        className={cn("relative rounded-[32px] border bg-white/45 backdrop-blur-xl", border, shadow)}
-        animate={reduce ? undefined : { y: [0, -10, 0] }}
-        transition={reduce ? undefined : { duration: 7.2, repeat: Infinity, ease: EASE_IN_OUT, delay: floatDelay }}
+        className={cn("relative rounded-[30px] border bg-white/45 backdrop-blur-xl", border, shadow)}
+        animate={reduce ? undefined : { y: [0, -8, 0] }}
+        transition={reduce ? undefined : { duration: 7.0, repeat: Infinity, ease: EASE_IN_OUT, delay: floatDelay }}
       >
         <div
           aria-hidden
-          className="absolute inset-0 rounded-[32px] opacity-[0.86]"
+          className="absolute inset-0 rounded-[30px] opacity-[0.86]"
           style={{
             background:
               "linear-gradient(135deg, rgba(255,255,255,0.90) 0%, rgba(255,255,255,0.22) 36%, rgba(255,255,255,0.06) 72%, rgba(255,255,255,0.26) 100%)",
           }}
         />
-        <div aria-hidden className="absolute inset-0 rounded-[32px] ring-1 ring-black/10" />
+        <div aria-hidden className="absolute inset-0 rounded-[30px] ring-1 ring-black/10" />
 
-        <div className="relative m-2 overflow-hidden rounded-[28px]" style={{ aspectRatio: `${aspect} / 1` }}>
+        <div className="relative m-2 overflow-hidden rounded-[26px]" style={{ aspectRatio: `${aspect} / 1` }}>
           <Image
             src={src}
             alt={alt}
@@ -189,7 +168,6 @@ function GlassImagePanel({
           />
         </div>
 
-        {/* tiny chrome dots */}
         <div aria-hidden className="absolute left-4 top-4 flex gap-1.5 opacity-70">
           <span className="h-2 w-2 rounded-full bg-black/20" />
           <span className="h-2 w-2 rounded-full bg-black/15" />
@@ -200,9 +178,6 @@ function GlassImagePanel({
   );
 }
 
-/**
- * Panel[2] — warning card (auto-height; never clips)
- */
 function WarningCalloutPanel({
   label = "WARNING",
   body = "You experienced a significant drop in training volume for the Lats, down 2,737.5 kg from last week, with only 16.5 sets logged this week.",
@@ -220,38 +195,36 @@ function WarningCalloutPanel({
 
   return (
     <motion.div
-      initial={reduce ? undefined : { opacity: 0, y: 16, rotate: tilt * 0.6, scale: 0.99 }}
+      initial={reduce ? undefined : { opacity: 0, y: 14, rotate: tilt * 0.55, scale: 0.992 }}
       animate={reduce ? undefined : { opacity: 1, y: 0, rotate: tilt, scale: 1 }}
-      transition={{ duration: 0.85, ease: EASE_OUT, delay: 0.12 + floatDelay }}
+      transition={{ duration: 0.8, ease: EASE_OUT, delay: 0.10 + floatDelay }}
       className={cn("relative", className)}
     >
       <motion.div
         className="relative"
-        animate={reduce ? undefined : { y: [0, -7, 0] }}
-        transition={reduce ? undefined : { duration: 7.4, repeat: Infinity, ease: EASE_IN_OUT, delay: floatDelay }}
+        animate={reduce ? undefined : { y: [0, -6, 0] }}
+        transition={reduce ? undefined : { duration: 7.2, repeat: Infinity, ease: EASE_IN_OUT, delay: floatDelay }}
       >
         <div
           aria-hidden
-          className="absolute -inset-10 rounded-[42px] blur-3xl"
+          className="absolute -inset-9 rounded-[40px] blur-3xl"
           style={{
             background:
-              "radial-gradient(closest-side, rgba(239,143,143,0.30), rgba(201,162,39,0.10), rgba(255,255,255,0))",
+              "radial-gradient(closest-side, rgba(239,143,143,0.28), rgba(201,162,39,0.10), rgba(255,255,255,0))",
           }}
         />
 
         <div
-          className="relative rounded-[34px] p-[1px]"
+          className="relative rounded-[32px] p-[1px]"
           style={{
             background:
-              "linear-gradient(135deg, rgba(239,143,143,0.58) 0%, rgba(239,143,143,0.20) 38%, rgba(13,27,61,0.10) 100%)",
-            boxShadow: "0 34px 110px rgba(13,27,61,0.16)",
+              "linear-gradient(135deg, rgba(239,143,143,0.56) 0%, rgba(239,143,143,0.18) 38%, rgba(13,27,61,0.10) 100%)",
+            boxShadow: "0 30px 96px rgba(13,27,61,0.14)",
           }}
         >
           <div
-            className={cn("relative overflow-hidden rounded-[33px] min-h-[120px] md:min-h-[140px]", className)}
-            style={{
-              background: "linear-gradient(180deg, #FFF4F4 0%, #FDEEEE 100%)",
-            }}
+            className={cn("relative overflow-hidden rounded-[31px]", className)}
+            style={{ background: "linear-gradient(180deg, #FFF4F4 0%, #FDEEEE 100%)" }}
           >
             <div
               aria-hidden
@@ -262,24 +235,9 @@ function WarningCalloutPanel({
               }}
             />
 
-            <div
-              aria-hidden
-              className="absolute inset-[10px] z-0 rounded-[26px]"
-              style={{ border: "2px solid rgba(239, 143, 143, 0.22)" }}
-            />
+            <div aria-hidden className="absolute inset-[9px] z-0 rounded-[24px]" style={{ border: "2px solid rgba(239, 143, 143, 0.20)" }} />
 
-            <div
-              aria-hidden
-              className="absolute left-0 top-0 z-0 h-24 w-40 -translate-x-12 -translate-y-10 rotate-12 rounded-full blur-2xl"
-              style={{ background: "radial-gradient(closest-side, rgba(239,143,143,0.28), rgba(255,255,255,0))" }}
-            />
-            <div
-              aria-hidden
-              className="absolute bottom-0 right-0 z-0 h-28 w-48 translate-x-12 translate-y-10 -rotate-12 rounded-full blur-2xl"
-              style={{ background: "radial-gradient(closest-side, rgba(13,27,61,0.12), rgba(255,255,255,0))" }}
-            />
-
-            <div className="relative z-10 flex w-full gap-3 p-[clamp(16px,2.0vw,26px)]">
+            <div className="relative z-10 flex w-full gap-3 p-[clamp(14px,1.8vw,22px)]">
               <div className="mt-[2px] grid h-9 w-9 flex-none place-items-center rounded-2xl border border-[#EF8F8F]/30 bg-white/55 backdrop-blur">
                 <AlertTriangle className="h-4 w-4 text-[#E45A5A]" />
               </div>
@@ -303,7 +261,7 @@ function WarningCalloutPanel({
                 </div>
 
                 <div
-                  className="mt-[clamp(8px,1.0vw,12px)] text-pretty text-[clamp(16px,1.55vw,23px)] leading-[1.22]"
+                  className="mt-[clamp(7px,0.9vw,10px)] text-pretty text-[clamp(15px,1.45vw,21px)] leading-[1.22]"
                   style={{ color: "#0D1B3D", fontWeight: 650 }}
                 >
                   {body}
@@ -311,7 +269,7 @@ function WarningCalloutPanel({
               </div>
             </div>
 
-            <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-white/35 to-transparent" />
+            <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 h-9 bg-gradient-to-t from-white/35 to-transparent" />
           </div>
         </div>
       </motion.div>
@@ -332,37 +290,58 @@ function HeaderBar({
     <motion.header
       initial={reduce ? undefined : { opacity: 0, y: -10 }}
       animate={reduce ? undefined : { opacity: 1, y: 0 }}
-      transition={{ duration: 0.65, ease: EASE_OUT, delay: 0.02 }}
+      transition={{ duration: 0.6, ease: EASE_OUT }}
       className="sticky top-0 z-50"
     >
-      {/* glass bar */}
-      <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-10">
-        <div className="mt-3 rounded-2xl border border-black/10 bg-white/65 backdrop-blur-xl shadow-[0_10px_60px_rgba(13,27,61,0.08)]">
-          <div className="flex items-center justify-between gap-3 px-3 py-3 sm:px-4">
-            {/* Brand */}
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
+        <div
+          className="
+            relative mt-4 rounded-3xl
+            border border-black/5
+            bg-[linear-gradient(180deg,rgba(255,255,255,0.78),rgba(245,248,252,0.72))]
+            backdrop-blur-xl
+            shadow-[0_8px_40px_rgba(13,27,61,0.12)]
+          "
+        >
+          {/* subtle gold hairline */}
+          <div
+            aria-hidden
+            className="
+              pointer-events-none
+              absolute inset-x-6 top-0 h-px
+              bg-gradient-to-r
+              from-transparent via-[#E6D38A]/40 to-transparent
+            "
+          />
 
-            <Link href={brand.href} className="group flex min-w-0 items-center gap-2">
-              {/* Logo (A) — completely clean */}
-              <span className="relative h-10 w-10 flex-none overflow-hidden rounded-2xl bg-white">
+          <div className="flex items-center justify-between gap-4 px-4 py-3 sm:px-5">
+            {/* Brand */}
+            <Link
+              href={brand.href}
+              className="group flex min-w-0 items-center gap-1"
+            >
+              <span className="relative h-9 w-9 flex-none overflow-hidden rounded-xl">
                 <Image
                   src={brand.logoSrc}
                   alt={brand.logoAlt}
                   fill
-                  sizes="40px"
+                  sizes="36px"
                   className="object-cover"
                   priority
                 />
               </span>
 
-              {/* Wordmark (no A) */}
               <span className="min-w-0">
                 <span className="block truncate text-[18px] font-extrabold tracking-[-0.02em] sm:text-[20px]">
                   <span
                     className="
-                      bg-gradient-to-r from-[#E0C36A] via-[#BFA24A] to-[#8F6A12]
+                      bg-gradient-to-r
+                      from-[#E0C36A]
+                      via-[#BFA24A]
+                      to-[#8F6A12]
                       bg-clip-text text-transparent
-                      transition-[filter,transform] duration-300
-                      group-hover:brightness-110 group-hover:saturate-110
+                      transition-all duration-300
+                      group-hover:brightness-110
                     "
                   >
                     ureus
@@ -371,36 +350,54 @@ function HeaderBar({
               </span>
             </Link>
 
-            {/* CTA (single button) */}
+            {/* CTA */}
             <Link
               href={cta.href}
-              className="inline-flex flex-none items-center justify-center rounded-2xl bg-[#0D1B3D] px-4 py-2.5 text-[13px] font-semibold text-white shadow-[0_12px_44px_rgba(13,27,61,0.20)] transition hover:translate-y-[-1px] hover:shadow-[0_18px_56px_rgba(13,27,61,0.26)] focus:outline-none focus:ring-2 focus:ring-[#0D1B3D]/30"
+              className="
+                inline-flex flex-none items-center justify-center
+                rounded-2xl px-4 py-2.5
+                text-[13px] font-semibold text-[#0D1B3D]
+                bg-[linear-gradient(135deg,#F4E2A3,#E0C36A)]
+                shadow-[0_10px_30px_rgba(224,195,106,0.35)]
+                transition-all duration-300
+                hover:translate-y-[-1px]
+                hover:shadow-[0_16px_44px_rgba(224,195,106,0.45)]
+                focus:outline-none focus:ring-2 focus:ring-[#E0C36A]/40
+              "
             >
               <span className="hidden sm:inline">{cta.label}</span>
-              <span className="sm:hidden">Waitlist</span>
+              <span className="sm:hidden">Join</span>
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </div>
         </div>
       </div>
 
-      {/* thin separator glow */}
-      <div aria-hidden className="pointer-events-none h-px w-full bg-gradient-to-r from-transparent via-black/10 to-transparent" />
+      {/* ultra-soft separator */}
+      <div
+        aria-hidden
+        className="
+          pointer-events-none h-px w-full
+          bg-gradient-to-r
+          from-transparent via-black/5 to-transparent
+        "
+      />
     </motion.header>
   );
 }
 
+
+
 export default function HeroLandingAbstract({
   brand = { logoSrc: "/brand/logo.png", logoAlt: "Aureus logo", name: "Aureus", href: "/" },
-  eyebrow = "AUREUS • PREMIUM TRAINING LOG",
   title = "Train with zero friction.",
   subtitle = "A calmer, faster way to log workouts — built for lifters who care about details. Clean UI, powerful insights, and an experience that stays out of your way.",
   primaryCta = { label: "Join the waitlist", href: "#waitlist" },
   secondaryCta = { label: "See features", href: "#features" },
   panels = [
-    { src: "/snippets/hero-a.jpg", alt: "Panel 0" }, // 1.38 (most prominent)
-    { src: "/snippets/hero-b.jpg", alt: "Panel 1" }, // 0.89
-    { src: "/snippets/hero-c.jpg", alt: "Panel 2" }, // unused (warning card renders instead)
+    { src: "/snippets/hero-a.jpg", alt: "Panel 0" },
+    { src: "/snippets/hero-b.jpg", alt: "Panel 1" },
+    { src: "/snippets/hero-c.jpg", alt: "Panel 2" },
   ],
   warning,
   className,
@@ -411,11 +408,12 @@ export default function HeroLandingAbstract({
     reduce
       ? {}
       : {
-          initial: { opacity: 0, y: 16 },
+          initial: { opacity: 0, y: 14 },
           animate: { opacity: 1, y: 0 },
-          transition: { duration: 0.7, ease: EASE_OUT, delay },
+          transition: { duration: 0.65, ease: EASE_OUT, delay },
         };
 
+  // aspect ratios (width/height)
   const A0 = 1.38;
   const A1 = 0.89;
 
@@ -429,41 +427,31 @@ export default function HeroLandingAbstract({
   return (
     <section className={cn("relative w-full overflow-hidden bg-white", className)}>
       <AmbientBackground />
-
-      {/* HEADER (logo + name, single CTA on right) */}
       <HeaderBar brand={safeBrand} cta={primaryCta} />
 
       <div className="relative mx-auto max-w-7xl px-5 sm:px-6 lg:px-10">
-        {/* slightly tighter top padding because header exists */}
-        <div className="grid items-center gap-10 pb-16 pt-10 sm:pb-20 sm:pt-12 lg:grid-cols-12 lg:gap-14 lg:pb-24 lg:pt-16">
+        {/* Tighter vertical rhythm overall so it fits shorter screens */}
+        <div className="grid items-center gap-8 pb-12 pt-8 sm:pb-16 sm:pt-10 lg:grid-cols-12 lg:gap-12 lg:pb-18 lg:pt-12">
           {/* LEFT */}
           <div className="lg:col-span-6">
-            <motion.div {...fadeUp(0)} className="inline-flex items-center gap-2">
-              <span className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/70 px-3 py-1 text-[11px] font-semibold tracking-[0.22em] text-[#0D1B3D] shadow-[0_1px_0_rgba(0,0,0,0.03)] backdrop-blur">
-                <Sparkles className="h-3.5 w-3.5" />
-                {eyebrow}
-              </span>
-            </motion.div>
-
             <motion.h1
-              {...fadeUp(0.08)}
-              className="mt-6 text-balance text-4xl font-semibold tracking-tight text-[#0D1B3D] sm:text-5xl md:text-6xl"
+              {...fadeUp(0.06)}
+              className="mt-5 text-balance text-4xl font-semibold tracking-tight text-[#0D1B3D] sm:text-5xl md:text-6xl"
             >
               {title}
             </motion.h1>
 
             <motion.p
-              {...fadeUp(0.16)}
-              className="mt-5 max-w-xl text-pretty text-base leading-relaxed text-[#516079] sm:text-lg"
+              {...fadeUp(0.12)}
+              className="mt-4 max-w-xl text-pretty text-[15px] leading-relaxed text-[#516079] sm:text-lg"
             >
               {subtitle}
             </motion.p>
 
-            {/* Keep both CTAs in the hero (header only has 1 CTA, per your request) */}
-            <motion.div {...fadeUp(0.24)} className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <motion.div {...fadeUp(0.18)} className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
               <Link
                 href={primaryCta.href}
-                className="group inline-flex items-center justify-center gap-2 rounded-2xl bg-[#0D1B3D] px-5 py-3 text-sm font-semibold text-white shadow-[0_12px_44px_rgba(13,27,61,0.24)] transition hover:translate-y-[-1px] hover:shadow-[0_18px_56px_rgba(13,27,61,0.28)] focus:outline-none focus:ring-2 focus:ring-[#0D1B3D]/30"
+                className="group inline-flex items-center justify-center gap-2 rounded-2xl bg-[#0D1B3D] px-5 py-3 text-sm font-semibold text-white shadow-[0_12px_44px_rgba(13,27,61,0.22)] transition hover:translate-y-[-1px] hover:shadow-[0_18px_56px_rgba(13,27,61,0.26)] focus:outline-none focus:ring-2 focus:ring-[#0D1B3D]/30"
               >
                 {primaryCta.label}
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
@@ -476,29 +464,13 @@ export default function HeroLandingAbstract({
                 {secondaryCta.label}
               </Link>
             </motion.div>
-
-            <motion.div {...fadeUp(0.32)} className="mt-7 flex flex-wrap gap-2">
-              <Badge icon={<Zap className="h-4 w-4 text-[#C9A227]" />} label="Fast logging" />
-              <Badge icon={<ShieldCheck className="h-4 w-4 text-[#0D1B3D]" />} label="Built for consistency" />
-              <Badge icon={<Sparkles className="h-4 w-4 text-[#3E5BA9]" />} label="Premium insights" />
-            </motion.div>
-
-            <motion.p {...fadeUp(0.4)} className="mt-8 max-w-xl text-sm text-[#6E7A8C]">
-              Built to feel premium from day one — smooth interactions, thoughtful details, and zero clutter.
-            </motion.p>
           </div>
 
-          {/* RIGHT (recomposed to be bigger + more dominant) */}
+          {/* RIGHT */}
           <div className="lg:col-span-6">
             <div className="relative mx-auto max-w-[980px]">
-              {/* faint orbit ring */}
-              <div
-                aria-hidden
-                className="pointer-events-none absolute left-1/2 top-1/2 hidden h-[820px] w-[820px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-black/5 md:block"
-              />
-
-              {/* Mobile: stacked and LARGE */}
-              <div className="flex flex-col gap-6 md:hidden">
+              {/* Mobile: remove big gaps, make warning sit closer */}
+              <div className="flex flex-col gap-3 md:hidden">
                 <GlassImagePanel
                   src={panels[0].src}
                   alt={panels[0].alt ?? "Panel 0"}
@@ -513,7 +485,7 @@ export default function HeroLandingAbstract({
                   alt={panels[1].alt ?? "Panel 1"}
                   aspect={A1}
                   tilt={6}
-                  floatDelay={0.12}
+                  floatDelay={0.10}
                   prominence="secondary"
                 />
                 <WarningCalloutPanel
@@ -522,15 +494,15 @@ export default function HeroLandingAbstract({
                     warning?.body ??
                     "You experienced a significant drop in training volume for the Lats, down 2,737.5 kg from last week, with only 16.5 sets logged this week."
                   }
-                  tilt={4}
-                  floatDelay={0.18}
+                  tilt={3}
+                  floatDelay={0.14}
                 />
               </div>
 
-              {/* Desktop: big hero collage (fills the column) */}
-              <div className="relative hidden md:block md:min-h-[780px] lg:min-h-[860px]">
-                {/* Panel 0 — the hero: huge, anchored left */}
-                <div className="absolute left-0 top-0 z-30 w-[76%] lg:w-[78%]">
+              {/* Desktop: constrain overall collage height so it fits vertically */}
+              <div className="relative hidden md:block md:h-[520px] lg:h-[600px] xl:h-[660px]">
+                {/* Panel 0 — large but slightly reduced */}
+                <div className="absolute left-0 top-0 z-30 w-[72%] lg:w-[74%]">
                   <GlassImagePanel
                     src={panels[0].src}
                     alt={panels[0].alt ?? "Panel 0"}
@@ -542,20 +514,20 @@ export default function HeroLandingAbstract({
                   />
                 </div>
 
-                {/* Panel 1 — secondary: overlaps the right edge, larger than before */}
-                <div className="absolute right-0 top-[14%] z-20 w-[50%] lg:top-[16%] lg:w-[52%]">
+                {/* Panel 1 — overlaps, slightly smaller */}
+                <div className="absolute right-0 top-[12%] z-20 w-[46%] lg:top-[14%] lg:w-[48%]">
                   <GlassImagePanel
                     src={panels[1].src}
                     alt={panels[1].alt ?? "Panel 1"}
                     aspect={A1}
                     tilt={8}
-                    floatDelay={0.16}
+                    floatDelay={0.14}
                     prominence="secondary"
                   />
                 </div>
 
-                {/* Warning — least prominent: tucked bottom-right, smaller but still readable */}
-                <div className="absolute bottom-0 right-[2%] z-10 w-[68%] origin-bottom-right scale-[0.84] lg:w-[70%] lg:scale-[0.82]">
+                {/* Warning — pull up closer + reduce scale so everything fits */}
+                <div className="absolute bottom-[2%] right-[1%] z-10 w-[66%] origin-bottom-right scale-[0.72] lg:w-[68%] lg:scale-[0.70]">
                   <WarningCalloutPanel
                     label={warning?.label ?? "WARNING"}
                     body={
@@ -563,23 +535,20 @@ export default function HeroLandingAbstract({
                       "You experienced a significant drop in training volume for the Lats, down 2,737.5 kg from last week, with only 16.5 sets logged this week."
                     }
                     tilt={6}
-                    floatDelay={0.28}
+                    floatDelay={0.22}
+                    className="min-h-0"
                   />
                 </div>
 
-                {/* subtle connector line (adds “designed” feel without clutter) */}
+                {/* subtle connector line */}
                 <div
                   aria-hidden
-                  className="pointer-events-none absolute left-[18%] top-[62%] h-px w-[520px] opacity-80"
+                  className="pointer-events-none absolute left-[16%] top-[60%] h-px w-[460px] opacity-70"
                   style={{
                     background:
-                      "linear-gradient(90deg, rgba(201,162,39,0) 0%, rgba(201,162,39,0.62) 42%, rgba(62,91,169,0.18) 100%)",
+                      "linear-gradient(90deg, rgba(201,162,39,0) 0%, rgba(201,162,39,0.60) 42%, rgba(62,91,169,0.16) 100%)",
                   }}
                 />
-              </div>
-
-              <div className="mt-5 text-center text-xs text-[#6E7A8C]">
-                Big visuals first — then a real warning to prove the “insights” story.
               </div>
             </div>
           </div>

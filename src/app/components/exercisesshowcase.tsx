@@ -952,7 +952,7 @@ export default function ExerciseLibrarySectionFinalLight({
         <div className="mt-14 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           <div className="lg:col-span-5">
             <div
-              className="rounded-3xl ring-1 shadow-[0_26px_90px_rgba(0,0,0,0.12)] p-6 md:p-7 backdrop-blur"
+              className="rounded-3xl ring-1 ring-[rgba(13,27,61,0.08)] shadow-[0_26px_90px_rgba(0,0,0,0.12)] p-6 md:p-7 backdrop-blur"
               style={{ backgroundColor: "rgba(255,255,255,0.80)", borderColor: withAlpha(colors.navy, 0.10) }}
             >
               <div className="flex items-center gap-2" style={{ color: colors.navy }}>

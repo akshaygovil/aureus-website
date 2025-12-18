@@ -69,7 +69,7 @@ export const faqs =
     },
     {
       q: "Is my data safe and private?",
-      a: "Yes. Your data is stored fully offline, so the owners of the app, even if they wanted, to won't be able to access it. The app is fully safe and private",
+      a: "Yes. Your data is stored fully offline, so the owners of the app, even if they wanted to, won't be able to access it. The app is fully safe and private",
     },
     {
       q: "Most companies just stick that they use “AI” to increase shareholder value, when the AI functionality is really bad. Is your app like this? ",
