@@ -79,11 +79,6 @@
 }
 .animate-wave { animation: wave 4.5s ease-in-out infinite; }
 
-.group:hover img {
-  filter: blur(3px) brightness(0.9);
-  transition: all 0.5s ease;
-}
-
 @keyframes muscleGlow {
   0%, 100% {
     filter: drop-shadow(0 0 8px rgba(201,162,39,0.4));

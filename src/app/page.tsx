@@ -2,14 +2,28 @@
 import FAQSection from "./components/faq";
 import HeroLanding from "./components/HeroLanding";
 import { motion } from "framer-motion";
-import DataDrivenPhysique from "./productshowcase.tsx/page";
-import FeatureShowcase from "./information/page";
 import Image from "next/image";
-import FeatureShowcaseSection from "./components/featuresshowcase";
-import { ReactCompareSlider, ReactCompareSliderImage } from "react-compare-slider";
+import { ReactCompareSlider } from "react-compare-slider";
 import HumanBody from "./components/HumanBody";
 import InteractiveMuscleMap from "./components/selectablehumanbody";
 import ComparisonTable from "./components/benefits";
+import ImageText from "./components/imagetext";
+import TilesSection from "./components/tiles";
+import FullWidthTiles from "./components/tiles";
+import Tiles from "./components/tiles2";
+import ExerciseLibrarySection from "./components/exercisesshowcase";
+import ExerciseLibrarySectionFinal from "./components/exercisesshowcase";
+import Footer from "./components/footer";
+import LabeledPhoneMockup from "./components/labelledimage";
+import Tiles2x2 from "./components/tiles";
+import HorizontalTiles from "./components/tiles2";
+import HorizontalRowTiles from "./components/tiles2";
+import AIFunctionalitySection from "./components/AIfunctionality";
+import VideoText from "./components/videotext";
+import TwoScreensWithCenterText from "./components/TwoScreensWithCenterText";
+import TwoPhonesCenterText from "./components/TwoScreensWithCenterText";
+import AureusFeatureShowcase from "./components/functionaltimes";
+import AlternativeSection from "./components/productcomparison";
 
 function Feature({ icon, title, desc }: { icon: string; title: string; desc: string }) {
   return (
@@ -27,675 +41,406 @@ function Feature({ icon, title, desc }: { icon: string; title: string; desc: str
   );
 }
 
+const x = 150
 export default function Page() {
   return (
-    <main className="min-h-screen bg-white text-[#1E1E1E] flex flex-col items-center">
+    <main className="min-h-screen bg-white text-[#1E1E1E] flex flex-col">
       {/* --- HERO --- */}
-      <HeroLanding />
+      <HeroLanding 
+        panels={[
+          { src: "/snippets/heroimage2.png", alt: "Panel 1" }, // 1.38
+          { src: "/snippets/heroimage1.png", alt: "Panel 2" }, // 0.89
+          { src: "/snippets/hero-c.jpg", alt: "Panel 3" }, // 2.45 (small accent)
+        ]}
+        brand={{ logoSrc: "/apple-touch-icon.png", name: "Aureus", href: "/signup" }}
+        primaryCta={{ label: "Join the waitlist", href: "/signup" }}
+      /> 
 
+      <AureusFeatureShowcase/>
 
+      <AlternativeSection/>
 
-      <FeatureShowcaseSection/>
-      <FeatureShowcase
-        title="250 + exercise library"
-        description="Containing over 250 + exericses with detailed "
-        buttonLink="#"
-        image={"/4.png"}
-        flip={false}
-        tilt={"right"}
+      <AIFunctionalitySection
+        leftTall={{ src: "/appscreenshots/websitescreenshot7.png", alt: "AI builder input" }}
+        leftBottom={{ src: "/snippets/buildaisafety.png", alt: "Snippet 1" }}
+        rightTop={{ src: "/snippets/buildwithai2.png", alt: "Snippet 2" }}
+        rightBottom={{ src: "/snippets/buildwithai3.png", alt: "Snippet 3" }}
+        outputTall={{ src: "/appscreenshots/websitescreenshot8.png", alt: "AI session output" }}
       />
-      <FeatureShowcase
-        title="250 + exercise library"
-        description="Containing over 250 + exericses with detailed "
-        buttonLink="#"
-        image={"/idk.png"}
-        flip={true}
-        tilt={"right"}
+      <ImageText
+        title="Workout calander + Streak tracking"
+        subtitle="This is a simple calendar that shows how your month is actually going.
+          You can see which days you trained, which days you rested, and which days were left incomplete. Below the calendar, your current streak is shown so you always know how long you’ve been consistent — without having to think about it."
+        screenshotSrc="/appscreenshots/websitescreenshot2.png"
       />
-      <FeatureShowcase
-        title="250 + exercise library"
-        description="Containing over 250 + exericses with detailed "
-        buttonLink="#"
-        image={"/3.png"}
-        flip={false}
-        tilt={"flat"}
+      <ImageText
+        title="Detailed muscle analysis"
+        subtitle="Choose a time range and you’ll get a clear summary of which muscle groups you’ve prioritised, and which ones have been trained less. The heatmap shows the intensity of the muscles worked, and below a table presents the full data. "
+        screenshotSrc="/appscreenshots/websitescreenshot5.png"
+        reverse
+      />
+      <ImageText
+        title="Look over past workouts with ease"
+        subtitle="A clear snapshot of a past session — duration, volume, exercises, and a visual breakdown of the muscles trained. Everything below is listed exactly as you logged it, so you can review the workout without rethinking it."
+        screenshotSrc="/appscreenshots/websitescreenshot10.png"
+      />
+      <ImageText
+        title="Detailed and complete volume analytics"
+        subtitle="This screen tracks your total volume, sets, and training frequency over any time range. You can spot trends day-to-day, see how consistent your workload has been, and understand how hard you’re really training — beyond just exercises and reps."
+        screenshotSrc="/appscreenshots/websitescreenshot13.png"
+        reverse
+      />
+      <VideoText
+        title="Day to day volume and training analysis slideshow"
+        subtitle="This is a day-by-day replay of your training.
+          Select a time range and watch how your volume and sets change over time. Each frame shows what you trained on that day, along with a heatmap so you can see where the work actually went.
+          It’s useful for spotting patterns — busy weeks, missed days, overload phases — without digging through logs or charts."
+        videoSrc="/muscleslideshow.mp4"
+      />      
+      <TwoPhonesCenterText
+        title="Full weight analysis"
+        subtitle="You can see how your weight has changed over time, how consistent your logging has been, and how your current trend compares to your goal. The insights call out what’s happening and whether you’re moving in the right direction."
+        leftScreenshotSrc="/appscreenshots/websitescreenshot11.png"
+        rightScreenshotSrc="/appscreenshots/websitescreenshot12.png"
+        iphoneFrameSrc="/finaliphoneframe.png"
+        size={1}
       />
 
-    <section className="relative w-full py-36 bg-gradient-to-b from-[#050505] via-[#0A0A0A] to-[#101010] text-white overflow-hidden">
-      {/* ---- Atmospheric layers ---- */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_35%,rgba(201,162,39,0.12),transparent_70%)] blur-[200px]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_70%,rgba(90,131,215,0.25),transparent_70%)] blur-[200px]" />
-      <div className="absolute inset-0 opacity-[0.05] bg-[linear-gradient(90deg,#fff_1px,transparent_1px),linear-gradient(0deg,#fff_1px,transparent_1px)] bg-[size:100px_100px]" />
+      <section className="relative w-full overflow-hidden bg-white">
+        {/* ✅ Ultra-subtle section unifier: faint grid + soft gradient wash */}
+        <div aria-hidden className="pointer-events-none absolute inset-0">
+          {/* very light grid pattern */}
+          <div
+            className="absolute inset-0 opacity-[0.12]"
+            style={{
+              backgroundImage: `
+                linear-gradient(to right, rgba(13,27,61,0.18) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(13,27,61,0.18) 1px, transparent 1px)
+              `,
+              backgroundSize: "48px 48px",
+            }}
+          />
+          {/* soft top wash */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "radial-gradient(900px 520px at 50% 0%, rgba(62,91,169,0.10) 0%, rgba(255,255,255,0) 60%)",
+            }}
+          />
+          {/* tiny gold tint near tiles area (super subtle) */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "radial-gradient(760px 460px at 50% 58%, rgba(233,200,91,0.08) 0%, rgba(255,255,255,0) 62%)",
+            }}
+          />
+        </div>
 
-      {/* ---- Gold gradient arc ring ---- */}
-      <div className="absolute left-1/2 top-[45%] -translate-x-1/2 w-[900px] h-[900px] rounded-full border border-[#C9A227]/10 blur-[3px]" />
-      <div className="absolute left-1/2 top-[45%] -translate-x-1/2 w-[1100px] h-[1100px] rounded-full border border-[#C9A227]/5 blur-[2px]" />
-
-      <div className="max-w-7xl mx-auto relative z-10 px-8 flex flex-col lg:flex-row items-center justify-between gap-28">
-        {/* ---------- TEXT SIDE ---------- */}
-        <motion.div
-          initial={{ opacity: 0, x: -60 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1 }}
-          viewport={{ once: true }}
-          className="flex-1"
-        >
-          <h2 className="text-5xl md:text-6xl font-bold leading-tight mb-8">
-            <span className="bg-gradient-to-r from-[#C9A227] via-[#E8CF8E] to-[#5A83D7] bg-clip-text text-transparent whitespace-nowrap">
-              Aureus Intelligence
-            </span>
-            <br />
-            The Neural Edge of Performance
+        {/* Intro */}
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-10 pt-28 pb-20 text-center">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-[#0D1B3D]">
+            Train without friction.
           </h2>
 
-          <p className="text-gray-300/90 text-lg max-w-xl mb-12 leading-relaxed">
-            Aureus isn’t built on generic AI models. It’s a <strong>neural-level performance system</strong> — fine-tuned for biomechanics, recovery, and elite strength programming. 
-            Every insight, adjustment, and adaptation comes from <strong>domain-specific intelligence</strong> engineered for serious lifters.
+          <p className="mt-6 max-w-2xl mx-auto text-base sm:text-lg text-[#6E7A8C] leading-relaxed">
+            Logging workouts feels instant — everything is where you expect it, nothing
+            gets in the way. Focus on lifting. Aureus handles the rest.
+            <span className="font-black">TODO change the image to include RPE and use proper times</span>
           </p>
-
-          <div className="space-y-8">
-            <Feature
-              icon="🧬"
-              title="Biomechanical Intelligence"
-              desc="Learns your unique patterns — torque, tempo, and recovery curves — to refine performance precision."
-            />
-            <Feature
-              icon="⚙️"
-              title="Prompt-Layered Reasoning"
-              desc="Built on proprietary prompt stacks designed for hypertrophy, strength, and recovery optimization."
-            />
-            <Feature
-              icon="💡"
-              title="Adaptive Neural Coaching"
-              desc="Evolves after every workout, creating a closed feedback loop that mirrors a real coach’s progression logic."
-            />
-          </div>
-
-          <motion.a
-            href="#"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            viewport={{ once: true }}
-            className="inline-block mt-14 px-12 py-5 bg-gradient-to-r from-[#C9A227] to-[#E8CF8E] text-black text-lg font-semibold rounded-full shadow-[0_0_50px_rgba(201,162,39,0.45)] hover:shadow-[0_0_80px_rgba(201,162,39,0.7)] hover:scale-[1.02] transition-all duration-300"
-          >
-            Discover the Aureus Engine
-          </motion.a>
-        </motion.div>
-
-        {/* ---------- VISUAL SIDE ---------- */}
-        <motion.div
-          initial={{ opacity: 0, x: 60 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1 }}
-          viewport={{ once: true }}
-          className="flex-1 relative flex justify-center items-center"
-        >
-          {/* --- Blue neural energy core --- */}
-          <div className="absolute left-1/2 top-[34%] -translate-x-1/2 w-[200px] h-[200px] rounded-full bg-[radial-gradient(circle_at_center,rgba(90,131,215,0.7),transparent_70%)] blur-[70px] animate-core-pulse" />
-          <div className="absolute left-1/2 top-[34%] -translate-x-1/2 w-[250px] h-[250px] rounded-full bg-[radial-gradient(circle_at_center,rgba(90,131,215,0.4),transparent_80%)] blur-[90px] animate-wave" />
-
-          {/* --- Outer glow diffusion --- */}
-          <div className="absolute w-[650px] h-[650px] rounded-full bg-[radial-gradient(circle_at_center,rgba(201,162,39,0.25),rgba(90,131,215,0.2),transparent_70%)] blur-[240px] animate-pulse-slow" />
-
-          {/* --- Main model --- */}
-          <div className="relative w-[420px] sm:w-[460px]">
-            <Image
-              src="/aiimage.png"
-              alt="Aureus AI Intelligence Visual"
-              width={460}
-              height={460}
-              draggable={false}
-              priority
-              className="relative z-10 mix-blend-screen select-none"
-            />
-          </div>
-
-          
-{/* --- Floating metric panels --- */}
-<div className="absolute inset-0 z-30 pointer-events-none">
-  {/* --- Left Gold Panel --- */}
-  <div className="absolute left-[10%] top-[25%] pointer-events-auto">
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1, delay: 0.3 }}
-      className="
-        group relative w-[260px] rounded-2xl border border-[#C9A227]/40
-        bg-gradient-to-br from-black/80 via-black/70 to-black/60
-        backdrop-blur-3xl p-6 opacity-60 hover:opacity-100
-        shadow-[0_0_40px_rgba(201,162,39,0.15)]
-        transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)]
-        hover:scale-[1.08] hover:border-[#C9A227]/80 
-        hover:shadow-[0_0_120px_rgba(201,162,39,0.6)]
-        hover:brightness-125 hover:z-50 hover:rotate-2
-        "
-    >
-      <div
-        className="
-          absolute inset-0 rounded-2xl pointer-events-none
-          bg-[radial-gradient(circle_at_top_left,rgba(201,162,39,0.25),transparent_70%)]
-          opacity-40 blur-xl transition-all duration-700 group-hover:opacity-100
-        "
-      />
-      <h4 className="relative text-lg font-semibold text-[#E8CF8E] mb-2 drop-shadow-[0_0_6px_rgba(201,162,39,0.6)]">
-        Neural Drive Index
-      </h4>
-      <p className="relative text-sm text-gray-200 leading-relaxed">
-        +18.7% average torque increase since last cycle
-      </p>
-    </motion.div>
-  </div>
-
-  {/* --- Right Blue Panel --- */}
-  <div className="absolute right-[8%] bottom-[25%] pointer-events-auto">
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1, delay: 0.5 }}
-      className="
-        group relative w-[260px] rounded-2xl border border-[#5A83D7]/40
-        bg-gradient-to-br from-black/80 via-black/70 to-black/60
-        backdrop-blur-3xl p-6 opacity-60 hover:opacity-100
-        shadow-[0_0_40px_rgba(90,131,215,0.15)]
-        transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)]
-        hover:scale-[1.08] hover:border-[#5A83D7]/80 
-        hover:shadow-[0_0_120px_rgba(90,131,215,0.6)]
-        hover:brightness-125 hover:z-50 hover:-rotate-2
-      "
-    >
-      <div
-        className="
-          absolute inset-0 rounded-2xl pointer-events-none
-          bg-[radial-gradient(circle_at_bottom_right,rgba(90,131,215,0.25),transparent_70%)]
-          opacity-40 blur-xl transition-all duration-700 group-hover:opacity-100
-        "
-      />
-      <h4 className="relative text-lg font-semibold text-[#AFC8F9] mb-2 drop-shadow-[0_0_6px_rgba(90,131,215,0.8)]">
-        Recovery Equilibrium
-      </h4>
-      <p className="relative text-sm text-gray-200 leading-relaxed">
-        Neural readiness score: <span className="text-[#C9A227]">92%</span>
-      </p>
-    </motion.div>
-  </div>
-</div>
-
-
-
-        </motion.div>
-      </div>
-
-      {/* ---- Animations ---- */}
-    </section>
-
-
-
-
-
-
-
-
-<section className="relative w-full py-32 bg-white text-[#111] overflow-hidden">
-  {/* Ambient backdrop glows */}
-  <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,rgba(255,90,90,0.1),transparent_70%)] blur-[160px]" />
-  <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_50%,rgba(60,255,150,0.1),transparent_70%)] blur-[160px]" />
-
-  <div className="relative z-10 flex flex-col items-center">
-    <h2 className="text-5xl font-bold mb-4 text-center tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[#E53935] to-[#43A047]">
-      Transformation in Motion
-    </h2>
-    <p className="text-gray-600 text-lg max-w-2xl text-center mb-16 leading-relaxed">
-      Witness your evolution — from intense effort to intelligent growth.  
-      <span className="font-medium text-[#2E7D32]">Aureus AI</span> brings your journey to life.
-    </p>
-
-    {/* Slider container */}
-    <div className="relative w-full max-w-5xl rounded-3xl overflow-hidden border border-[#E6E6E6] bg-white shadow-[0_0_80px_rgba(0,0,0,0.05)]">
-      <ReactCompareSlider
-        itemOne={
-          <div className="relative flex justify-center items-center w-full bg-white overflow-hidden">
-            {/* 🔥 Red halo (LEFT EDGE) */}
-            <div className="absolute left-[-150px] top-1/2 -translate-y-1/2 w-[500px] h-[700px] bg-[radial-gradient(circle_at_left,rgba(255,60,60,0.45),transparent_70%)] blur-[120px] opacity-80" />
-            <div className="w-[600px] aspect-[1/1] flex items-center justify-center">
-              <HumanBody className="w-full h-auto" />
-              <span className="absolute top-6 left-8 text-[#E53935] font-semibold text-lg tracking-wide uppercase">
-                Before
-              </span>
-            </div>
-          </div>
-        }
-        itemTwo={
-          <div className="relative flex justify-center items-center w-full bg-white overflow-hidden">
-            {/* 💚 Green halo (RIGHT EDGE) */}
-            <div className="absolute right-[-150px] top-1/2 -translate-y-1/2 w-[500px] h-[700px] bg-[radial-gradient(circle_at_right,rgba(60,255,140,0.45),transparent_70%)] blur-[120px] opacity-80" />
-            <div className="w-[600px] aspect-[1/1] flex items-center justify-center">
-              <HumanBody
-                className="w-full h-auto"
-                colors={{
-                  "middle-chest": "#43A047",
-                  "biceps": "#43A047",
-                  "glutes": "#43A047",
-                }}
-              />
-              <span className="absolute top-6 right-8 text-[#43A047] font-semibold text-lg tracking-wide uppercase">
-                After
-              </span>
-            </div>
-          </div>
-        }
-        style={{
-          width: "100%",
-          height: "auto",
-          borderRadius: "1.5rem",
-        }}
-        handle={
-          <div className="relative flex items-center justify-center">
-            {/* Central glowing divider */}
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[3px] h-[700px] bg-[#4CAF50] shadow-[0_0_30px_rgba(255,80,80,0.4)] z-0 animate-pulse-slow" />
-            
-            {/* Handle circle */}
-            <div className="relative z-10 flex items-center justify-center w-14 h-14 rounded-full bg-white backdrop-blur-md border border-[#4CAF50]/40 shadow-[0_0_25px_rgba(60,210,100,0.4)] hover:scale-110 transition-all duration-300">
-              <span className="text-2xl font-bold text-[#43A047] drop-shadow-[0_0_6px_rgba(60,210,100,0.6)] select-none">
-                {'‹›'}
-              </span>
-            </div>
-          </div>
-        }
-      />
-    </div>
-
-    <p className="mt-10 text-center text-gray-600 max-w-xl text-base">
-      <span className="font-semibold text-[#E53935]">Effort.</span>  
-      <span className="font-semibold text-[#43A047]"> Evolution.</span>  
-      See the difference, powered by intelligent training analytics.
-    </p>
-  </div>
-</section>
-<InteractiveMuscleMap/>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <section className="relative w-full min-h-[100vh] overflow-hidden bg-[#050505] text-white flex items-center justify-center">
-      {/* ===== Background Hero Image ===== */}
-      <div className="absolute inset-0">
-        <Image
-          src="/public/globe.svg" // <- your futuristic athlete/AI fusion image
-          alt="AI Athlete Background"
-          fill
-          priority
-          className="object-cover object-center opacity-60"
-        />
-        {/* Gradient overlay for depth */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-[#0B0B0B]/95" />
-      </div>
-
-      {/* ===== Animated Glows ===== */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-[20%] left-[25%] w-[500px] h-[500px] rounded-full blur-[160px] bg-[#C9A227]/25 animate-pulse" />
-        <div className="absolute bottom-[10%] right-[20%] w-[600px] h-[600px] rounded-full blur-[180px] bg-[#5A83D7]/30 animate-pulse" />
-      </div>
-
-      {/* ===== Grid Overlay ===== */}
-      <div className="absolute inset-0 opacity-[0.06] bg-[linear-gradient(90deg,#fff_1px,transparent_1px),linear-gradient(0deg,#fff_1px,transparent_1px)] bg-[size:90px_90px]" />
-
-      {/* ===== Content ===== */}
-      <div className="relative z-10 max-w-6xl mx-auto text-center px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.1, ease: [0.25, 0.1, 0.25, 1] }}
-          viewport={{ once: true }}
-        >
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/20 bg-white/10 backdrop-blur-md text-sm tracking-wider uppercase">
-            <span className="h-2 w-2 rounded-full bg-[#C9A227] shadow-[0_0_10px_#C9A227]" />
-            Fine-Tuned Neural Intelligence
-          </div>
-
-          <h1 className="mt-8 text-5xl sm:text-6xl md:text-7xl font-semibold leading-tight">
-            The <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C9A227] via-white to-[#5A83D7]">Strongest AI</span>{" "}
-            <br />
-            <span className="text-white/90">Built For Strength.</span>
-          </h1>
-
-          <p className="mt-6 text-lg sm:text-xl max-w-2xl mx-auto text-white/70">
-            A purpose-trained AI model — sculpted on real hypertrophy data, velocity curves, and fatigue patterns — not a general chatbot.
-            Every rep, rest, and recovery optimized for your physiology.
-          </p>
-
-          <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="#"
-              className="relative inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-[#C9A227] to-[#5A83D7] px-7 py-3 font-semibold shadow-[0_8px_40px_rgba(201,162,39,0.35)] hover:shadow-[0_10px_44px_rgba(201,162,39,0.45)] transition"
-            >
-              Experience the Model
-            </a>
-            <a
-              href="#"
-              className="relative inline-flex items-center justify-center rounded-2xl border border-white/20 bg-white/5 px-7 py-3 font-medium text-white/90 hover:bg-white/10 transition"
-            >
-              See Comparison
-            </a>
-          </div>
-        </motion.div>
-
-        {/* ===== Floating Stats / Chips ===== */}
-        <motion.div
-          initial={{ opacity: 0, y: 60 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, delay: 0.3 }}
-          viewport={{ once: true }}
-          className="mt-20 grid grid-cols-1 sm:grid-cols-3 gap-6"
-        >
-          {[
-            {
-              label: "Prediction Accuracy",
-              value: "+27.4%",
-              sub: "on velocity & RIR detection",
-            },
-            {
-              label: "Training Plan Adherence",
-              value: "+19.2%",
-              sub: "real-world lifter retention",
-            },
-            {
-              label: "Adaptive Fatigue Control",
-              value: "Auto-tuned",
-              sub: "deload triggers by HRV & sleep",
-            },
-          ].map((stat, i) => (
-            <div
-              key={i}
-              className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md p-6 hover:bg-white/[0.08] transition group"
-            >
-              <h3 className="text-2xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-[#C9A227] to-[#5A83D7]">
-                {stat.value}
-              </h3>
-              <p className="mt-2 text-sm text-white/80 uppercase tracking-wide">
-                {stat.label}
-              </p>
-              <p className="text-xs text-white/50 mt-1">{stat.sub}</p>
-            </div>
-          ))}
-        </motion.div>
-      </div>
-
-      {/* ===== Bottom Accent Lines ===== */}
-      <svg
-        className="absolute left-0 bottom-0 w-full opacity-30"
-        height="90"
-        viewBox="0 0 1200 90"
-        fill="none"
-      >
-        <path
-          d="M0 70 C 300 10, 900 130, 1200 70"
-          stroke="url(#g1)"
-          strokeWidth="2"
-        />
-        <defs>
-          <linearGradient id="g1" x1="0" y1="0" x2="1200" y2="0">
-            <stop offset="0%" stopColor="#C9A227" stopOpacity="0.0" />
-            <stop offset="50%" stopColor="#C9A227" stopOpacity="0.9" />
-            <stop offset="100%" stopColor="#5A83D7" stopOpacity="0.0" />
-          </linearGradient>
-        </defs>
-      </svg>
-    </section>
-
-
-
-
-
-
-
-
-      <section className="w-full max-w-6xl text-center pt-32 pb-24 relative">
-        {/* soft gradient glow background */}
-        <div className="absolute inset-0 -z-10 overflow-hidden">
-          <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-gradient-to-br from-[#F5EAC2] via-[#FFF8E1] to-transparent blur-[160px]" />
         </div>
 
-        <h1 className="text-5xl sm:text-6xl font-semibold tracking-tight mb-6 animate-fadeIn">
-          Train Smarter.<br />Look Better. Live Stronger.
-        </h1>
-        <p className="text-lg text-[#4B4B4B] max-w-2xl mx-auto">
-          Precision fitness, simplified. A minimal platform built for lifters who
-          want clarity, focus, and real results — without distractions.
-        </p>
-
-        <div className="mt-10 flex flex-col sm:flex-row justify-center gap-4">
-          <a
-            href="#"
-            className="px-8 py-3 rounded-full bg-[#C9A227] text-white font-semibold hover:bg-[#B5951F] transition"
-          >
-            Get Started
-          </a>
-          <a
-            href="#"
-            className="px-8 py-3 rounded-full border border-[#C9A227]/30 text-[#2C2C2C] hover:border-[#C9A227] hover:text-[#C9A227] transition"
-          >
-            Learn More
-          </a>
+        {/* Annotated phone */}
+        <div className="relative max-w-7xl mx-auto px-2 sm:px-6 lg:px-10">
+          <LabeledPhoneMockup
+            screenshotSrc="/appscreenshots/websitescreenshot4.png"
+            phoneFrameSrc="/finaliphoneframe.png"
+            dotColor="#3E5BA9"
+            dotRingColor="rgba(62,91,169,0.16)"
+            dotSizePx={6}
+            lineColor="rgba(62,91,169,0.55)"
+            lineGlowColor="rgba(62,91,169,0.10)"
+            labelBg="rgba(246,248,250,0.92)"
+            labelBorderColor="rgba(62,91,169,0.10)"
+            labelTitleColor="#0D1B3D"
+            labelDescColor="rgba(110,122,140,1)"
+            labelWidthPx={260}
+            labelScale={1.15}
+            labels={[
+              {
+                id: "a",
+                title: "Workout name",
+                description: "Clearly labelled sessions so nothing feels lost.",
+                anchor: { top: "6.5%", left: "15%" },
+                panel: { left: `-${x}%`, top: "1.5%" },
+              },
+              {
+                id: "b",
+                title: "Timings",
+                description: "Displays the time you started the workout, along with how much time you've spent so far.",
+                anchor: { top: "10%", left: "57%" },
+                panel: { right: `-${x}%`, top: "5%" },
+              },
+              {
+                id: "c",
+                title: "Different types of sets for different occasions",
+                description: "Want to log a warmup set? A superset? A dropset? Or just a normal set, you can toggle the set type",
+                anchor: { top: "40%", left: "17%" },
+                panel: { left: `-${x}%`, top: "35%" },
+              },
+              {
+                id: "d",
+                title: "Rest timing",
+                description: "Built-in rest control, always visible.",
+                anchor: { top: "46%", left: "95%" },
+                panel: { right: `-${x}%`, top: "36%" },
+              },
+              {
+                id: "e",
+                title: "RPE",
+                description: "Automatically log your next set",
+                anchor: { top: "51%", left: "75%" },
+                panel: { right: `-${x}%`, top: "66%" },
+              },              
+              {
+                id: "f",
+                title: "Toggle up or down exercises to save space",
+                description: "Got plenty of exercises in your workout? No problem, collapse exercises to save space, only having open the ones you're using.",
+                anchor: { top: "77.8%", left: "3%" },
+                panel: { left: `-${x}%`, top: "72.8%" },
+              },
+              {
+                id: "g",
+                title: "Easy set logging",
+                description: "Automatically log your next set",
+                anchor: { top: "90%", left: "95%" },
+                panel: { right: `-${x}%`, top: "85%" },
+              },
+            ]}
+          />
         </div>
-      </section>
 
-      {/* --- FEATURES --- */}
-      <section className="w-full max-w-6xl py-24 text-center border-t border-gray-100">
-        <h2 className="text-3xl font-semibold mb-4">Why Choose Unnamed</h2>
-        <p className="text-[#555] max-w-xl mx-auto mb-14">
-          Designed for focus and longevity — no clutter, just progress.
-        </p>
+        {/* Tessellated proof section */}
+        <div className="relative mt-10 sm:mt-12 pb-20">
+          {/* subtle divider that still feels “connected” */}
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 mb-4 sm:mb-6">
+            <div className="w-full bg-gradient-to-r from-transparent via-black/10 to-transparent mb-5" />
 
-        <div className="grid md:grid-cols-3 gap-10 text-left">
-          {[
-            {
-              title: "Minimal Interface",
-              desc: "A clean design that helps you stay focused on what matters — your lifts.",
-              icon: "💎",
-            },
-            {
-              title: "Science-Backed Progression",
-              desc: "Programs grounded in proven strength principles, refined for simplicity.",
-              icon: "📈",
-            },
-            {
-              title: "Intelligent Tracking",
-              desc: "Automatic load suggestions and trend analytics without overcomplication.",
-              icon: "⚙️",
-            },
-          ].map(({ title, desc, icon }) => (
-            <div
-              key={title}
-              className="bg-white border border-gray-100 rounded-2xl p-8 shadow-sm hover:shadow-md transition"
-            >
-              <div className="text-4xl mb-4">{icon}</div>
-              <h3 className="text-lg font-semibold mb-2">{title}</h3>
-              <p className="text-gray-600 text-sm leading-relaxed">{desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-{/* --- WHY CHOOSE AUREUS --- */}
-<section className="relative w-screen left-1/2 -translate-x-1/2 overflow-hidden py-32 bg-gradient-to-br from-[#FDFBF5] via-[#FAF8EF] to-[#F5F5F0] text-[#1E1E1E]">
-  {/* --- Background Glow --- */}
-  <div className="absolute inset-0 -z-10 overflow-hidden">
-    {/* soft left glow */}
-    <div className="absolute top-0 left-[-20%] w-[80vw] h-[120vh] bg-[radial-gradient(circle_at_center,rgba(249,236,200,0.4),transparent_70%)] blur-[180px]" />
-    {/* soft right glow */}
-    <div className="absolute top-[10%] right-[-25%] w-[80vw] h-[120vh] bg-[radial-gradient(circle_at_center,rgba(201,162,39,0.25),transparent_70%)] blur-[200px]" />
-  </div>
-
-  <div className="max-w-7xl mx-auto px-6 flex flex-col items-center text-center">
-    {/* Header */}
-    <motion.h2
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-      viewport={{ once: false, amount: 0.3 }}
-      className="text-4xl sm:text-5xl font-semibold mb-4"
-    >
-      Why Choose <span className="text-[#C9A227]">Aureus</span>?
-    </motion.h2>
-    <motion.p
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, delay: 0.1 }}
-      viewport={{ once: false, amount: 0.3 }}
-      className="text-[#4B4B4B] max-w-2xl mx-auto mb-24 text-lg leading-relaxed"
-    >
-      Aureus provides intelligent workout planning, nutrition guidance, and advanced tracking — everything you need to elevate your training, beautifully.
-    </motion.p>
-
-    {/* --- Layout Grid --- */}
-    <div className="grid md:grid-cols-3 gap-10 items-center w-full max-w-6xl">
-      {/* Left Features */}
-      <div className="flex flex-col gap-10">
-        <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: false, amount: 0.3 }}
-          className="bg-white/80 backdrop-blur-lg border border-gray-200 rounded-2xl p-6 text-left shadow-sm hover:shadow-md transition"
-        >
-          <h3 className="font-semibold text-lg mb-1">Progress Tracking</h3>
-          <p className="text-gray-600 text-sm leading-relaxed">
-            Monitor your achievements with intelligent analytics and visual insights.
-          </p>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          viewport={{ once: false, amount: 0.3 }}
-          className="bg-white/80 backdrop-blur-lg border border-gray-200 rounded-2xl p-6 text-left shadow-sm hover:shadow-md transition"
-        >
-          <h3 className="font-semibold text-lg mb-1">Nutrition Support</h3>
-          <p className="text-gray-600 text-sm leading-relaxed">
-            Meal plans and calorie tracking to complement your fitness journey.
-          </p>
-        </motion.div>
-      </div>
-
-      {/* Center Mockup */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: false, amount: 0.3 }}
-        className="relative flex justify-center"
-      >
-        {/* Phone */}
-        <div className="relative w-[260px] sm:w-[300px] md:w-[340px] aspect-[9/19] rounded-[2.5rem] bg-white border-[6px] border-black shadow-2xl overflow-hidden">
-          {/* Screen area */}
-          <div className="h-full w-full bg-gradient-to-b from-[#F8F8F8] to-[#ECECEC] flex flex-col items-center justify-center text-center px-6">
-            <div className="w-24 h-24 bg-[#C9A227]/20 rounded-full mb-5" />
-            <h4 className="text-lg font-semibold mb-2">Full Body Workout</h4>
-            <p className="text-sm text-gray-600">
-              Smart, adaptive sessions built for total strength and focus.
+            <p className="text-xs sm:text-sm tracking-[0.25em] uppercase text-[#8A94A6]">
+              In-session tools
+            </p>
+            <h3 className="mt-2 text-xl sm:text-2xl font-semibold tracking-tight text-[#0D1B3D]">
+              Everything stays one tap away.
+            </h3>
+            <p className="mt-2 max-w-2xl text-[14px] sm:text-[15px] text-[#6E7A8C] leading-relaxed">
+              Rest, set types, quick edits, and the session overview — designed to keep
+              you moving.
             </p>
           </div>
+
+          <Tiles2x2
+            items={[
+              {
+                title: "Always-on rest timer",
+                subtitle: "Starts instantly, stays visible, never breaks your flow",
+                src: "/snippets/resttimer.png",
+                alt: "Rest timer",
+              },
+              {
+                title: "Advanced set types",
+                subtitle: "Warm-ups, drop sets, AMRAPs — log exactly how you train",
+                src: "/snippets/settype.png",
+                alt: "Set type",
+              },
+              {
+                title: "Instant edits",
+                subtitle: "Adjust weight, reps, or rest in seconds — no friction",
+                src: "/snippets/editresttimer.png",
+                alt: "Quick edits",
+              },
+              {
+                title: "TODO replace this with the rpe mention",
+                subtitle: "Every exercise, set, and rest — clear at a glance",
+                src: "/snippets/addexercises.png",
+                alt: "Session overview",
+              },
+            ]}
+          />
         </div>
+      </section>
 
-        {/* Center glow under phone */}
-        <div className="absolute -bottom-20 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-[radial-gradient(circle_at_center,rgba(201,162,39,0.25),transparent_80%)] blur-[160px]" />
-      </motion.div>
+      <div className="relative pb-32">
+        <ExerciseLibrarySectionFinal
+          libraryScreenshotSrc="/appscreenshots/websitescreenshot3.png"
+          filterPanelSrc="/appscreenshots/filter-panel.png"
+          filtersActiveSrc="/appscreenshots/filters-active.png"
+          customExerciseSrc="/appscreenshots/custom-exercise.png"
+          iphoneFrameSrc="/finaliphoneframe.png"
+        />
+      </div>
 
-      {/* Right Features */}
-      <div className="flex flex-col gap-10">
-        <motion.div
-          initial={{ opacity: 0, x: 30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: false, amount: 0.3 }}
-          className="bg-white/80 backdrop-blur-lg border border-gray-200 rounded-2xl p-6 text-left shadow-sm hover:shadow-md transition"
-        >
-          <h3 className="font-semibold text-lg mb-1">Personalized Workouts</h3>
-          <p className="text-gray-600 text-sm leading-relaxed">
-            Tailored plans optimized for your equipment, goals, and recovery.
-          </p>
-        </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, x: 30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          viewport={{ once: false, amount: 0.3 }}
-          className="bg-white/80 backdrop-blur-lg border border-gray-200 rounded-2xl p-6 text-left shadow-sm hover:shadow-md transition"
-        >
-          <h3 className="font-semibold text-lg mb-1">AI-Powered Coaching</h3>
-          <p className="text-gray-600 text-sm leading-relaxed">
-            Real-time guidance and adaptive recommendations powered by AI.
-          </p>
-        </motion.div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section className="relative w-full overflow-hidden bg-[#FCF6EA] text-[#171717]">
+  {/* ✅ ONE continuous “light gold paper” background across EVERYTHING */}
+  <div aria-hidden className="pointer-events-none absolute inset-0">
+    <div
+      className="absolute inset-0"
+      style={{
+        background: `
+          radial-gradient(1200px 760px at 18% 10%, rgba(23,23,23,0.045) 0%, rgba(252,246,234,0) 60%),
+          radial-gradient(980px 560px at 86% 18%, rgba(214,171,74,0.20) 0%, rgba(252,246,234,0) 62%),
+          linear-gradient(to bottom, rgba(255,255,255,0.50), rgba(252,246,234,0.92))
+        `,
+      }}
+    />
+    {/* soft vignette (no lines, no separators) */}
+    <div
+      className="absolute inset-0 opacity-[0.55]"
+      style={{
+        background:
+          "radial-gradient(1200px 760px at 50% 18%, rgba(0,0,0,0) 0%, rgba(0,0,0,0.028) 72%, rgba(0,0,0,0.055) 100%)",
+      }}
+    />
+    {/* subtle grain */}
+    <div
+      className="absolute inset-0 opacity-[0.06] mix-blend-multiply"
+      style={{
+        backgroundImage:
+          "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.92' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E\")",
+      }}
+    />
+  </div>
+
+  {/* Intro */}
+  <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-10 pt-16 sm:pt-20 pb-10 sm:pb-12">
+    <div className="max-w-4xl flex flex-col gap-6">
+      <h2 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight">
+        Train with direction.
+        <span className="block text-black/60 font-medium">
+          Everything you’re working toward, in one place.
+        </span>
+      </h2>
+
+      <p className="text-[16px] sm:text-[17px] md:text-[18px] leading-[1.7] text-black/60">
+        Set strength, bodyweight, or performance goals and see them fill as you train. Aureus automatically calculates progress, predicts timelines, and updates your path forward—feeding everything into your AI insights without extra effort.
+      </p>
+    </div>
+  </div>
+
+
+  {/* ✅ FULL-BLEED FLOW ZONE (no internal lines, no separate backgrounds) */}
+  <div className="relative w-screen left-1/2 -translate-x-1/2">
+    <div className="py-8 sm:py-12">
+      {/* Phone (full-bleed: no x padding) */}
+      <LabeledPhoneMockup
+        screenshotSrc="/appscreenshots/websitescreenshot6.png"
+        phoneFrameSrc="/finaliphoneframe.png"
+        dotColor="#171717"
+        dotRingColor="rgba(23,23,23,0.10)"
+        dotSizePx={6}
+        lineColor="rgba(23,23,23,0.40)"
+        lineGlowColor="rgba(214,171,74,0.22)"
+        labelBg="rgba(252,246,234,0.92)"
+        labelBorderColor="rgba(23,23,23,0.10)"
+        labelTitleColor="#171717"
+        labelDescColor="rgba(23,23,23,0.62)"
+        labelWidthPx={270}
+        labelScale={1.12}
+        labels={[
+          {
+            id: "a",
+            title: "Set rhythm",
+            description: "Reps and load without breaking attention.",
+            anchor: { top: "16.25%", left: "4%" },
+            panel: { left: `-${x}%`, top: "11.25%" },
+          },
+          {
+            id: "b",
+            title: "Rest control",
+            description: "Timing stays close — no hunting for it.",
+            anchor: { top: "26.5%", left: "96%" },
+            panel: { right: `-${x}%`, top: "21.5%" },
+          },
+          {
+            id: "c",
+            title: "Add new goals",
+            description: "Everything you did, summarized cleanly.",
+            anchor: { top: "89.7%", left: "95%" },
+            panel: { right: `-${x}%`, top: "84.7%" },
+          },
+        ]}
+      />
+
+      {/* Tools intro (text constrained; still same background) */}
+      <div className="mt-10 sm:mt-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+        <h3 className="mt-2 text-xl sm:text-2xl font-semibold tracking-tight">
+          Small controls. Big momentum.
+        </h3>
+        <p className="mt-2 max-w-2xl text-[14px] sm:text-[15px] text-black/60 leading-relaxed">
+          Rest, set types, quick edits, and overview — arranged to feel like a simple,
+          dependable workflow.
+        </p>
+      </div>
+
+      {/* Tiles (full-bleed: no x padding wrappers) */}
+      <div className="mt-6 sm:mt-8">
+        <HorizontalRowTiles
+          heading="Effortless logging."
+          subheading="Three core interactions you’ll use every session."
+          items={[
+            {
+              title: "Strength Goals",
+              subtitle: "Choose any exercise and your goal 1RM. Watch the goal fill automatically fill up as you workout, with 1RM's being auto computed.",
+              src: "/snippets/strengthgoal.png",
+              alt: "Rest timer",
+            },
+            {
+              title: "Body Goals",
+              subtitle: "Weather you're cutting / bulking, trying to gain or lose weight setting a body goal helps shape your physique to your dream bodyweight. After entering your goal, the app's actionable weight analytics screen keeps you on track",
+              src: "/snippets/bodygoal.png",
+              alt: "Set type",
+            },
+            {
+              title: "Go at the speed you like",
+              subtitle: "Your weight journey doesn't need to go to fast, you can go at the speed you feel comfortable at.",
+              src: "/snippets/paceviewer.png",
+              alt: "Quick edit",
+            },
+          ]}
+        />
       </div>
     </div>
   </div>
 </section>
 
-
       <ComparisonTable/>
-      <DataDrivenPhysique/>
-
       <FAQSection/>
-      {/* --- FOOTER --- */}
-      <footer className="w-full border-t border-gray-100 py-12 text-center">
-        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 px-6">
-          {/* Left: Brand / Tagline */}
-          <div className="text-[#1E1E1E] text-sm">
-            © {new Date().getFullYear()} <span className="font-semibold">Aureus</span> — Built for clarity and strength.
-          </div>
-
-          {/* Right: Links */}
-          <div className="flex items-center gap-6 text-sm">
-            <a
-              href="/about"
-              className="text-[#4B4B4B] hover:text-[#C9A227] transition-colors"
-            >
-              About
-            </a>
-            <a
-              href="/privacy_policy"
-              className="text-[#4B4B4B] hover:text-[#C9A227] transition-colors"
-            >
-              Privacy Policy
-            </a>
-            <a
-              href="/terms_of_service"
-              className="text-[#4B4B4B] hover:text-[#C9A227] transition-colors"
-            >
-              Terms of Service
-            </a>
-            <a
-              href="#"
-              className="text-[#4B4B4B] hover:text-[#C9A227] transition-colors"
-            >
-              Terms
-            </a>
-          </div>
-        </div>
-
-        {/* Subtle gradient glow background */}
-        <div className="absolute inset-x-0 bottom-0 -z-10 overflow-hidden">
-          <div className="absolute bottom-[-200px] left-1/2 -translate-x-1/2 w-[700px] h-[300px] bg-gradient-to-t from-[#FFF8E1] via-[#FDFBF3] to-transparent blur-[140px]" />
-        </div>
-      </footer>
+      <Footer/>
     </main>
   );
 }

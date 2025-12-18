@@ -1,146 +1,228 @@
 "use client";
 
-import { motion } from "framer-motion";
+import Image from "next/image";
+import React from "react";
+import Link from "next/link";
 
-export default function AboutPage() {
+export default function AboutMinimal() {
   return (
-    <main className="min-h-screen bg-white text-[#1E1E1E] flex flex-col items-center px-6">
-      {/* --- HERO --- */}
-      <section className="w-full max-w-6xl text-center pt-32 pb-20 relative">
-        {/* Soft background glow */}
-        <div className="absolute inset-0 -z-10 overflow-hidden">
-          <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-gradient-to-br from-[#F5EAC2] via-[#FFF8E1] to-transparent blur-[160px]" />
-        </div>
+    <section className="relative w-full overflow-hidden bg-white">
+      {/* ultra-soft background */}
+      <div aria-hidden className="pointer-events-none absolute inset-0">
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(900px 520px at 50% -10%, rgba(62,91,169,0.10) 0%, rgba(255,255,255,0) 60%), radial-gradient(700px 420px at 15% 110%, rgba(201,162,39,0.12) 0%, rgba(255,255,255,0) 60%)",
+          }}
+        />
+        {/* subtle vignette for depth */}
+        <div
+          className="absolute inset-0 opacity-[0.55]"
+          style={{
+            background:
+              "radial-gradient(900px 520px at 50% 30%, rgba(13,27,61,0.04) 0%, rgba(255,255,255,0) 60%)",
+          }}
+        />
+      </div>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-5xl sm:text-6xl font-semibold tracking-tight mb-6"
-        >
-          About <span className="text-[#C9A227]">Aureus</span>
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className="text-lg text-[#4B4B4B] max-w-2xl mx-auto leading-relaxed"
-        >
-          We’re redefining what it means to train intelligently — blending
-          design, technology, and science into a single experience built for
-          lifters who demand more from their workouts and their tools.
-        </motion.p>
-      </section>
-
-      {/* --- STORY --- */}
-      <section className="w-full max-w-6xl py-20 border-t border-gray-100">
-        <div className="grid md:grid-cols-2 gap-10 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl font-semibold mb-4">Our Story</h2>
-            <p className="text-gray-600 leading-relaxed mb-6">
-              Aureus began as a response to noise — endless apps, trackers,
-              and distractions that overcomplicate fitness. We built something
-              radically simpler: a refined environment where focus thrives and
-              every rep has meaning.
-            </p>
-            <p className="text-gray-600 leading-relaxed">
-              Every design choice, every feature, and every animation was
-              crafted to serve one purpose — helping lifters stay consistent,
-              disciplined, and inspired without unnecessary friction.
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="rounded-2xl h-80 bg-gradient-to-br from-[#FFFDF4] to-[#F9F7E8] border border-[#C9A227]/20 shadow-inner"
-          />
-        </div>
-      </section>
-
-      {/* --- MISSION --- */}
-      <section className="w-full max-w-6xl py-20 border-t border-gray-100 text-center">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          className="text-3xl font-semibold mb-4"
-        >
-          Our Mission
-        </motion.h2>
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-          className="text-[#555] max-w-2xl mx-auto mb-12"
-        >
-          To create a timeless platform that merges clarity, performance, and
-          mastery — giving lifters the power to track, grow, and evolve without
-          friction or distraction.
-        </motion.p>
-
-        <div className="grid sm:grid-cols-3 gap-8 text-left">
-          {[
-            {
-              title: "Simplicity",
-              desc: "Every screen, gesture, and motion is intentional — designed to help you move with precision and focus.",
-              icon: "🧘‍♂️",
-            },
-            {
-              title: "Science",
-              desc: "Grounded in proven strength principles and refined with modern AI insights for measurable results.",
-              icon: "⚗️",
-            },
-            {
-              title: "Sustainability",
-              desc: "Progress that compounds — not through chaos, but through consistency, minimalism, and mastery.",
-              icon: "♻️",
-            },
-          ].map(({ title, desc, icon }) => (
-            <motion.div
-              key={title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7 }}
-              viewport={{ once: true }}
-              className="bg-white border border-gray-100 rounded-2xl p-8 shadow-sm hover:shadow-md transition"
-            >
-              <div className="text-4xl mb-4">{icon}</div>
-              <h3 className="text-lg font-semibold mb-2">{title}</h3>
-              <p className="text-gray-600 text-sm leading-relaxed">{desc}</p>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      {/* --- CTA --- */}
-      <section className="w-full max-w-5xl py-24 border-t border-gray-100 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          className="bg-gradient-to-r from-[#FDF8E4] to-[#FFFDF4] rounded-2xl p-12 border border-[#C9A227]/20"
-        >
-          <h2 className="text-3xl font-semibold mb-4">Join the Movement</h2>
-          <p className="text-gray-600 max-w-md mx-auto mb-8">
-            Built for lifters who demand precision. Train smarter. Live stronger.
-          </p>
-          <a
+      <div className="relative max-w-6xl mx-auto px-5 sm:px-6 lg:px-10 pt-10 sm:pt-12 pb-20">
+        {/* Top bar */}
+        <div className="mb-10 flex items-center justify-between">
+          <Link
             href="/"
-            className="px-8 py-3 rounded-full bg-[#C9A227] text-white font-semibold hover:bg-[#B5951F] transition"
+            className="group inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/70 px-3 py-2 text-sm font-medium text-[#0D1B3D] backdrop-blur transition hover:bg-white"
           >
-            Back to Home
-          </a>
-        </motion.div>
-      </section>
-    </main>
+            <span className="inline-block -mt-px transition-transform group-hover:-translate-x-0.5">
+              ←
+            </span>
+            <span>Home</span>
+          </Link>
+
+          <div className="hidden sm:flex items-center gap-2">
+            <span className="h-1.5 w-1.5 rounded-full bg-[#C9A227]" />
+            <span className="text-xs tracking-[0.28em] uppercase text-[#8A94A6]">
+              About
+            </span>
+          </div>
+        </div>
+
+        {/* Header */}
+        <div className="max-w-2xl">
+          <p className="text-[11px] tracking-[0.34em] uppercase text-[#8A94A6]">
+            About Aureus
+          </p>
+
+          <h1 className="mt-4 text-4xl sm:text-5xl font-semibold tracking-tight text-[#0D1B3D]">
+            Built from the “skinny guy” phase — for serious lifters.
+          </h1>
+
+          <p className="mt-5 text-[15px] sm:text-[16px] leading-relaxed text-[#6E7A8C]">
+            I’m not a brand-first founder. I’m a lifter who obsessed over the
+            basics: clean logging, real progression, and a training flow that
+            never gets in the way.
+          </p>
+        </div>
+
+        {/* Content */}
+        <div className="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+          {/* Copy */}
+          <div className="lg:col-span-6">
+            <div className="space-y-4 text-[15px] sm:text-[16px] leading-relaxed text-[#6E7A8C]">
+              <p>
+                I started lifting as the skinny guy who overthought everything.
+                I tracked every set, every rep, every rest timer — because I
+                had to. Progress wasn’t automatic for me.
+              </p>
+
+              <p>
+                Over the years I tried the big names:{" "}
+                <span className="text-[#0D1B3D] font-medium">MyFitnessPal</span>,{" "}
+                <span className="text-[#0D1B3D] font-medium">Strong</span>,{" "}
+                <span className="text-[#0D1B3D] font-medium">Hevy</span>,{" "}
+                <span className="text-[#0D1B3D] font-medium">JEFIT</span>,{" "}
+                <span className="text-[#0D1B3D] font-medium">Fitbod</span>.
+                Some were decent — but none felt like a tool built for lifters
+                who care about the details.
+              </p>
+
+              <p>
+                They were either noisy, slow, or made the basics harder than
+                they should be. So I built Aureus — the app I wanted on day one:
+                clean, fast, and made for real training.
+              </p>
+
+              <p>
+                And it’s not just for bulking. The same “no-noise” tracking is
+                what makes fat loss work too: consistent lifts, simple progress
+                checks, and the kind of adherence you can actually stick to.
+              </p>
+
+              <p>
+                I choose to stay anonymous on purpose. Not to be mysterious —
+                just because I want the product to earn trust by how it feels
+                to use.
+              </p>
+
+              <div className="pt-2">
+                <div className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/70 px-3 py-1.5 backdrop-blur">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#C9A227]" />
+                  <span className="text-xs text-[#0D1B3D] font-medium">
+                    Built by a lifter. Polished like a premium tool.
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Images */}
+          <div className="lg:col-span-6">
+            <div className="grid grid-cols-2 gap-4">
+              <ShotCard
+                label="Before"
+                src="/mybefore.png"
+                metaTop="45kg"
+                metaBottom={`Height: 5'10"`}
+              />
+              <ShotCard
+                label="After"
+                src="/myafter.png"
+                metaTop="70kg"
+                metaBottom={`Height: 5'10"`}
+              />
+            </div>
+
+            <div className="mt-5">
+              <div className="inline-flex flex-wrap items-center gap-2 rounded-2xl border border-black/10 bg-white/70 px-3 py-2 backdrop-blur">
+                <PillDot />
+                <span className="text-sm text-[#0D1B3D] font-medium">
+                  Transformation: +25kg
+                </span>
+                <span className="text-sm text-[#8A94A6]">•</span>
+                <span className="text-sm text-[#0D1B3D] font-medium">
+                  Height: 5&apos;10&quot;
+                </span>
+              </div>
+
+              <p className="mt-3 text-sm sm:text-[15px] leading-relaxed text-[#6E7A8C]">
+                The “after” isn’t a flex — it’s accountability. I’m building
+                Aureus for people who train seriously, because I’m one of them.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="h-10" />
+      </div>
+    </section>
+  );
+}
+
+function PillDot() {
+  return (
+    <span className="relative inline-flex h-2 w-2">
+      <span className="absolute inset-0 rounded-full bg-[#C9A227] opacity-30 blur-[2px]" />
+      <span className="relative h-2 w-2 rounded-full bg-[#C9A227]" />
+    </span>
+  );
+}
+
+function ShotCard({
+  label,
+  src,
+  metaTop,
+  metaBottom,
+}: {
+  label: string;
+  src: string;
+  metaTop: string;
+  metaBottom: string;
+}) {
+  return (
+    <div className="group relative overflow-hidden rounded-3xl border border-black/10 bg-[#F4F6FA] shadow-[0_12px_40px_rgba(13,27,61,0.08)]">
+      {/* soft ring */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        style={{
+          boxShadow:
+            "inset 0 0 0 1px rgba(201,162,39,0.28), inset 0 0 0 999px rgba(255,255,255,0.02)",
+        }}
+      />
+
+      <div className="relative aspect-[3/4] w-full">
+        <Image
+          src={src}
+          alt={`${label} transformation`}
+          fill
+          sizes="(max-width: 768px) 50vw, 520px"
+          className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+          priority={false}
+        />
+
+        {/* gentle bottom fade for text legibility */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-24"
+          style={{
+            background:
+              "linear-gradient(to top, rgba(13,27,61,0.55), rgba(13,27,61,0))",
+          }}
+        />
+      </div>
+
+      {/* Label */}
+      <div className="absolute left-3 right-3 bottom-3 flex items-end justify-between gap-3">
+        <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/35 px-3 py-1.5 backdrop-blur">
+          <span className="h-1.5 w-1.5 rounded-full bg-[#C9A227]" />
+          <span className="text-[12px] font-medium text-white">{label}</span>
+        </span>
+
+        <span className="rounded-2xl border border-white/12 bg-black/30 px-3 py-2 backdrop-blur">
+          <div className="text-[12px] font-semibold text-white">{metaTop}</div>
+          <div className="text-[11px] text-white/80">{metaBottom}</div>
+        </span>
+      </div>
+    </div>
   );
 }
