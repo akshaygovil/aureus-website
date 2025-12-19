@@ -120,7 +120,9 @@ export default function LabeledPhoneMockup({
   const mobilePillRef = useRef<HTMLDivElement | null>(null);
 
   const [isDesktop, setIsDesktop] = useState(false);
-  const [activeId, setActiveId] = useState(labels[0]?.id ?? "");
+
+  // ✅ allow "no selection" on mobile (empty string)
+  const [activeId, setActiveId] = useState<string>(labels[0]?.id ?? "");
 
   type Line = { id: string; x1: number; y1: number; x2: number; y2: number };
   const [lines, setLines] = useState<Line[]>([]);
@@ -144,6 +146,25 @@ export default function LabeledPhoneMockup({
   const mobileGlowW = isDesktop ? lineGlowWidthPx : Math.max(8, lineGlowWidthPx + 3);
 
   const phoneWidth = `clamp(260px, 92vw, ${widthPx}px)`;
+
+  const activeLabel = useMemo(() => {
+    if (!activeId) return null;
+    return labels.find((l) => l.id === activeId) ?? null;
+  }, [labels, activeId]);
+
+  const closeMobilePanel = () => {
+    if (!isDesktop) setActiveId("");
+  };
+
+  const toggleSelect = (id: string) => {
+    // Desktop always selects (panels are always shown anyway)
+    if (isDesktop) {
+      setActiveId(id);
+      return;
+    }
+    // Mobile: tap same id = close
+    setActiveId((prev) => (prev === id ? "" : id));
+  };
 
   // recompute lines
   useLayoutEffect(() => {
@@ -192,36 +213,37 @@ export default function LabeledPhoneMockup({
             });
           }
         } else {
-          // Mobile: dot -> active info pill edge (single line)
-          const label = labels.find((l) => l.id === activeId) ?? labels[0];
-          const dotEl = label ? dotRefs.current[label.id] : null;
-          const pillEl = mobilePillRef.current;
+          // ✅ Mobile: only draw if there's an active label AND pill exists
+          if (activeLabel?.id) {
+            const dotEl = dotRefs.current[activeLabel.id];
+            const pillEl = mobilePillRef.current;
 
-          if (label && dotEl && pillEl) {
-            const d = dotEl.getBoundingClientRect();
-            const p = pillEl.getBoundingClientRect();
+            if (dotEl && pillEl) {
+              const d = dotEl.getBoundingClientRect();
+              const p = pillEl.getBoundingClientRect();
 
-            const dot = {
-              x: d.left - containerRect.left + d.width / 2,
-              y: d.top - containerRect.top + d.height / 2,
-            };
+              const dot = {
+                x: d.left - containerRect.left + d.width / 2,
+                y: d.top - containerRect.top + d.height / 2,
+              };
 
-            const pillRect = {
-              left: p.left - containerRect.left,
-              top: p.top - containerRect.top,
-              right: p.right - containerRect.left,
-              bottom: p.bottom - containerRect.top,
-            };
+              const pillRect = {
+                left: p.left - containerRect.left,
+                top: p.top - containerRect.top,
+                right: p.right - containerRect.left,
+                bottom: p.bottom - containerRect.top,
+              };
 
-            const end = middlePointOnRectEdgeFacingPoint(dot, pillRect);
+              const end = middlePointOnRectEdgeFacingPoint(dot, pillRect);
 
-            next.push({
-              id: label.id,
-              x1: snapForStroke(dot.x, mobileLineW),
-              y1: snapForStroke(dot.y, mobileLineW),
-              x2: snapForStroke(end.x, mobileLineW),
-              y2: snapForStroke(end.y, mobileLineW),
-            });
+              next.push({
+                id: activeLabel.id,
+                x1: snapForStroke(dot.x, mobileLineW),
+                y1: snapForStroke(dot.y, mobileLineW),
+                x2: snapForStroke(end.x, mobileLineW),
+                y2: snapForStroke(end.y, mobileLineW),
+              });
+            }
           }
         }
 
@@ -255,21 +277,12 @@ export default function LabeledPhoneMockup({
       window.removeEventListener("resize", onResize);
       window.removeEventListener("scroll", onScroll, true);
     };
-  }, [isDesktop, labelIds, labels, activeId, lineWidthPx, mobileLineW]);
-
-  const activeLabel = useMemo(
-    () => labels.find((l) => l.id === activeId) ?? labels[0],
-    [labels, activeId]
-  );
+  }, [isDesktop, labelIds, labels, activeId, activeLabel, lineWidthPx, mobileLineW, lineGlowWidthPx, mobileGlowW]);
 
   return (
     <div className="relative w-full">
       <div className="w-full flex flex-col items-center">
-        <div
-          ref={containerRef}
-          className="relative aspect-[886/1725] overflow-visible"
-          style={{ width: phoneWidth }}
-        >
+        <div ref={containerRef} className="relative aspect-[886/1725] overflow-visible" style={{ width: phoneWidth }}>
           {/* Screenshot clip area */}
           <div
             ref={screenRef}
@@ -282,13 +295,7 @@ export default function LabeledPhoneMockup({
             }}
           >
             <div className="relative h-full w-full">
-              <Image
-                src={screenshotSrc}
-                alt="App screenshot"
-                fill
-                className="object-cover select-none"
-                priority
-              />
+              <Image src={screenshotSrc} alt="App screenshot" fill className="object-cover select-none" priority />
 
               {/* Dots (tap targets) */}
               {labels.map((label, idx) => {
@@ -301,7 +308,7 @@ export default function LabeledPhoneMockup({
                     }}
                     type="button"
                     aria-label={label.title}
-                    onClick={() => setActiveId(label.id)}
+                    onClick={() => toggleSelect(label.id)}
                     className="absolute z-30 rounded-full grid place-items-center"
                     style={{
                       top: label.anchor.top,
@@ -315,7 +322,6 @@ export default function LabeledPhoneMockup({
                       cursor: "pointer",
                     }}
                   >
-                    {/* number helps on mobile */}
                     <span
                       className="select-none font-semibold"
                       style={{
@@ -342,7 +348,7 @@ export default function LabeledPhoneMockup({
             priority
           />
 
-          {/* Leader lines (DESKTOP: all, MOBILE: active) */}
+          {/* Leader lines (DESKTOP: all, MOBILE: active only if open) */}
           <svg className="absolute inset-0 z-30 pointer-events-none" style={{ overflow: "visible" }}>
             <defs>
               <filter id={glowId} x="-50%" y="-50%" width="200%" height="200%">
@@ -416,51 +422,69 @@ export default function LabeledPhoneMockup({
             </motion.div>
           ))}
 
-          {/* Mobile: ACTIVE info pill inside phone (so the line stays meaningful) */}
+          {/* ✅ Mobile: ACTIVE info pill (closable) */}
           <div className="sm:hidden absolute z-40 left-1/2 -translate-x-1/2 bottom-[10%] w-[92%]">
-            <motion.div
-              key={activeLabel?.id}
-              ref={mobilePillRef}
-              initial={{ opacity: 0, y: 10, scale: 0.98 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ duration: 0.22, ease: "easeOut" }}
-              className="rounded-2xl shadow-[0_22px_60px_rgba(0,0,0,0.22)] px-4 py-3"
-              style={{
-                background: labelBg,
-                border: `1px solid ${labelBorderColor}`,
-                backdropFilter: "blur(14px)",
-              }}
-            >
-              <div className="flex items-start gap-3">
-                <div
-                  className="mt-[6px] rounded-full"
+            {activeLabel && (
+              <motion.div
+                key={activeLabel.id}
+                ref={mobilePillRef}
+                initial={{ opacity: 0, y: 10, scale: 0.98 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 8, scale: 0.98 }}
+                transition={{ duration: 0.22, ease: "easeOut" }}
+                className="relative rounded-2xl shadow-[0_22px_60px_rgba(0,0,0,0.22)] px-4 py-3"
+                style={{
+                  background: labelBg,
+                  border: `1px solid ${labelBorderColor}`,
+                  backdropFilter: "blur(14px)",
+                }}
+              >
+                {/* close button */}
+                <button
+                  type="button"
+                  onClick={closeMobilePanel}
+                  aria-label="Close panel"
+                  className="absolute right-2 top-2 rounded-lg px-2 py-1 text-[14px] leading-none"
                   style={{
-                    width: 12,
-                    height: 12,
-                    background: dotColor,
-                    boxShadow: `0 0 0 4px ${dotRingColor}`,
-                    flex: "0 0 auto",
+                    color: "rgba(13,27,61,0.72)",
+                    background: "rgba(0,0,0,0.04)",
+                    border: "1px solid rgba(0,0,0,0.06)",
                   }}
-                />
-                <div className="min-w-0">
-                  <div className="text-[11px] tracking-wide uppercase opacity-70" style={{ color: labelTitleColor }}>
-                    Tap dots to explore
-                  </div>
-                  <div className="mt-1 font-semibold text-[14px] leading-snug" style={{ color: labelTitleColor }}>
-                    {activeLabel?.title}
-                  </div>
-                  {activeLabel?.description && (
-                    <div className="mt-1 text-[12px] leading-relaxed" style={{ color: labelDescColor }}>
-                      {activeLabel.description}
+                >
+                  ✕
+                </button>
+
+                <div className="flex items-start gap-3 pr-8">
+                  <div
+                    className="mt-[6px] rounded-full"
+                    style={{
+                      width: 12,
+                      height: 12,
+                      background: dotColor,
+                      boxShadow: `0 0 0 4px ${dotRingColor}`,
+                      flex: "0 0 auto",
+                    }}
+                  />
+                  <div className="min-w-0">
+                    <div className="text-[11px] tracking-wide uppercase opacity-70" style={{ color: labelTitleColor }}>
+                      Tap dots to explore
                     </div>
-                  )}
+                    <div className="mt-1 font-semibold text-[14px] leading-snug" style={{ color: labelTitleColor }}>
+                      {activeLabel.title}
+                    </div>
+                    {activeLabel.description && (
+                      <div className="mt-1 text-[12px] leading-relaxed" style={{ color: labelDescColor }}>
+                        {activeLabel.description}
+                      </div>
+                    )}
+                  </div>
                 </div>
-              </div>
-            </motion.div>
+              </motion.div>
+            )}
           </div>
         </div>
 
-        {/* Optional mobile legend (very compact, helps users understand the numbers) */}
+        {/* Optional mobile legend */}
         <div className="sm:hidden w-full max-w-[560px] px-4 mt-3">
           <div className="grid gap-2">
             {labels.map((l, idx) => {
@@ -469,7 +493,7 @@ export default function LabeledPhoneMockup({
                 <button
                   key={`${l.id}-legend`}
                   type="button"
-                  onClick={() => setActiveId(l.id)}
+                  onClick={() => toggleSelect(l.id)}
                   className="text-left rounded-xl px-3 py-2 border"
                   style={{
                     background: selected ? "rgba(201,162,39,0.10)" : "transparent",
