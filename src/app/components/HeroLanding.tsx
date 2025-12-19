@@ -4,15 +4,10 @@ import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion, type MotionProps } from "framer-motion";
-import { ArrowRight, Sparkles, AlertTriangle } from "lucide-react";
+import { ArrowRight, AlertTriangle } from "lucide-react";
 
 type HeroCTA = { label: string; href: string };
 type Snippet = { src: string; alt?: string };
-
-type WarningPanel = {
-  label?: string; // "WARNING"
-  body?: string;
-};
 
 type Brand = {
   logoSrc?: string;
@@ -22,19 +17,10 @@ type Brand = {
 };
 
 type HeroProps = {
-  title?: string;
-  subtitle?: string;
-
   brand?: Brand;
-
   primaryCta?: HeroCTA;
   secondaryCta?: HeroCTA;
-
-  /** Panel[0] + Panel[1] are images. Panel[2] is unused (warning card renders instead). */
-  panels?: [Snippet, Snippet, Snippet];
-
-  warning?: WarningPanel;
-
+  panels?: [Snippet, Snippet];
   className?: string;
 };
 
@@ -45,6 +31,112 @@ function cn(...xs: Array<string | false | null | undefined>) {
 /** Strictly-typed easings (Framer Motion v11+) */
 const EASE_OUT: [number, number, number, number] = [0.16, 1, 0.3, 1];
 const EASE_IN_OUT: [number, number, number, number] = [0.42, 0, 0.58, 1];
+
+function RotatingTypeCaps({
+  words,
+  prefix = "TRACK YOUR ",
+  className,
+  prefixClassName,
+  wordClassName,
+  caretClassName,
+  typeMs = 62,
+  deleteMs = 44,
+  holdMs = 1650,
+  gapMs = 520,
+}: {
+  words: string[];
+  prefix?: string;
+
+  /** wrapper */
+  className?: string;
+
+  /** style only for prefix */
+  prefixClassName?: string;
+
+  /** style only for the rotating word */
+  wordClassName?: string;
+
+  caretClassName?: string;
+  typeMs?: number;
+  deleteMs?: number;
+  holdMs?: number;
+  gapMs?: number;
+}) {
+  const reduce = useReducedMotion();
+
+  const [wordIndex, setWordIndex] = React.useState(0);
+  const [subIndex, setSubIndex] = React.useState(0);
+  const [phase, setPhase] = React.useState<"typing" | "holding" | "deleting" | "gap">("typing");
+
+  const current = (words[wordIndex] ?? "").toUpperCase();
+
+  React.useEffect(() => {
+    if (reduce) return;
+
+    if (phase === "typing") {
+      if (subIndex >= current.length) {
+        const t = window.setTimeout(() => setPhase("holding"), holdMs);
+        return () => window.clearTimeout(t);
+      }
+      const t = window.setTimeout(() => setSubIndex((i) => i + 1), typeMs);
+      return () => window.clearTimeout(t);
+    }
+
+    if (phase === "holding") {
+      const t = window.setTimeout(() => setPhase("deleting"), holdMs);
+      return () => window.clearTimeout(t);
+    }
+
+    if (phase === "deleting") {
+      if (subIndex <= 0) {
+        setPhase("gap");
+        return;
+      }
+      const t = window.setTimeout(() => setSubIndex((i) => i - 1), deleteMs);
+      return () => window.clearTimeout(t);
+    }
+
+    const t = window.setTimeout(() => {
+      setWordIndex((i) => (i + 1) % words.length);
+      setPhase("typing");
+    }, gapMs);
+    return () => window.clearTimeout(t);
+  }, [reduce, phase, subIndex, current.length, typeMs, deleteMs, holdMs, gapMs, words.length]);
+
+  const shown = current.slice(0, subIndex);
+
+  if (reduce) {
+    return (
+      <div className={cn("inline-flex flex-wrap items-baseline gap-2", className)}>
+        <span className={cn("font-extrabold tracking-[0.26em] uppercase", prefixClassName)}>{prefix}</span>
+        <span className={cn("font-extrabold tracking-[0.26em] uppercase", wordClassName)}>{(words[0] ?? "WORKOUTS").toUpperCase()}</span>
+      </div>
+    );
+  }
+
+  return (
+    <div className={cn("inline-flex flex-wrap items-baseline gap-2", className)}>
+      <span className={cn("font-extrabold tracking-[0.26em] uppercase", prefixClassName)}>{prefix}</span>
+
+      <span aria-hidden className="inline-flex items-baseline">
+        <span className={cn("font-extrabold tracking-[0.26em] uppercase", wordClassName)}>{shown}</span>
+        <span
+          className={cn(
+            "ml-1 inline-block h-[0.95em] w-[1.5px] translate-y-[1px] rounded-full",
+            reduce ? "" : "animate-[caretBlink_1.25s_steps(1,end)_infinite]",
+            caretClassName
+          )}
+          style={{ backgroundColor: "currentColor" }}
+        />
+      </span>
+
+      <span className="sr-only">
+        {prefix}
+        {(words[0] ?? "WORKOUTS").toUpperCase()}
+      </span>
+    </div>
+  );
+}
 
 function AmbientBackground() {
   return (
@@ -303,7 +395,6 @@ function HeaderBar({
             shadow-[0_8px_40px_rgba(13,27,61,0.12)]
           "
         >
-          {/* subtle gold hairline */}
           <div
             aria-hidden
             className="
@@ -315,20 +406,9 @@ function HeaderBar({
           />
 
           <div className="flex items-center justify-between gap-4 px-4 py-3 sm:px-5">
-            {/* Brand */}
-            <Link
-              href={brand.href}
-              className="group flex min-w-0 items-center gap-1"
-            >
+            <Link href={brand.href} className="group flex min-w-0 items-center gap-2">
               <span className="relative h-9 w-9 flex-none overflow-hidden rounded-xl">
-                <Image
-                  src={brand.logoSrc}
-                  alt={brand.logoAlt}
-                  fill
-                  sizes="36px"
-                  className="object-cover"
-                  priority
-                />
+                <Image src={brand.logoSrc} alt={brand.logoAlt} fill sizes="36px" className="object-cover" priority />
               </span>
 
               <span className="min-w-0">
@@ -344,13 +424,12 @@ function HeaderBar({
                       group-hover:brightness-110
                     "
                   >
-                    ureus
+                    {brand.name}
                   </span>
                 </span>
               </span>
             </Link>
 
-            {/* CTA */}
             <Link
               href={cta.href}
               className="
@@ -373,33 +452,22 @@ function HeaderBar({
         </div>
       </div>
 
-      {/* ultra-soft separator */}
       <div
         aria-hidden
-        className="
-          pointer-events-none h-px w-full
-          bg-gradient-to-r
-          from-transparent via-black/5 to-transparent
-        "
+        className="pointer-events-none h-px w-full bg-gradient-to-r from-transparent via-black/5 to-transparent"
       />
     </motion.header>
   );
 }
 
-
-
 export default function HeroLandingAbstract({
   brand = { logoSrc: "/brand/logo.png", logoAlt: "Aureus logo", name: "Aureus", href: "/" },
-  title = "Train with zero friction.",
-  subtitle = "A calmer, faster way to log workouts — built for lifters who care about details. Clean UI, powerful insights, and an experience that stays out of your way.",
-  primaryCta = { label: "Join the waitlist", href: "#waitlist" },
+  primaryCta = { label: "Join the waitlist", href: "/signup" },
   secondaryCta = { label: "See features", href: "#features" },
   panels = [
     { src: "/snippets/hero-a.jpg", alt: "Panel 0" },
     { src: "/snippets/hero-b.jpg", alt: "Panel 1" },
-    { src: "/snippets/hero-c.jpg", alt: "Panel 2" },
   ],
-  warning,
   className,
 }: HeroProps) {
   const reduce = useReducedMotion();
@@ -430,22 +498,50 @@ export default function HeroLandingAbstract({
       <HeaderBar brand={safeBrand} cta={primaryCta} />
 
       <div className="relative mx-auto max-w-7xl px-5 sm:px-6 lg:px-10">
-        {/* Tighter vertical rhythm overall so it fits shorter screens */}
-        <div className="grid items-center gap-8 pb-12 pt-8 sm:pb-16 sm:pt-10 lg:grid-cols-12 lg:gap-12 lg:pb-18 lg:pt-12">
+        <div className="grid items-center gap-8 pb-12 pt-8 sm:pb-16 sm:pt-10 lg:grid-cols-12 lg:gap-12 lg:pt-12">
           {/* LEFT */}
           <div className="lg:col-span-6">
+            {/* SMALL UPPER LINE (animated) */}
+              <motion.div {...fadeUp(0.04)} className="mt-2">
+                <RotatingTypeCaps
+                  words={["weight changes", "workouts", "physique pics", "strength curves", "volume", "PRs"]}
+                  prefix="TRACK YOUR"
+                  className="text-[13px] sm:text-[14px]"
+                  prefixClassName="text-[#0D1B3D]/60 font-extrabold tracking-[0.26em]"
+                  wordClassName="
+                    bg-gradient-to-r
+                    from-[#C9A227]
+                    via-[#D4AF37]
+                    to-[#3E5BA9]
+                    bg-clip-text text-transparent
+                    font-extrabold tracking-[0.26em]
+                  "
+                  caretClassName="opacity-70"
+                  typeMs={74}
+                  deleteMs={56}
+                  holdMs={1600}
+                  gapMs={900}
+                />
+              </motion.div>
+            {/* MAIN TAGLINE */}
             <motion.h1
-              {...fadeUp(0.06)}
-              className="mt-5 text-balance text-4xl font-semibold tracking-tight text-[#0D1B3D] sm:text-5xl md:text-6xl"
+              {...fadeUp(0.08)}
+              className="mt-4 text-balance text-4xl font-semibold tracking-tight text-[#0D1B3D] sm:text-5xl md:text-6xl"
             >
-              {title}
+              Train with{" "}
+              <span className="bg-gradient-to-r from-[#2B3F73] via-[#3E5BA9] to-[#5B74C8] bg-clip-text text-transparent">
+                elite
+              </span>{" "}
+              direction
             </motion.h1>
 
             <motion.p
               {...fadeUp(0.12)}
               className="mt-4 max-w-xl text-pretty text-[15px] leading-relaxed text-[#516079] sm:text-lg"
             >
-              {subtitle}
+              You already train hard. Now track{" "}
+              <em className="font-semibold italic text-[#0D1B3D]">everything</em>{" "}, reveal the trends
+              — and turn it into clear actionable feedback
             </motion.p>
 
             <motion.div {...fadeUp(0.18)} className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -457,19 +553,24 @@ export default function HeroLandingAbstract({
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </Link>
 
-              <Link
-                href={secondaryCta.href}
+              <button
+                onClick={() => {
+                  document.getElementById("features")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                  });
+                }}
                 className="inline-flex items-center justify-center rounded-2xl border border-black/10 bg-white/70 px-5 py-3 text-sm font-semibold text-[#0D1B3D] shadow-[0_1px_0_rgba(0,0,0,0.03)] backdrop-blur transition hover:bg-white focus:outline-none focus:ring-2 focus:ring-[#0D1B3D]/20"
               >
                 {secondaryCta.label}
-              </Link>
+              </button>
             </motion.div>
           </div>
 
           {/* RIGHT */}
           <div className="lg:col-span-6">
             <div className="relative mx-auto max-w-[980px]">
-              {/* Mobile: remove big gaps, make warning sit closer */}
+              {/* Mobile */}
               <div className="flex flex-col gap-3 md:hidden">
                 <GlassImagePanel
                   src={panels[0].src}
@@ -489,19 +590,17 @@ export default function HeroLandingAbstract({
                   prominence="secondary"
                 />
                 <WarningCalloutPanel
-                  label={warning?.label ?? "WARNING"}
+                  label={"WARNING"}
                   body={
-                    warning?.body ??
                     "You experienced a significant drop in training volume for the Lats, down 2,737.5 kg from last week, with only 16.5 sets logged this week."
                   }
                   tilt={3}
-                  floatDelay={0.14}
+                  floatDelay={0.22}
                 />
               </div>
 
-              {/* Desktop: constrain overall collage height so it fits vertically */}
-              <div className="relative hidden md:block md:h-[520px] lg:h-[600px] xl:h-[660px]">
-                {/* Panel 0 — large but slightly reduced */}
+              {/* Desktop */}
+              <div className="relative hidden md:block md:h-[540px] lg:h-[620px] xl:h-[680px]">
                 <div className="absolute left-0 top-0 z-30 w-[72%] lg:w-[74%]">
                   <GlassImagePanel
                     src={panels[0].src}
@@ -514,7 +613,6 @@ export default function HeroLandingAbstract({
                   />
                 </div>
 
-                {/* Panel 1 — overlaps, slightly smaller */}
                 <div className="absolute right-0 top-[12%] z-20 w-[46%] lg:top-[14%] lg:w-[48%]">
                   <GlassImagePanel
                     src={panels[1].src}
@@ -526,24 +624,24 @@ export default function HeroLandingAbstract({
                   />
                 </div>
 
-                {/* Warning — pull up closer + reduce scale so everything fits */}
-                <div className="absolute bottom-[2%] right-[1%] z-10 w-[66%] origin-bottom-right scale-[0.72] lg:w-[68%] lg:scale-[0.70]">
+                <div className="absolute left-[10%] top-[62%] z-10 w-[44%] lg:left-[12%] lg:top-[64%] lg:w-[42%]">
+                </div>
+
+                <div className="absolute bottom-[1%] right-[1%] z-20 w-[66%] origin-bottom-right scale-[0.72] lg:w-[68%] lg:scale-[0.70]">
                   <WarningCalloutPanel
-                    label={warning?.label ?? "WARNING"}
+                    label={"WARNING"}
                     body={
-                      warning?.body ??
                       "You experienced a significant drop in training volume for the Lats, down 2,737.5 kg from last week, with only 16.5 sets logged this week."
                     }
                     tilt={6}
-                    floatDelay={0.22}
+                    floatDelay={0.28}
                     className="min-h-0"
                   />
                 </div>
 
-                {/* subtle connector line */}
                 <div
                   aria-hidden
-                  className="pointer-events-none absolute left-[16%] top-[60%] h-px w-[460px] opacity-70"
+                  className="pointer-events-none absolute left-[16%] top-[58%] h-px w-[460px] opacity-70"
                   style={{
                     background:
                       "linear-gradient(90deg, rgba(201,162,39,0) 0%, rgba(201,162,39,0.60) 42%, rgba(62,91,169,0.16) 100%)",

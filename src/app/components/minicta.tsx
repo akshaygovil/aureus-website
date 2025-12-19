@@ -69,8 +69,8 @@ function DownloadButton({
 
 export default function MainCTASection({
   id = "download",
-  heading = "Free to download. Powerful when you’re ready.",
-  subheading = "Use Aureus for free. Unlock advanced insights only if and when you want them.",
+  heading = "Free to download. Powerful when you need it.",
+  subheading = "Use Aureus for free. Upgrade to add deeper feedback and analysis only if and when you want it.",
   cta = { label: "Download Aureus", href: "#download" },
   className,
 }: MainCTASectionProps) {

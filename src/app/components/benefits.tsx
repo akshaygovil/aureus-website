@@ -128,9 +128,7 @@ export default function ComparisonTable() {
             Serious tracking. Zero noise.
           </h2>
           <p className="mt-4 text-[15px] sm:text-base md:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
-            <span className="text-slate-900 font-semibold">Aureus</span> is built
-            for lifters who care about data — clean visuals, real analytics, and
-            an offline-first experience that stays fast.
+            See how <span className="font-bold">Aureus</span> compares to leading competitors and typical fitness apps — from interface and performance to the depth of insight you actually get from your training.
           </p>
         </FadeIn>
 

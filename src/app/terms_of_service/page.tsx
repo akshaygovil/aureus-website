@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { EMAIL_ADRESS } from "../assets/constants";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 18 },
@@ -219,10 +220,10 @@ export default function TermsPage() {
             <p className="text-[11px] md:text-xs text-[#9CA3AF]">
               Questions about these Terms? Email{" "}
               <a
-                href="mailto:contact@aureus.com"
+                href={`mailto:${EMAIL_ADRESS}`}
                 className="text-[#D4AF37] hover:text-[#F5E6A8] underline underline-offset-2"
               >
-                contact@aureus.com
+                {EMAIL_ADRESS}
               </a>
               .
             </p>

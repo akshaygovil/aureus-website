@@ -116,9 +116,16 @@
   fill: #e0f2e9; /* light mint-green tint */
 }
 
-
-
-
+@keyframes caretBlink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
 
 
 

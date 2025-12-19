@@ -8,12 +8,13 @@ import {
   FaYoutube,
   FaEnvelope,
 } from "react-icons/fa6";
+import { EMAIL_ADRESS } from "../assets/constants";
 
 /**
  * Replace these.
  */
 const CONTACT = {
-  email: "hello@yourdomain.com",
+  email: EMAIL_ADRESS,
   instagram: "https://instagram.com/yourhandle",
   tiktok: "https://www.tiktok.com/@yourhandle",
   youtube: "https://www.youtube.com/@yourhandle",

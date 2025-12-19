@@ -3,6 +3,7 @@
 import Link from "next/link";
 import React from "react";
 import { FaInstagram, FaTiktok, FaYoutube, FaEnvelope } from "react-icons/fa6";
+import { EMAIL_ADRESS } from "../assets/constants";
 
 export default function Footer() {
   return (
@@ -57,7 +58,7 @@ export default function Footer() {
             {/* Socials */}
             <div className="flex flex-wrap items-center gap-3">
               <SocialIcon
-                href="mailto:your@email.com"
+                href={`mailto:${EMAIL_ADRESS}`}
                 label="Email"
                 icon={<FaEnvelope />}
               />

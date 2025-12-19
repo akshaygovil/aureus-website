@@ -6,44 +6,52 @@ export const faqs =
   [
     {
       q: "Will I visually see progress over time?",
-      a: `Yes - progress becomes impossible to ignore.
-        Aureus automatically turns your workout history, strength data, physique photos, and weight logs into clear visual timelines so you can literally see yourself improving over weeks, months, and years.
+      a: `
+        Yes. Progress becomes clear when it’s viewed over time — not session by session.
 
-        You'll get:
+        Aureus automatically turns your training history into long-term visual timelines, so improvements are easy to recognise across weeks, months, and years.
+
+        You’ll see:
         <ul>
-        <li>📈 Strength curves that trend upward</li>
-        <li>🏋️‍♂️ Volume charts that show training load increases</li>
-        <li>🔥 AI-detected milestones</li>
-        <li>🖼️ Side-by-side physique comparisons</li>
-        <li>🎞️ Auto-generated transformation slideshows</li>
-        </ul>Progress stops being abstract—it's visual, measurable, and extremely motivating.      
+          <li>Strength curves that show real upward trends</li>
+          <li>Volume charts that reflect increasing workload</li>
+          <li>Detected milestones and personal bests</li>
+          <li>Side-by-side physique comparisons</li>
+          <li>Auto-generated transformation timelines</li>
+        </ul>
+
+        Progress stops feeling abstract. You can see it clearly.
       `,
     },
     {
       q: "Can I track photos and weight changes?",
-      a: `Yes. Every day, you can log your weight and log an <strong>unlimited</strong> number of progress photos. <i>(available on the free version)</i>
+      a: `
+        Yes. You can log your weight daily and add an unlimited number of progress photos. <em>(Available on the free version.)</em>
 
-          These get displayed in our app, where you can view your lifetime worth of logs, in a dedicated, simple to use and performant screen. 
+        Weight and physique data are displayed in dedicated views designed to stay fast and responsive, even with years of history.
 
-          This comes with many features, including weight graphs, full smart weight analytics, giving you insights like "your weight has plateaued in the last 7 days". 
+        This includes:
+        <ul>
+          <li>Clean weight trend graphs</li>
+          <li>Smart weight-change analysis (plateaus, rate of change)</li>
+          <li>Side-by-side physique comparisons</li>
+          <li>Automatically generated photo timelines</li>
+        </ul>
 
-          You can also view your physique photos side by side, and the app comes with a built in auto-builded slideshow of all your photos, all within 1 click. 
-
-          Talk about an all-in-one app!
+        Everything stays organised and easy to review — without clutter.
       `,
     },
     {
       q: "How accurate are the strength and progression estimates?",
-      a: `No 1RM calculator can accurately predict strength estimates, and any app saying otherwise is lying.
-          
-          But our app gets pretty close. Different formulas shine in different conditions and rep ranges, for example the Brzycki works best in the 1-5 rep range, whereas the O'Conner shines in the 6-12 rep range.
+      a: `
+        No 1RM estimate is perfectly accurate — and Aureus doesn’t pretend otherwise.
 
-          Unfortunately, other fitness apps use only 1 formula, which is not a good solution for a strength app.
-          
-          Our app employs a hybrid of all formulas, determining the most suitable one to use in the given rep range to ensure the highest level of accuracy in predicting your 1RM's.
+        Strength estimation depends heavily on rep range and context. Instead of relying on a single formula, Aureus adapts its estimates based on how you actually train.
 
-          So, our strength curves, graphs, and progression estimates are pretty accurate. 
-          `,
+        This approach produces more reliable strength curves and progression trends over time — especially when viewed across multiple weeks or training blocks.
+
+        The result isn’t a single number to chase, but a clearer picture of how your strength is evolving.
+      `,
     },
     {
       q: "Will this app make workouts feel easier to stick with?",
@@ -72,16 +80,15 @@ export const faqs =
       a: "Yes. Your data is stored fully offline, so the owners of the app, even if they wanted to, won't be able to access it. The app is fully safe and private",
     },
     {
-      q: "Most companies just stick that they use “AI” to increase shareholder value, when the AI functionality is really bad. Is your app like this? ",
-      a: `No. We don't use AI as a marketing buzzwork, the AI functionality has meticulously been picked to ensure that it is genuinely helpful and provides insights which a normal algorithm wouldn't be able to supply. Our AI isn't a generic chatbot, or a ChatGPT wrapper. It is given an extremely comprehensive summary of your workouts, both daily and weekly and provides human sounding, concise and helpful summaries.
-      
-      Instead of giving vague advice like “train harder”, it can tell you:
-      <ul>
-        <li>which lifts improved the most this month</li>
-        <li>whether your volume is trending upward or downward</li>
-        <li>what muscle groups you've unintentionally neglected</li>
-        <li>how close you are to previous peaks</li>
-      </ul> One thing we strongly believe in is that if AI is your main marketing advantage, then you don't have a really good product, and so our app, without the use of AI beats <strong>99%</strong> of workouts apps out there. The AI is just the extra cherry on top.
+      q: "Is this just another AI-powered fitness app?",
+      a: `
+        No. Aureus doesn’t use AI as a headline feature — and it doesn’t rely on it.
+
+        The core of the app is structured training data: volume, load, progression trends, muscle balance, recovery patterns, and long-term history. That foundation works independently.
+
+        The AI simply helps interpret that data when you want a clear summary or second opinion — replacing vague advice with specific, training-aware feedback.
+
+        It’s there to add clarity, not noise.
       `,
     },
     {
@@ -90,22 +97,15 @@ export const faqs =
     },
     {
       q: "How is this different from a ChatGPT wrapper?",
-      a: `A ChatGPT wrapper is simply an interface that sends your prompts to ChatGPT and returns a response. There's no intelligence, no personalization, no real understanding of you.
-          
-          One business thing we always believe is that if your product revolves around AI, then you don't really have a production, you don't really have a product. You have a prompt.
-          Many apps today simply send a simple API call to an AI, and wrap it around a nice UI and cool brand. That's what we strive to be the complete opposite.
+      a: `
+        A ChatGPT wrapper responds to prompts. It doesn’t understand your training history.
 
-          Aureus is fundamentally different
+        Aureus is built around persistent, structured data — your workouts, loads, volume, muscle emphasis, progression trends, goals, and consistency over time.
 
-          First, Aureus would function just fine without the AI. With the advanced analytics, muscle heatmaps, 1RM prediction graphs, bar graphs, volume, strength, muscle worked trends, Aureus delivers an extremely comprehensive and thorough performance.
+        The app delivers deep analysis on its own. The AI layer simply helps synthesise that information into concise, relevant feedback when you choose to use it.
 
-          The AI is just the cherry on top that helps it transcend to the next level
-
-          Secondly, the difficult part about using AI is curating the perfect prompt to feed it. The prompt that has all the right information, summarised in a concise but detailed manner. The engineers at Aureus's team have masterfully achieved that.
-
-          Our AI is driven by actual structured data - your workouts, equipment used, weak points, volume, weight, muscle trends, lagging muscles and lifts, strength and weight goals, consistency, weekly schedules, injuries, and the list goes on.
-          It understands you extremely well, and is able to provide extremely accurate insights about your training that a normal coach would not be able to provide due to its ability to oversee everything.
-          `,
+        Even without AI, Aureus remains a complete performance tracking and analysis tool.
+      `,
     },
     {
       q: "How performant is your app, is it as fast as native apps?",
@@ -121,7 +121,7 @@ export const faqs =
           As long as you don't factory reset your phone, your data will remain securely stored on your phone 
           At the moment, we don't store your data on the cloud as that's too costly, but it's a strong possibility for the future. `,
     },
-  ];
+];
 
 export const PLANS: { label: Plan; key: PlanKey }[] = [
   { label: "Aureus", key: "aureus" },
@@ -131,12 +131,12 @@ export const PLANS: { label: Plan; key: PlanKey }[] = [
 
 export const FEATURES = [
   "Ultra-minimal, premium interface",
-  "Blazing-fast performance (instant feel)",
+  "Blazing-fast performance",
   "Daily AI coaching feedback",
   "Weekly AI progress summary",
   "Transformation slideshows (auto-built)",
   "PR detection + milestone highlights",
-  "Strength trend graphs (per lift)",
+  "Strength trend graphs",
   "1RM prediction curves (auto-estimates)",
   "Muscle heatmap by weekly volume",
   "Workout history + volume analysis",
@@ -149,11 +149,10 @@ export const FEATURES = [
   "Built in auto-computed DOTS calculator",
   "Physique photos",
   "250+ curated exercise library",
-  "Exercise filters (muscle/equipment)",
   "Bar & line charts",
   "Lifetime stats (sets, reps, volume)",
   "Ad-free, zero distractions",
-  "On-device data storage (local by default)",
+  "On-device data storage",
   "Offline-first — works without signal",
 ] as const;
 
@@ -164,7 +163,7 @@ export const MATRIX: Record<Feature, Record<PlanKey, boolean>> = {
     otherPremium: true,
     topCompetitor: true,
   },
-  "Blazing-fast performance (instant feel)": {
+  "Blazing-fast performance": {
     aureus: true,
     otherPremium: true,
     topCompetitor: true,
@@ -189,7 +188,7 @@ export const MATRIX: Record<Feature, Record<PlanKey, boolean>> = {
     otherPremium: true,
     topCompetitor: false,
   },
-  "Strength trend graphs (per lift)": {
+  "Strength trend graphs": {
     aureus: true,
     otherPremium: true,
     topCompetitor: true,
@@ -254,11 +253,6 @@ export const MATRIX: Record<Feature, Record<PlanKey, boolean>> = {
     otherPremium: true,
     topCompetitor: true,
   },
-  "Exercise filters (muscle/equipment)": {
-    aureus: true,
-    otherPremium: false,
-    topCompetitor: false,
-  },
   "Bar & line charts": {
     aureus: true,
     otherPremium: true,
@@ -274,7 +268,7 @@ export const MATRIX: Record<Feature, Record<PlanKey, boolean>> = {
     otherPremium: true,
     topCompetitor: false,
   },
-  "On-device data storage (local by default)": {
+  "On-device data storage": {
     aureus: true,
     otherPremium: false,
     topCompetitor: false,
@@ -285,3 +279,5 @@ export const MATRIX: Record<Feature, Record<PlanKey, boolean>> = {
     topCompetitor: false,
   },
 };
+
+export const EMAIL_ADRESS = 'aureus.app01@gmail.com'

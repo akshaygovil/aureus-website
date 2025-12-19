@@ -17,15 +17,11 @@ function cn(...xs: Array<string | false | null | undefined>) {
 const EASE_OUT: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
 export default function SearchOverDarkLux({
-  eyebrow = "Your search for a fitness app is over",
-  title = "Consistency—without the chaos.",
-  subtitle = "A calmer kind of discipline. Direction that feels obvious. Progress you can finally trust.",
-  className,
 }: SearchOverDarkLuxProps) {
   const reduce = useReducedMotion();
 
   return (
-    <section className={cn("relative w-full overflow-hidden bg-[#070A12] text-white", className)}>
+    <section className={cn("relative w-full overflow-hidden bg-[#070A12] text-white")}>
       {/* Deep, premium visuals */}
       <div aria-hidden className="pointer-events-none absolute inset-0">
         {/* Base depth */}
@@ -168,20 +164,9 @@ export default function SearchOverDarkLux({
           transition={{ duration: 0.85, ease: EASE_OUT }}
           className="mx-auto max-w-4xl text-center"
         >
-          {/* Eyebrow */}
-          <div className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/[0.06] px-3 py-1.5 backdrop-blur">
-            <span
-              className="mr-2 inline-block h-1.5 w-1.5 rounded-full"
-              style={{ background: "linear-gradient(90deg, #D4AF37, #E9C46A)" }}
-            />
-            <span className="text-[11px] sm:text-xs font-semibold tracking-[0.18em] uppercase text-white/65">
-              {eyebrow}
-            </span>
-          </div>
-
           {/* Headline */}
           <h2 className="mt-6 text-[46px] leading-[1.03] sm:text-6xl lg:text-[72px] font-semibold tracking-tight">
-            {title}
+            You don’t need more intensity.
             <span
               className="block mt-3 text-transparent bg-clip-text"
               style={{
@@ -189,18 +174,18 @@ export default function SearchOverDarkLux({
                   "linear-gradient(90deg, rgba(255,255,255,0.92) 0%, rgba(233,196,106,0.95) 35%, rgba(120,169,255,0.92) 62%, rgba(255,255,255,0.85) 100%)",
               }}
             >
-              Calm direction. Quiet power.
+              You need intention.
             </span>
           </h2>
 
           {/* Minimal text (still short) */}
           <p className="mt-6 text-[14px] sm:text-[15px] leading-relaxed text-white/60 max-w-2xl mx-auto">
-            {subtitle}
+            You already show up. You already put in the work. What most lifters are missing isn’t effort — it’s clarity.
           </p>
 
           {/* Ultra-minimal promise line */}
           <div className="mt-8 text-[12px] tracking-[0.16em] uppercase text-white/45">
-            Less noise • More momentum • Built to last
+            Aureus brings order to your training. So progress feels calm, deliberate, and repeatable — week after week.
           </div>
         </motion.div>
 

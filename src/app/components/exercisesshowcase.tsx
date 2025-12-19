@@ -30,9 +30,6 @@ type TileData = {
 type ExerciseLibrarySectionProps = {
   libraryScreenshotSrc: string;
   iphoneFrameSrc?: string;
-  filterPanelSrc: string;
-  filtersActiveSrc: string;
-  customExerciseSrc: string;
   ctaHref?: string;
 };
 
@@ -409,21 +406,6 @@ function MuscleListWeb({
           </div>
         );
       })}
-    </div>
-  );
-}
-
-function HumanBodyMock() {
-  return (
-    <div className="flex items-center justify-center">
-      <div className="relative h-[170px] w-[120px]">
-        <div className="absolute left-1/2 top-0 h-7 w-7 -translate-x-1/2 rounded-full" style={{ backgroundColor: withAlpha(colors.navy, 0.10) }} />
-        <div className="absolute left-1/2 top-7 h-[92px] w-[52px] -translate-x-1/2 rounded-[22px]" style={{ backgroundColor: withAlpha(colors.accent, 0.10) }} />
-        <div className="absolute left-[12px] top-[44px] h-[58px] w-[22px] rounded-[18px]" style={{ backgroundColor: withAlpha(colors.navy, 0.08) }} />
-        <div className="absolute right-[12px] top-[44px] h-[58px] w-[22px] rounded-[18px]" style={{ backgroundColor: withAlpha(colors.navy, 0.08) }} />
-        <div className="absolute left-[40px] bottom-0 h-[66px] w-[18px] rounded-[18px]" style={{ backgroundColor: withAlpha(colors.gold_normal, 0.10) }} />
-        <div className="absolute right-[40px] bottom-0 h-[66px] w-[18px] rounded-[18px]" style={{ backgroundColor: withAlpha(colors.gold_normal, 0.10) }} />
-      </div>
     </div>
   );
 }
@@ -895,38 +877,8 @@ function Tile({ data }: { data: TileData }) {
 export default function ExerciseLibrarySectionFinalLight({
   libraryScreenshotSrc,
   iphoneFrameSrc = "/finaliphoneframe.png",
-  filterPanelSrc,
-  filtersActiveSrc,
-  customExerciseSrc,
   ctaHref = "#download",
 }: ExerciseLibrarySectionProps) {
-  const tiles: TileData[] = useMemo(
-    () => [
-      {
-        badge: "Filters",
-        title: "Slice the library in seconds",
-        description: "Filter by equipment, body part, and type — find the right movement instantly.",
-        imageSrc: filterPanelSrc,
-        accent: "gold",
-      },
-      {
-        badge: "Filters in use",
-        title: "Stay oriented while browsing",
-        description: "Active filters stay visible, so you always know what you’re looking at.",
-        imageSrc: filtersActiveSrc,
-        accent: "blue",
-      },
-      {
-        badge: "Custom exercises",
-        title: "Add your own variations",
-        description: "Create custom movements when you need them — tracked like everything else.",
-        imageSrc: customExerciseSrc,
-        accent: "mint",
-      },
-    ],
-    [filterPanelSrc, filtersActiveSrc, customExerciseSrc]
-  );
-
   return (
     <section className="relative w-full py-16 md:py-24">
       <SectionBg />
@@ -934,17 +886,17 @@ export default function ExerciseLibrarySectionFinalLight({
       <div className="mx-auto w-full max-w-6xl px-6">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="mt-4 text-3xl md:text-5xl font-semibold tracking-tight" style={{ color: colors.navy }}>
-            250 + exercises — curated, practical, and fast to use.
+            A complete exercise library, built for real training
           </h2>
 
           <p className="mt-4 text-base md:text-lg leading-relaxed" style={{ color: colors.softcolor }}>
-            No fluff — just the movements you'll actually train with, organised so selection is instant.
+            250+ carefully curated exercises — practical movements people actually train with. Organised for fast selection, so you spend less time searching and more time lifting.
           </p>
         </div>
 
         <ImageText
-          title="Never miss an exercise"
-          subtitle="Around 300 carefully selected exercises — the movements people actually use, with fast viewing and editing."
+          title="You won’t outgrow it"
+          subtitle="Around 300 movements covering compounds, accessories, and variations — all quick to view, edit, and slot into your workouts as your training evolves."
           screenshotSrc={libraryScreenshotSrc}
           reverse
         />
@@ -1006,16 +958,6 @@ export default function ExerciseLibrarySectionFinalLight({
             <PhoneFrame iphoneFrameSrc={iphoneFrameSrc}>
               <ExerciseDetailPreview videoSrc='https://utdpgflhusmeijpclavl.supabase.co/storage/v1/object/public/exercise_videos/dumbbell-incline-bench-press.mp4'/>
             </PhoneFrame>
-          </div>
-        </div>
-
-        <div className="mt-12">
-          <div className="mx-auto max-w-5xl">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 place-items-center">
-              {tiles.map((t) => (
-                <Tile key={t.badge} data={t} />
-              ))}
-            </div>
           </div>
         </div>
       </div>

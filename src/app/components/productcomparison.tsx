@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import {
   BadgeCheck,
@@ -16,12 +15,8 @@ import {
   Zap,
 } from "lucide-react";
 
-type CTA = { label: string; href: string };
-
 type AlternativeSectionProps = {
   appName?: string; // default: "Aureus"
-  primaryCta?: CTA; // default: { label: "Download free", href: "/download" }
-  secondaryCta?: CTA; // default: { label: "See what you get", href: "#insights" }
   className?: string;
 };
 
@@ -35,25 +30,39 @@ function SegButton({
   active,
   onClick,
   children,
+  id,
 }: {
   active: boolean;
   onClick: () => void;
   children: React.ReactNode;
+  id: string;
 }) {
   return (
     <button
       type="button"
       onClick={onClick}
       className={cn(
-        "relative inline-flex items-center justify-center rounded-full px-3 py-1.5 text-xs font-semibold transition",
-        "outline-none focus-visible:ring-2 focus-visible:ring-[#F3D37C]/55 focus-visible:ring-offset-2 focus-visible:ring-offset-[#070C1B]",
-        active
-          ? "bg-white/10 text-white ring-1 ring-white/15"
-          : "text-white/70 hover:text-white hover:bg-white/5"
+        "relative z-10 inline-flex items-center justify-center rounded-full px-4 py-1.5",
+        "text-xs font-semibold transition-colors",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F3D37C]/55 focus-visible:ring-offset-2 focus-visible:ring-offset-[#070C1B]",
+        active ? "text-white" : "text-white/70 hover:text-white"
       )}
       aria-pressed={active}
     >
       {children}
+
+      {/* Animated slider */}
+      {active && (
+        <motion.div
+          layoutId="mode-slider"
+          className="absolute inset-0 -z-10 rounded-full bg-white/10 ring-1 ring-white/15"
+          transition={{
+            type: "spring",
+            stiffness: 420,
+            damping: 34,
+          }}
+        />
+      )}
     </button>
   );
 }
@@ -249,8 +258,6 @@ function CompareCard({
 
 export default function AlternativeSection({
   appName = "Aureus",
-  primaryCta = { label: "Download free", href: "/download" },
-  secondaryCta = { label: "See what you get", href: "#insights" },
   className,
 }: AlternativeSectionProps) {
   const reduce = useReducedMotion();
@@ -381,35 +388,6 @@ export default function AlternativeSection({
             <span className="text-white/85"> {appName} gives you premium, actionable insights</span> from the workouts
             you already log.
           </p>
-
-          <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
-            <Link
-              href={primaryCta.href}
-              className={cn(
-                "group inline-flex items-center justify-center gap-2 rounded-2xl px-5 py-3 text-sm font-semibold",
-                "bg-gradient-to-b from-[#F3D37C] via-[#D7B35E] to-[#A67C2A] text-[#0B1020]",
-                "shadow-[0_18px_60px_rgba(243,211,124,0.18)]",
-                "ring-1 ring-white/10 hover:brightness-[1.03] active:brightness-[0.98]",
-                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F3D37C]/55 focus-visible:ring-offset-2 focus-visible:ring-offset-[#070C1B]"
-              )}
-            >
-              <Download className="h-4 w-4" aria-hidden />
-              {primaryCta.label}
-              <span className="ml-1 text-[#0B1020]/70 transition group-hover:translate-x-0.5">→</span>
-            </Link>
-
-            <Link
-              href={secondaryCta.href}
-              className={cn(
-                "inline-flex items-center justify-center gap-2 rounded-2xl px-5 py-3 text-sm font-semibold",
-                "bg-white/5 text-white/85 ring-1 ring-white/10 hover:bg-white/8",
-                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F3D37C]/55 focus-visible:ring-offset-2 focus-visible:ring-offset-[#070C1B]"
-              )}
-            >
-              <Zap className="h-4 w-4" aria-hidden />
-              {secondaryCta.label}
-            </Link>
-          </div>
         </motion.div>
 
         {/* Segmented control */}
@@ -422,18 +400,20 @@ export default function AlternativeSection({
                 viewport: { once: true, amount: 0.35 },
                 transition: { duration: 0.65, ease: [0.16, 1, 0.3, 1] as const, delay: 0.05 },
               })}
-          className="mt-10 flex items-center justify-center"
+          className="flex items-center justify-center"
         >
-          <div className="inline-flex items-center gap-1.5 rounded-full bg-white/5 p-1.5 ring-1 ring-white/10">
-            <SegButton active={mode === "cost"} onClick={() => setMode("cost")}>
-              Cost
-            </SegButton>
-            <SegButton active={mode === "effort"} onClick={() => setMode("effort")}>
-              Effort
-            </SegButton>
-            <SegButton active={mode === "insights"} onClick={() => setMode("insights")}>
-              Insights
-            </SegButton>
+          <div className="mt-10 flex items-center justify-center">
+            <div className="relative inline-flex items-center gap-1 rounded-full bg-white/5 p-1.5 ring-1 ring-white/10">
+              <SegButton active={mode === "cost"} onClick={() => setMode("cost")} id="cost">
+                Cost
+              </SegButton>
+              <SegButton active={mode === "effort"} onClick={() => setMode("effort")} id="effort">
+                Effort
+              </SegButton>
+              <SegButton active={mode === "insights"} onClick={() => setMode("insights")} id="insights">
+                Insights
+              </SegButton>
+            </div>
           </div>
         </motion.div>
 
@@ -485,80 +465,7 @@ export default function AlternativeSection({
             }
           />
         </motion.div>
-
-        {/* Bottom conversion band */}
-        <motion.div
-          {...(reduce
-            ? {}
-            : {
-                initial: { opacity: 0, y: 14 },
-                whileInView: { opacity: 1, y: 0 },
-                viewport: { once: true, amount: 0.3 },
-                transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] as const, delay: 0.12 },
-              })}
-          className="mt-10 overflow-hidden rounded-3xl bg-white/[0.045] p-6 ring-1 ring-white/10 sm:p-7"
-        >
-          <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
-            <div className="min-w-0">
-              <div className="flex flex-wrap items-center gap-2">
-                <Pill tone="gold">
-                  <Download className="h-3.5 w-3.5" aria-hidden />
-                  Free to download
-                </Pill>
-                <Pill tone="soft">
-                  <Sparkles className="h-3.5 w-3.5" aria-hidden />
-                  Premium insights included
-                </Pill>
-                <Pill tone="soft">
-                  <Zap className="h-3.5 w-3.5" aria-hidden />
-                  No spreadsheets
-                </Pill>
-              </div>
-
-              <p className="mt-3 text-pretty text-sm leading-relaxed text-white/70">
-                If you’ve ever logged workouts and thought, “Okay… now what?” — this is the missing piece.
-                {` ${appName}`} turns your training into clear next steps, without a coach’s hourly rate.
-              </p>
-            </div>
-
-            <div className="flex shrink-0 flex-wrap items-center gap-3">
-              <Link
-                href={primaryCta.href}
-                className={cn(
-                  "inline-flex items-center justify-center gap-2 rounded-2xl px-5 py-3 text-sm font-semibold",
-                  "bg-white text-[#0B1020] hover:brightness-[0.98]",
-                  "shadow-[0_18px_50px_rgba(0,0,0,0.35)]",
-                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F3D37C]/55 focus-visible:ring-offset-2 focus-visible:ring-offset-[#070C1B]"
-                )}
-              >
-                <Download className="h-4 w-4" aria-hidden />
-                {primaryCta.label}
-              </Link>
-
-              <Link
-                href={secondaryCta.href}
-                className={cn(
-                  "inline-flex items-center justify-center gap-2 rounded-2xl px-5 py-3 text-sm font-semibold",
-                  "bg-transparent text-white/85 ring-1 ring-white/15 hover:bg-white/5",
-                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F3D37C]/55 focus-visible:ring-offset-2 focus-visible:ring-offset-[#070C1B]"
-                )}
-              >
-                <ChartNoAxesCombined className="h-4 w-4" aria-hidden />
-                Compare features
-              </Link>
-            </div>
-          </div>
-        </motion.div>
       </div>
     </section>
   );
 }
-
-/**
- * Usage:
- * <AlternativeSection
- *   appName="Aureus"
- *   primaryCta={{ label: "Download free", href: "/download" }}
- *   secondaryCta={{ label: "See insights", href: "#insights" }}
- * />
- */
