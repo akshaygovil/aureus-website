@@ -406,7 +406,7 @@ function HeaderBar({
           />
 
           <div className="flex items-center justify-between gap-4 px-4 py-3 sm:px-5">
-            <Link href={brand.href} className="group flex min-w-0 items-center gap-2">
+            <Link href={brand.href} className="group flex min-w-0 items-center gap-1">
               <span className="relative h-9 w-9 flex-none overflow-hidden rounded-xl">
                 <Image src={brand.logoSrc} alt={brand.logoAlt} fill sizes="36px" className="object-cover" priority />
               </span>
@@ -424,7 +424,7 @@ function HeaderBar({
                       group-hover:brightness-110
                     "
                   >
-                    {brand.name}
+                    ureus
                   </span>
                 </span>
               </span>
