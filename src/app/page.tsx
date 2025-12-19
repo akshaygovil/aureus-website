@@ -48,16 +48,9 @@ export default function Page() {
           widthPreset="xl"
         />
         <ImageText
-          title="Look over past workouts with ease"
-          subtitle="See a complete snapshot of any session — duration, volume, exercises, and a visual breakdown of the muscles trained. Everything is shown exactly as you logged it, so you can review the work objectively, without second-guessing or reinterpreting it later."
-          screenshotSrc="/appscreenshots/websitescreenshot10.png"
-          widthPreset="xl"
-        />
-        <ImageText
           title="Detailed and complete volume analytics"
           subtitle="Analyse total volume, set count, and training frequency across any time range. Spot workload trends, assess consistency, and understand how hard you’re actually training — beyond individual exercises or reps."
           screenshotSrc="/appscreenshots/websitescreenshot13.png"
-          reverse
           widthPreset="xl"
         />
         <ImageText
@@ -65,7 +58,14 @@ export default function Page() {
           subtitle="Log physique photos with zero limits — unlimited entries, even multiple shots per day. Capture every check-in, then later review them side-by-side or as a clean slideshow to spot real changes over weeks and blocks, not mirror-day noise."
           screenshotSrc="/appscreenshots/websitescreenshot14.png"
           widthPreset="xl"
-        />   
+          reverse
+        /> 
+      <ImageText
+          title="Look over past workouts with ease"
+          subtitle="See a complete snapshot of any session — duration, volume, exercises, and a visual breakdown of the muscles trained. Everything is shown exactly as you logged it, so you can review the work objectively, without second-guessing or reinterpreting it later."
+          screenshotSrc="/appscreenshots/websitescreenshot10.png"
+          widthPreset="xl"
+        />  
         <VideoText
           title="Day-by-day training replay"
           subtitle="Replay your training one day at a time across any time range. See how volume and set distribution shift over time, with each day showing exactly what was trained and where the work went via a muscle heatmap. Designed to reveal patterns — overload phases, missed sessions, and inconsistent weeks."
