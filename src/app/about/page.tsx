@@ -38,13 +38,6 @@ export default function AboutMinimal() {
             </span>
             <span>Home</span>
           </Link>
-
-          <div className="hidden sm:flex items-center gap-2">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#C9A227]" />
-            <span className="text-xs tracking-[0.28em] uppercase text-[#8A94A6]">
-              About
-            </span>
-          </div>
         </div>
 
         {/* Header */}
@@ -103,15 +96,6 @@ export default function AboutMinimal() {
                 just because I want the product to earn trust by how it feels
                 to use.
               </p>
-
-              <div className="pt-2">
-                <div className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/70 px-3 py-1.5 backdrop-blur">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#C9A227]" />
-                  <span className="text-xs text-[#0D1B3D] font-medium">
-                    Built by a lifter. Polished like a premium tool.
-                  </span>
-                </div>
-              </div>
             </div>
           </div>
 
@@ -131,23 +115,33 @@ export default function AboutMinimal() {
                 metaBottom={`Height: 5'10"`}
               />
             </div>
-
             <div className="mt-5">
-              <div className="inline-flex flex-wrap items-center gap-2 rounded-2xl border border-black/10 bg-white/70 px-3 py-2 backdrop-blur">
-                <PillDot />
-                <span className="text-sm text-[#0D1B3D] font-medium">
-                  Transformation: +25kg
-                </span>
-                <span className="text-sm text-[#8A94A6]">•</span>
-                <span className="text-sm text-[#0D1B3D] font-medium">
-                  Height: 5&apos;10&quot;
-                </span>
-              </div>
+              <div
+                className="
+                  inline-flex max-w-full flex-wrap items-center gap-x-4 gap-y-2
+                  rounded-full bg-white/80 px-4 py-2.5
+                  ring-1 ring-inset ring-black/10
+                  shadow-[0_14px_40px_rgba(13,27,61,0.10)]
+                  backdrop-blur
+                "
+              >
+                <div className="inline-flex items-center gap-2">
+                  <PillDot />
+                  <span className="text-[12px] font-semibold tracking-[0.18em] uppercase text-[#0D1B3D]/60">
+                    Transformation
+                  </span>
+                  <span className="text-[14px] font-semibold text-[#0D1B3D]">+25kg</span>
+                </div>
 
-              <p className="mt-3 text-sm sm:text-[15px] leading-relaxed text-[#6E7A8C]">
-                The “after” isn’t a flex — it’s accountability. I’m building
-                Aureus for people who train seriously, because I’m one of them.
-              </p>
+                <span className="hidden sm:block h-4 w-px bg-black/10" aria-hidden />
+
+                <div className="inline-flex items-center gap-2">
+                  <span className="text-[12px] font-semibold tracking-[0.18em] uppercase text-[#0D1B3D]/60">
+                    Height
+                  </span>
+                  <span className="text-[14px] font-semibold text-[#0D1B3D]">5&apos;10&quot;</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>

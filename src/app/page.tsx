@@ -1,7 +1,6 @@
 "use client";
 import FAQSection from "./components/faq";
 import HeroLanding from "./components/HeroLanding";
-import HumanBody from "./components/HumanBody";
 import ComparisonTable from "./components/benefits";
 import ImageText from "./components/imagetext";
 import ExerciseLibrarySectionFinal from "./components/exercisesshowcase";
@@ -12,7 +11,6 @@ import HorizontalRowTiles from "./components/tiles2";
 import AIFunctionalitySection from "./components/AIfunctionality";
 import VideoText from "./components/videotext";
 import TwoPhonesCenterText from "./components/TwoScreensWithCenterText";
-import AureusFeatureShowcase from "./components/functionaltimes";
 import AlternativeSection from "./components/productcomparison";
 import MainCTASection from "./components/minicta";
 import SearchOverSection from "./components/belowherosection";
@@ -36,44 +34,50 @@ export default function Page() {
       <SearchOverSection/>
 
       <section id="features">
-        <AIFunctionalitySection
-          weekly={{ src: "/snippets/ai-weekly.webp", alt: "Weekly AI feedback screenshot" }}
-          daily={{ src: "/snippets/ai-daily.webp", alt: "Daily AI feedback screenshot" }}
-          builder={{ src: "/appscreenshots/websitescreenshot7.png", alt: "AI workout builder screenshot" }}
-        />
         <ImageText
           title="Workout calander + Streak tracking"
           subtitle="Get a clear snapshot of your training month at a glance. See exactly when you trained, when you rested, and where sessions were missed — without digging through logs. Your current streak updates automatically, giving you an honest signal of consistency over time."
           screenshotSrc="/appscreenshots/websitescreenshot2.png"
+          widthPreset="xl"
         />
         <ImageText
           title="Detailed muscle analysis"
           subtitle="Select any time range to see exactly how your training volume is distributed across muscle groups. The heatmap highlights what you’ve been prioritising — and what’s being undertrained — while the breakdown below gives you the full, unfiltered data to assess balance, bias, and recovery."
           screenshotSrc="/appscreenshots/websitescreenshot5.png"
           reverse
+          widthPreset="xl"
         />
         <ImageText
           title="Look over past workouts with ease"
           subtitle="See a complete snapshot of any session — duration, volume, exercises, and a visual breakdown of the muscles trained. Everything is shown exactly as you logged it, so you can review the work objectively, without second-guessing or reinterpreting it later."
           screenshotSrc="/appscreenshots/websitescreenshot10.png"
+          widthPreset="xl"
         />
         <ImageText
           title="Detailed and complete volume analytics"
           subtitle="Analyse total volume, set count, and training frequency across any time range. Spot workload trends, assess consistency, and understand how hard you’re actually training — beyond individual exercises or reps."
           screenshotSrc="/appscreenshots/websitescreenshot13.png"
           reverse
+          widthPreset="xl"
         />
         <ImageText
           title="Log physique photos. See real change."
           subtitle="Log physique photos with zero limits — unlimited entries, even multiple shots per day. Capture every check-in, then later review them side-by-side or as a clean slideshow to spot real changes over weeks and blocks, not mirror-day noise."
           screenshotSrc="/appscreenshots/websitescreenshot14.png"
+          widthPreset="xl"
         />   
         <VideoText
           title="Day-by-day training replay"
           subtitle="Replay your training one day at a time across any time range. See how volume and set distribution shift over time, with each day showing exactly what was trained and where the work went via a muscle heatmap. Designed to reveal patterns — overload phases, missed sessions, and inconsistent weeks."
           videoSrc="/muscleslideshow.mp4"
           reverse
-        />      
+          widthPreset="xl"
+        />
+        <AIFunctionalitySection
+          weekly={{ src: "/appscreenshots/websitescreenshot16.png", alt: "Weekly AI feedback screenshot" }}
+          daily={{ src: "/appscreenshots/websitescreenshot15.png", alt: "Daily AI feedback screenshot" }}
+          builder={{ src: "/appscreenshots/websitescreenshot7.png", alt: "AI workout builder screenshot" }}
+        />          
         <TwoPhonesCenterText
           title="Full bodyweight analysis"
           subtitle="Track bodyweight trends over time, assess logging consistency, and compare your current trajectory against your goal. Built-in insights highlight what’s changing and whether your approach is actually moving you in the right direction."
@@ -358,8 +362,6 @@ export default function Page() {
           iphoneFrameSrc="/finaliphoneframe.png"
         />
       </div>
-
-      <AureusFeatureShowcase/>
 
       <AlternativeSection/>
 

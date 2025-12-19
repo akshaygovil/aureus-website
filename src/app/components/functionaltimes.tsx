@@ -592,7 +592,7 @@ export default function AureusFeatureShowcase() {
             Precision tools. Built right in.
           </h2>
           <p className="mt-5 text-[15px] sm:text-lg text-[#4B4B4B] max-w-2xl mx-auto leading-relaxed">
-            Little utilities that feel native — presented as clean, consistent tiles.
+            Get a feel of some parts of the app.
           </p>
         </motion.div>
 

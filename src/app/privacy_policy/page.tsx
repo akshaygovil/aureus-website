@@ -72,8 +72,10 @@ export default function PrivacyPage() {
               For any questions about this Policy or your data, you can contact us
               at{" "}
               <a
-                href={`mailto:${EMAIL_ADRESS}`}
+                href={`https://mail.google.com/mail/?view=cm&fs=1&to=${EMAIL_ADRESS}`}
                 className="text-[#D4AF37] hover:text-[#F5E6A8] underline underline-offset-2"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 {EMAIL_ADRESS}
               </a>
@@ -267,8 +269,10 @@ export default function PrivacyPage() {
               <li>
                 Request assistance or account deletion by emailing{" "}
                 <a
-                  href={`mailto:${EMAIL_ADRESS}`}
+                  href={`https://mail.google.com/mail/?view=cm&fs=1&to=${EMAIL_ADRESS}`}
                   className="text-[#D4AF37] hover:text-[#F5E6A8] underline underline-offset-2"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   {EMAIL_ADRESS}
                 </a>
@@ -316,7 +320,9 @@ export default function PrivacyPage() {
               If you have any questions about this Policy or how Aureus handles
               your data, email us at{" "}
               <a
-                href={`mailto:${EMAIL_ADRESS}`}
+                href={`https://mail.google.com/mail/?view=cm&fs=1&to=${EMAIL_ADRESS}`}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-[#D4AF37] hover:text-[#F5E6A8] underline underline-offset-2"
               >
                 {EMAIL_ADRESS}

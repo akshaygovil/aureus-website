@@ -58,7 +58,7 @@ export default function Footer() {
             {/* Socials */}
             <div className="flex flex-wrap items-center gap-3">
               <SocialIcon
-                href={`mailto:${EMAIL_ADRESS}`}
+                href={`https://mail.google.com/mail/?view=cm&fs=1&to=${EMAIL_ADRESS}`}
                 label="Email"
                 icon={<FaEnvelope />}
               />

@@ -141,7 +141,7 @@ function PhoneFrame({
   children: React.ReactNode;
 }) {
   return (
-    <div className="w-full max-w-[420px] mx-auto">
+    <div className="w-full max-w-[320px] md:max-w-[340px] lg:max-w-[360px] mx-auto">
       <div
         className={cn(
           "relative rounded-[2.25rem]",
@@ -883,7 +883,7 @@ export default function ExerciseLibrarySectionFinalLight({
     <section className="relative w-full py-16 md:py-24">
       <SectionBg />
 
-      <div className="mx-auto w-full max-w-6xl px-6">
+      <div className="mx-auto w-full max-w-[1400px] px-6 lg:px-10">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="mt-4 text-3xl md:text-5xl font-semibold tracking-tight" style={{ color: colors.navy }}>
             A complete exercise library, built for real training
@@ -904,56 +904,24 @@ export default function ExerciseLibrarySectionFinalLight({
         <div className="mt-14 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           <div className="lg:col-span-5">
             <div
-              className="rounded-3xl ring-1 ring-[rgba(13,27,61,0.08)] shadow-[0_26px_90px_rgba(0,0,0,0.12)] p-6 md:p-7 backdrop-blur"
-              style={{ backgroundColor: "rgba(255,255,255,0.80)", borderColor: withAlpha(colors.navy, 0.10) }}
+              className="rounded-3xl border border-white/40 bg-white/65 backdrop-blur-xl shadow-[0_24px_80px_rgba(13,27,61,0.12)] p-6 md:p-7"
             >
-              <div className="flex items-center gap-2" style={{ color: colors.navy }}>
-                <Dumbbell className="h-5 w-5" style={{ color: colors.gold_dark }} />
-                <div className="text-sm font-semibold">Preview a full entry</div>
+              {/* Eyebrow */}
+              <div className="flex items-center gap-2 text-xs font-medium tracking-wide text-[#0D1B3D]/70">
+                <Dumbbell className="h-4 w-4 text-[#D4AF37]" />
+                Preview a real entry
               </div>
 
-              <h3 className="mt-3 text-2xl md:text-3xl font-semibold tracking-tight" style={{ color: colors.navy }}>
-                Everything you need, instantly.
+              {/* Title */}
+              <h3 className="mt-3 text-2xl md:text-3xl font-semibold tracking-tight text-[#0D1B3D]">
+                Everything, clearly laid out.
               </h3>
 
-              <p className="mt-3 text-sm md:text-base leading-relaxed" style={{ color: colors.softcolor }}>
-                Scroll the preview to see exactly how an exercise is structured — media, cues, muscles, and context.
-              </p>
-
-              <div className="mt-6 space-y-3">
-                {[
-                  "Clear media + form cues (no guessing)",
-                  "Accurate primary & secondary muscle mapping",
-                  "Preparation, execution, and key tips in one place",
-                ].map((t) => (
-                  <div
-                    key={t}
-                    className="flex items-start gap-3 rounded-2xl border bg-white p-3.5 shadow-[0_10px_24px_rgba(0,0,0,0.06)]"
-                    style={{ borderColor: colors.reallysoftcolor }}
-                  >
-                    <span className="mt-1.5 h-2 w-2 rounded-full" style={{ backgroundColor: colors.accent }} />
-                    <div className="text-sm" style={{ color: colors.navy }}>
-                      {t}
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-6">
-                <a
-                  href={ctaHref}
-                  className="inline-flex items-center justify-center gap-2 rounded-2xl px-4 py-3 text-sm font-semibold shadow-[0_14px_34px_rgba(0,0,0,0.14)] active:translate-y-[1px] transition-transform"
-                  style={{
-                    backgroundColor: colors.accent,
-                    color: colors.full_light_or_black,
-                  }}
-                >
-                  Explore the app <ArrowRight className="h-4 w-4" />
-                </a>
-              </div>
+              {/* Body */}
+              <p className="mt-3 max-w-md text-sm md:text-base leading-relaxed text-[#6E7A8C]">
+                See how exercises are structured inside Aureus — media, cues, muscles, and context, all in one place.              </p>
             </div>
           </div>
-
           <div className="lg:col-span-7">
             <PhoneFrame iphoneFrameSrc={iphoneFrameSrc}>
               <ExerciseDetailPreview videoSrc='https://utdpgflhusmeijpclavl.supabase.co/storage/v1/object/public/exercise_videos/dumbbell-incline-bench-press.mp4'/>
