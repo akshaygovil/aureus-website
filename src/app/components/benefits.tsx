@@ -128,7 +128,7 @@ export default function ComparisonTable() {
             Serious tracking. Zero noise.
           </h2>
           <p className="mt-4 text-[15px] sm:text-base md:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
-            See how <span className="font-bold">Aureus</span> compares to leading competitors and typical fitness apps — from interface and performance to the depth of insight you actually get from your training.
+            See how <span className="">Aureus</span> compares to leading competitors and typical fitness apps — from interface and performance to the depth of insight you actually get from your training.
           </p>
         </FadeIn>
 
