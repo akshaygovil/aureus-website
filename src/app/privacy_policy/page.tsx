@@ -66,9 +66,10 @@ export default function PrivacyPage() {
               1. Who We Are & Scope
             </h2>
             <p className="text-[#9CA3AF]">
-              This Privacy Policy applies to the Aureus Fitness mobile
-              application and any related web experiences (collectively, the
-              &quot;Service&quot;). The Service is operated under the Aureus Fitness brand.
+              This Privacy Policy applies to the Aureus Fitness mobile application
+              and any related web experiences (collectively, the &quot;Service&quot;).
+              The Service is operated under the Aureus Fitness brand and is based
+              in Australia.
               For any questions about this Policy or your data, you can contact us
               at{" "}
               <a

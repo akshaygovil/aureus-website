@@ -16,8 +16,9 @@ const FadeIn: React.FC<{
   return (
     <motion.div
       initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }} // ✅ mount fallback (prevents “blank on mobile”)
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.4 }}
+      viewport={{ once: true, amount: 0.25 }}
       transition={{ duration: 0.55, ease: "easeOut", delay }}
       className={className}
     >
@@ -33,10 +34,6 @@ const Cell = memo(function Cell({
   value: boolean;
   highlighted?: boolean;
 }) {
-  // Fast, high-contrast semantic colors:
-  // - ticks: teal/emerald (positive)
-  // - crosses: rose/red (negative)
-  // - highlighted plan: gold accent on top of the semantic color
   const tickShell = highlighted
     ? "border-[#D4AF37]/45 bg-[#FFF6D9] shadow-[0_10px_26px_rgba(212,175,55,0.18)]"
     : "border-emerald-200 bg-emerald-50 shadow-[0_10px_26px_rgba(16,185,129,0.12)]";
@@ -77,18 +74,22 @@ const Cell = memo(function Cell({
   );
 });
 
+Cell.displayName = "Cell";
+
 export default function ComparisonTable() {
   const reduce = useReducedMotion();
 
   const rows = useMemo(() => {
     return FEATURES.map((feature) => {
-      const row = MATRIX[feature];
+      // ✅ guard: prevents a crash if MATRIX[feature] is missing
+      const row = (MATRIX as Record<string, any>)[feature] ?? {};
+
       return {
         feature,
         values: PLANS.map((p) => ({
           key: p.key,
           highlighted: p.key === "aureus",
-          value: row[p.key],
+          value: Boolean(row[p.key]), // ✅ force boolean
         })),
       };
     });
@@ -124,11 +125,14 @@ export default function ComparisonTable() {
 
       <div className="relative mx-auto max-w-6xl px-5 sm:px-6 py-16 sm:py-20 md:py-24">
         <FadeIn className="text-center">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight leading-[1.15] bg-gradient-to-r from-[#B88A1E] via-[#D4AF37] to-[#8A6A12] bg-clip-text text-transparent">
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-semibold tracking-tight leading-[1.15] bg-gradient-to-r from-[#B88A1E] via-[#D4AF37] to-[#8A6A12] bg-clip-text text-transparent">
             Serious tracking. Zero noise.
           </h2>
-          <p className="mt-4 text-[15px] sm:text-base md:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
-            See how <span className="">Aureus</span> compares to leading competitors and typical fitness apps — from interface and performance to the depth of insight you actually get from your training.
+          <p className="mt-3 text-sm sm:text-base md:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
+            See how <span className="font-semibold text-slate-800">Aureus</span>{" "}
+            compares to leading competitors and typical fitness apps — from
+            interface and performance to the depth of insight you actually get
+            from your training.
           </p>
         </FadeIn>
 
@@ -144,7 +148,7 @@ export default function ComparisonTable() {
               <table className="w-full border-collapse text-left">
                 <thead className="sticky top-0 z-10">
                   <tr className="border-b border-slate-200/90 bg-white/88 backdrop-blur">
-                    <th className="py-4 sm:py-5 px-4 sm:px-6 text-xs sm:text-sm font-semibold text-slate-700 tracking-wide uppercase">
+                    <th className="py-3 sm:py-5 px-3 sm:px-6 text-[10px] sm:text-sm font-semibold text-slate-700 tracking-wide uppercase">
                       Feature
                     </th>
 
@@ -152,11 +156,9 @@ export default function ComparisonTable() {
                       <th
                         key={p.key}
                         className={[
-                          "py-4 sm:py-5 px-3 sm:px-5 text-center",
-                          "text-xs sm:text-sm font-semibold tracking-wide",
-                          p.key === "aureus"
-                            ? "text-[#B88A1E]"
-                            : "text-slate-500",
+                          "py-3 sm:py-5 px-2 sm:px-5 text-center",
+                          "text-[10px] sm:text-sm font-semibold tracking-wide",
+                          p.key === "aureus" ? "text-[#B88A1E]" : "text-slate-500",
                         ].join(" ")}
                       >
                         {p.key === "aureus" && !reduce ? (
