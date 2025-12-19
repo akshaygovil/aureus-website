@@ -131,7 +131,6 @@ export const PLANS: { label: Plan; key: PlanKey }[] = [
 
 export const FEATURES = [
   "Ultra-minimal, premium interface",
-  "Blazing-fast performance",
   "Daily AI coaching feedback",
   "Weekly AI progress summary",
   "Transformation slideshows (auto-built)",
@@ -151,6 +150,7 @@ export const FEATURES = [
   "250+ curated exercise library",
   "Bar & line charts",
   "Lifetime stats (sets, reps, volume)",
+  "Blazing-fast performance",
   "Ad-free, zero distractions",
   "On-device data storage",
   "Offline-first — works without signal",
@@ -159,11 +159,6 @@ export const FEATURES = [
 
 export const MATRIX: Record<Feature, Record<PlanKey, boolean>> = {
   "Ultra-minimal, premium interface": {
-    aureus: true,
-    otherPremium: true,
-    topCompetitor: true,
-  },
-  "Blazing-fast performance": {
     aureus: true,
     otherPremium: true,
     topCompetitor: true,
@@ -262,6 +257,11 @@ export const MATRIX: Record<Feature, Record<PlanKey, boolean>> = {
     aureus: true,
     otherPremium: false,
     topCompetitor: false,
+  },
+  "Blazing-fast performance": {
+    aureus: true,
+    otherPremium: true,
+    topCompetitor: true,
   },
   "Ad-free, zero distractions": {
     aureus: true,
