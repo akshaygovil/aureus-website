@@ -49,7 +49,7 @@ export default function FAQSection() {
           </span>
         </motion.h2>
 
-        <p className="mx-auto mt-4 max-w-2xl text-center text-[#8A94A6] text-[14.5px] leading-relaxed font-medium tracking-[0.015em] sm:text-[15.5px]">
+        <p className="mx-auto mt-4 max-w-2xl text-center text-[#6B7280] text-[14.5px] leading-relaxed font-medium tracking-[0.015em] sm:text-[15.5px]">
           Transparent answers to some of the most commonly asked questions.
         </p>
 
@@ -130,7 +130,7 @@ export default function FAQSection() {
                       <div className="border-t border-[#E9EDF3] px-4 py-4 sm:px-6 sm:py-5 md:px-7 md:py-6">
                         <div
                           className="
-                            text-[#8A94A6]
+                            text-[#6B7280]
                             text-[14px] leading-[1.7] tracking-[0.01em]
                             sm:text-[15px]
                             [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:my-2

@@ -35,7 +35,7 @@ export default function Page() {
 
       <section id="features">
         <ImageText
-          title="Workout calander + Streak tracking"
+          title="Workout calendar + Streak tracking"
           subtitle="Get a clear snapshot of your training month at a glance. See exactly when you trained, when you rested, and where sessions were missed — without digging through logs. Your current streak updates automatically, giving you an honest signal of consistency over time."
           screenshotSrc="/appscreenshots/websitescreenshot2.png"
           widthPreset="xl"
