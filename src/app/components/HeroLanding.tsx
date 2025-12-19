@@ -560,7 +560,7 @@ export default function HeroLandingAbstract({
                     block: "start",
                   });
                 }}
-                className="inline-flex items-center justify-center rounded-2xl border border-black/10 bg-white/70 px-5 py-3 text-sm font-semibold text-[#0D1B3D] shadow-[0_1px_0_rgba(0,0,0,0.03)] backdrop-blur transition hover:bg-white focus:outline-none focus:ring-2 focus:ring-[#0D1B3D]/20"
+                className="cursor-pointer inline-flex items-center justify-center rounded-2xl border border-black/10 bg-white/70 px-5 py-3 text-sm font-semibold text-[#0D1B3D] shadow-[0_1px_0_rgba(0,0,0,0.03)] backdrop-blur transition hover:bg-white focus:outline-none focus:ring-2 focus:ring-[#0D1B3D]/20"
               >
                 {secondaryCta.label}
               </button>
