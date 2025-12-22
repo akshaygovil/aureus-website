@@ -1,3 +1,5 @@
+import { EMAIL_ADRESS } from "../assets/constants";
+
 export const metadata = {
   title: "Delete Your Account – Aureus",
   description:
@@ -28,7 +30,7 @@ export default function DeleteAccountPage() {
               to:
               <br />
               <span className="font-medium text-neutral-100">
-                support@aureus.app
+                {EMAIL_ADRESS}
               </span>
             </li>
             <li>
@@ -84,7 +86,7 @@ export default function DeleteAccountPage() {
           <p>
             Aureus is a fitness and training analytics application. If you have
             questions about data privacy, contact{" "}
-            <span className="text-neutral-300">support@aureus.app</span>.
+            <span className="text-neutral-300">{EMAIL_ADRESS}</span>.
           </p>
         </footer>
       </div>
