@@ -15,6 +15,7 @@ import AlternativeSection from "./components/productcomparison";
 import MainCTASection from "./components/minicta";
 import SearchOverSection from "./components/belowherosection";
 import React from "react";
+import Link from "next/link";
 
 const x = 150
 export default function Page() {
@@ -372,6 +373,12 @@ export default function Page() {
       <FAQSection/>
 
       <Footer/>
+      
+      <Link href='privacy_policy'>
+        <button>
+          <div>test</div>
+        </button>
+      </Link>
 
     </main>
   );
