@@ -97,7 +97,7 @@ export default function Footer() {
                 Legal
               </div>
               <div className="flex flex-col gap-3 text-sm sm:text-base">
-                <FooterLink href="/privacy_policy">Privacy Policy</FooterLink>
+                <FooterLink href="/privacy">Privacy Policy</FooterLink>
                 <FooterLink href="/terms_of_service">Terms of Service</FooterLink>
               </div>
             </div>
@@ -117,7 +117,7 @@ export default function Footer() {
 
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs sm:text-sm">
             <Link
-              href="/privacy_policy"
+              href="/privacy"
               className="text-[#0D1B3D]/65 hover:text-[#3E5BA9] transition-colors"
             >
               Privacy
