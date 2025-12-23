@@ -373,12 +373,6 @@ export default function Page() {
       <FAQSection/>
 
       <Footer/>
-      
-      <Link href='privacy_policy'>
-        <button>
-          <div>test</div>
-        </button>
-      </Link>
 
     </main>
   );
