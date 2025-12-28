@@ -61,17 +61,23 @@ export default function Page() {
           widthPreset="xl"
           reverse
         /> 
-      <ImageText
+        <ImageText
           title="Look over past workouts with ease"
           subtitle="See a complete snapshot of any session — duration, volume, exercises, and a visual breakdown of the muscles trained. Everything is shown exactly as you logged it, so you can review the work objectively, without second-guessing or reinterpreting it later."
           screenshotSrc="/appscreenshots/websitescreenshot10.png"
           widthPreset="xl"
-        />  
+        />
+        <ImageText
+          title="Strength analysis for any lift + 1RM predictions"
+          subtitle="Choose any lift, and view your 1RM / heaviest weight lifted for that lift over time. Comes with highly accurate 1RM predictions, where the algorithm predicts when you're going to hit certain 1RM's for that lift. A full table of every time you performed the lift, along with the weight and estimated 1RM follows below."
+          screenshotSrc="/appscreenshots/websitescreenshot17.png"
+          widthPreset="xl"
+          reverse
+        />          
         <VideoText
           title="Day-by-day training replay"
           subtitle="Replay your training one day at a time across any time range. See how volume and set distribution shift over time, with each day showing exactly what was trained and where the work went via a muscle heatmap. Designed to reveal patterns — overload phases, missed sessions, and inconsistent weeks."
           videoSrc="/muscleslideshow.mp4"
-          reverse
           widthPreset="xl"
         />
         <AIFunctionalitySection
