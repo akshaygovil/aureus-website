@@ -73,12 +73,19 @@ export default function Page() {
           screenshotSrc="/appscreenshots/websitescreenshot17.png"
           widthPreset="xl"
           reverse
-        />          
+        />
+        <ImageText
+          title="Full ultra-personalised timeline of your achievements"
+          subtitle="Capturing every single achievement you made, from lift 1RM's, volume breakthroughs, strength breakthroughs, dot scores, bodyweight goals, consistency goals, streaks, and other interesting ones, it's all here in chronological order for you to reminisce upon."
+          screenshotSrc="/appscreenshots/websitescreenshot18.png"
+          widthPreset="xl"
+        />         
         <VideoText
           title="Day-by-day training replay"
           subtitle="Replay your training one day at a time across any time range. See how volume and set distribution shift over time, with each day showing exactly what was trained and where the work went via a muscle heatmap. Designed to reveal patterns — overload phases, missed sessions, and inconsistent weeks."
           videoSrc="/muscleslideshow.mp4"
           widthPreset="xl"
+          reverse
         />
         <AIFunctionalitySection
           weekly={{ src: "/appscreenshots/websitescreenshot16.png", alt: "Weekly AI feedback screenshot" }}
