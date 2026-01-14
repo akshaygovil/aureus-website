@@ -87,8 +87,9 @@ export default function Footer() {
                 Pages
               </div>
               <div className="flex flex-col gap-3 text-sm sm:text-base">
-                <FooterLink href="/about">About</FooterLink>
+                {/*<FooterLink href="/about">About</FooterLink>*/}
                 <FooterLink href="/contact">Contact</FooterLink>
+                <FooterLink href="/blog">Blog</FooterLink>
               </div>
             </div>
 
@@ -110,9 +111,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="flex flex-col gap-3 border-t border-black/10 py-7 sm:py-8 lg:flex-row lg:items-center lg:justify-between">
           <div className="text-xs sm:text-sm text-[#8A94A6]">
-            © {new Date().getFullYear()}{" "}
-            <span className="text-[#0D1B3D]">Aureus</span> — Strong design. Stronger
-            training.
+            © {new Date().getFullYear()}{" "} <span className="text-[#0D1B3D]">Aureus</span> - Redefining Fitness
           </div>
 
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs sm:text-sm">

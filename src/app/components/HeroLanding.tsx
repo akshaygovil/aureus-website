@@ -4,7 +4,7 @@ import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion, type MotionProps } from "framer-motion";
-import { ArrowRight, AlertTriangle } from "lucide-react";
+import { AlertTriangle, Download } from "lucide-react";
 
 type HeroCTA = { label: string; href: string };
 type Snippet = { src: string; alt?: string };
@@ -430,9 +430,15 @@ function HeaderBar({
               </span>
             </Link>
 
-            <Link
-              href={cta.href}
+            <button
+              onClick={() => {
+                document.getElementById("cta")?.scrollIntoView({
+                  behavior: "smooth",
+                  block: "start",
+                });
+              }}
               className="
+                cursor-pointer
                 inline-flex flex-none items-center justify-center
                 rounded-2xl px-4 py-2.5
                 text-[13px] font-semibold text-[#0D1B3D]
@@ -444,10 +450,10 @@ function HeaderBar({
                 focus:outline-none focus:ring-2 focus:ring-[#E0C36A]/40
               "
             >
+              <Download className="h-4 w-4 mr-2" />
               <span className="hidden sm:inline">{cta.label}</span>
               <span className="sm:hidden">Join</span>
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
+            </button>
           </div>
         </div>
       </div>
@@ -462,7 +468,7 @@ function HeaderBar({
 
 export default function HeroLandingAbstract({
   brand = { logoSrc: "/brand/logo.png", logoAlt: "Aureus logo", name: "Aureus", href: "/" },
-  primaryCta = { label: "Join the waitlist", href: "/signup" },
+  primaryCta = { label: "Download Now", href: "/signup" },
   secondaryCta = { label: "See features", href: "#features" },
   panels = [
     { src: "/snippets/hero-a.jpg", alt: "Panel 0" },
@@ -545,13 +551,17 @@ export default function HeroLandingAbstract({
             </motion.p>
 
             <motion.div {...fadeUp(0.18)} className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <Link
-                href={primaryCta.href}
-                className="group inline-flex items-center justify-center gap-2 rounded-2xl bg-[#0D1B3D] px-5 py-3 text-sm font-semibold text-white shadow-[0_12px_44px_rgba(13,27,61,0.22)] transition hover:translate-y-[-1px] hover:shadow-[0_18px_56px_rgba(13,27,61,0.26)] focus:outline-none focus:ring-2 focus:ring-[#0D1B3D]/30"
+              <button
+                onClick={() => {
+                  document.getElementById("cta")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                  });
+                }}
+                className="cursor-pointer group inline-flex items-center justify-center gap-2 rounded-2xl bg-[#0D1B3D] px-5 py-3 text-sm font-semibold text-white shadow-[0_12px_44px_rgba(13,27,61,0.22)] transition hover:translate-y-[-1px] hover:shadow-[0_18px_56px_rgba(13,27,61,0.26)] focus:outline-none focus:ring-2 focus:ring-[#0D1B3D]/30"
               >
                 {primaryCta.label}
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-              </Link>
+              </button>
 
               <button
                 onClick={() => {

@@ -19,7 +19,6 @@ import Link from "next/link";
 
 const x = 150
 export default function Page() {
-  const featuresRef = React.useRef<HTMLDivElement>(null);
 
   return (
     <main className="min-h-screen bg-white text-[#1E1E1E] flex flex-col">
@@ -380,8 +379,10 @@ export default function Page() {
       <AlternativeSection/>
 
       <ComparisonTable/>
-
-      <MainCTASection/>
+      
+      <section id="cta">
+        <MainCTASection/>
+      </section>
 
       <FAQSection/>
 
