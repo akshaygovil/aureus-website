@@ -5,6 +5,7 @@ import React from "react";
 import Link from "next/link";
 
 export default function AboutMinimal() {
+  return null
   return (
     <section className="relative w-full overflow-hidden bg-white">
       {/* ultra-soft background */}
