@@ -89,7 +89,7 @@ export default function Footer() {
               <div className="flex flex-col gap-3 text-sm sm:text-base">
                 {/*<FooterLink href="/about">About</FooterLink>*/}
                 <FooterLink href="/contact">Contact</FooterLink>
-                <FooterLink href="/blog">Blog</FooterLink>
+                {/*<FooterLink href="/blog">Blog</FooterLink>*/}
               </div>
             </div>
 
